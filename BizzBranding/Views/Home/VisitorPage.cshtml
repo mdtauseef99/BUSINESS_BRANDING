@@ -1,0 +1,617 @@
+﻿@model BizzBranding.Models.LandingPageModel
+
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Message"] = TempData["AlertMessage"];
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+    
+  <script src="~/Content/lib/bootstrap/bootstrap.min.js"></script>
+<script src="~/Content/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+}
+<div id="msg">
+    <p style="color: green; padding-left: 8%"><strong>@ViewData["Message"]</strong></p>
+</div>
+
+
+
+
+<section class="brands visitors">
+    <div class="container">
+        <div class="Ads">
+            <div class="row">
+                <div class="col-md-12 Ads text-center" id="ad_space">
+                    <img src="../../Content/Images/CoBanner/ads.jpg" width="550" height="110" style="" id="wow">
+                </div>
+            </div>
+        </div>
+        @* <h2>@ViewBag.MemName</h2>*@
+        <div class=" ">
+            <div class=" " style="background: #fff; padding-bottom: 6px; margin-bottom: 10px;">
+                <div class="premium-block" >
+                    <img class="premium-block" src="~/Content/Images/CoBanner/@Model.CompanyBanner" alt="" />
+                    @*<h4>@ViewBag.MemName</h4>*@
+                </div>
+                <div class="premium-logo">
+                    <div class="profile-logo  profile-logo1">
+                        @*<a class="navbar-brand navbar-brand" href="../index.html" style="width: 260px; margin-left: 25px; margin-top: 0px;"></a>*@
+                        <img class="img-thumbnail" src="~/Content/Images/CoLogo/@Model.CompanyLogo" alt="" /><h2>@Model.BusinessName</h2>
+                    </div>
+
+
+                </div>
+                <div class="row connections-space">
+                    <div class="col-sm-12 text-right profile-icons ">
+                        <ul class="pull-right">
+                            <li>
+                                <div class="lbl BTN-Block">
+                                    <i class="icon-link" title="Connections"></i>
+                                    <span class="label label-default">@Model.TotalConnectCount</span>
+                                </div>
+                            </li>
+                            <li>
+                                @if (ViewBag.LoggedinProfile == true)
+                                {
+                                }
+                                else if (Session["Userid"] != null)
+                                {
+                                    <button class="btn btn-primary BTN-Block " data-toggle="modal" data-target="#myModal">Send Enquiry</button>
+                                }
+                                else
+                                {
+                                   <button class="btn btn-primary BTN-Block " data-toggle="modal" data-target="#myModallogin">Send Enquiry</button>
+                                }
+                            </li>
+                            @if (ViewBag.LoggedinProfile == true)
+                            {
+                            }
+                            else if (ViewBag.IsConnected == 0)
+                            {
+                                <li><a id="btnConnect" href="@Url.Action("SendRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnconnect" onclick="javascript:return confirm('Do you Want to Connect')"><i class="icon-plus" title="Connect"></i></a></li>
+                            }
+                            else if (ViewBag.IsConnected == 3)
+                            {
+                                <li><a id="btnConnect" href="@Url.Action("AcceptRequest", "Home", new { @id = Model.UserId })" class="btn btn-success btn-sm" style="font-size:16px;background-color: #17a89b; padding:3px 15px;" onclick="javascript:return confirm('Do you Want to Accept Connection')"><i class="icon-ok" title="Accept"></i></a></li>
+                                <li>
+                                    <a id="btnRemove" href="@Url.Action("RejectRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnRemove"style="font-size:14px; padding:6px 15px ;background-color: #17a89b;" onclick="javascript:return confirm('Are You Sure to Reject This Connection')">
+                                        <i class="icon-remove" title="Reject"></i></a>
+                                </li>
+                            }
+                            else if (ViewBag.IsConnected == 1)
+                            {
+                                <li><a id="btnConnect" href="#" class="btn btn-success btn-sm" style="font-size: 16px; background-color: #17a89b; padding: 3.5px 15px;"><i class="icon-question-sign" title="Pending"></i></a></li>
+                                <li><a id="btnRemove" href="@Url.Action("CancelRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnRemove"onclick="javascript:return confirm('Are You Sure to Cancel This Connection')"><i class="icon-remove" title="Cancel"></i></a></li>
+                            }
+                            else
+                            {
+                                <li><a id="btnRemove" href="@Url.Action("RejectRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnRemove"onclick="javascript:return confirm('Are You Sure to Remove This Connection')"><i class="icon-remove" title="Remove"></i></a></li>
+                            
+                            }
+                            @if (ViewBag.LoggedinProfile == true)
+                            {
+                            }
+                            else if (ViewBag.IsCoBranded == 0)
+                            {
+                                <li><a id="btnCoConnect" href="@Url.Action("CoBrandRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnRemove"onclick="javascript:return confirm('Are You Sure to CoBrand With This Connection')"><i class="icon-plus" title="CoBrand with this Business"></i></a></li>
+                            }
+                            else if (ViewBag.IsCoBranded == 3)
+                            {
+                                <li><a id="btnCoConnect" href="@Url.Action("AcceptCoBrandRequest", "Home", new { @id = Model.UserId })" class="btn btn-success btn-sm" style="font-size:16px;background-color: #17a89b; padding:3px 15px;" onclick="javascript:return confirm('Do you Want to Accept Co-Brand')"><i class="icon-ok" title="Accept Co-Brand"></i></a></li>
+                                <li>
+                                    <a id="btnCoRemove" href="@Url.Action("RejectCoBrandRequest", "Home", new { @id = Model.PartnerId })" class="btn btn-sm btn-primary btnRemove"style="font-size:14px; padding:6px 15px ;background-color: #17a89b;" onclick="javascript:return confirm('Are You Sure to Reject This Co-Brand')">
+                                        <i class="icon-remove" title="Reject Co-Brand"></i></a>
+                                </li>                      
+                            }
+                            else if (ViewBag.IsCoBranded == 1)
+                            {
+                                <li><a id="btnCoConnect" href="#" class="btn btn-success btn-sm" style="font-size: 16px; background-color: #17a89b; padding: 3.5px 15px;"><i class="icon-question-sign" title="Pending Co-Brand"></i></a></li>
+                                <li><a id="btnCoRemove" href="@Url.Action("CancelCoRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnRemove"onclick="javascript:return confirm('Are You Sure to Cancel This Co-Brand')"><i class="icon-remove" title="Cancel Co-Brand"></i></a></li>
+                            }
+                            else
+                            {
+                                <li><a id="btnCoRemove" href="@Url.Action("RejectCoBrandRequest", "Home", new { @id = Model.UserId })" class="btn btn-sm btn-primary btnRemove"onclick="javascript:return confirm('Are You Sure to Remove This Co-Brand')"><i class="icon-remove" title="Remove Co-Brand"></i></a></li>
+                            }
+                        </ul>
+                    </div>
+
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title " id="myModalLabel">Send Enquiry</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form role="form">
+                                                @*  <div class="form-group">
+                                                    <label for="exampleInputEmail1 pull-left">Name</label>
+                                                    <input type="email" class="form-control" id="txtName" placeholder="Name">
+                                                </div>*@
+                                                <div class="form-group">
+                                                    @if (@ViewBag._uId != null)
+                                                    {
+                                                        <label for="exampleInputEmail1" style="display: none">Email address</label>
+                                                        <input type="email" class="form-control" id="txtEmail" value="@ViewBag.LoginEmail" placeholder="Enter email" readonly="true" style="display:none">
+                                                        <input type="hidden" name="hdnId" value="@Model.UserId" id="msgToId" />
+                                                        <input type="hidden" name="hdncurrentid" value="@ViewBag._uId" id="currentid"/>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label for="exampleInputEmail1">Email address</label>
+                                                        <input type="email" class="form-control" id="txtEmail" placeholder="Enter email">
+                                                        <input type="hidden" name="hdnId" value="@Model.UserId" id="msgToId" />
+                                                        <input type="hidden" name="hdncurrentid" value="del" id="currentid" />
+                                                    }
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Enquiry Message</label>
+                                                    <textarea class="form-control" id="txtMessage" placeholder="Message"></textarea>
+                                                </div>
+                                                <button type="button" class="btn btn-default" onclick="SaveData();">Submit</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="myModallogin" tabindex="-1" role="dialog" aria-labelledby="myModallog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title " id="myModallog">Login</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form role="form">
+                                                @*  <div class="form-group">
+                                                    <label for="exampleInputEmail1 pull-left">Name</label>
+                                                    <input type="email" class="form-control" id="txtName" placeholder="Name">
+                                                </div>*@
+
+                                                <span id="msglogin"></span>
+                                                <div class="form-group">
+
+                                                    <label for="exampleInputEmail1">Email</label>
+                                                    <input type="email" class="form-control" id="txtEmail1" value="@ViewBag.LoginEmail" placeholder="Enter email"  >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Password</label>
+                                                    <input type="password" class="form-control" id="txtpassword" value="@ViewBag.LoginEmail" placeholder="Password"  >
+                                                </div>
+                                                <button type="button" class="btn btn-default" onclick="Login();">Login</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="tabs-in" style="margin-top: -74px;">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tabA" data-toggle="tab">Details</a></li>
+                        <li><a href="#tabB" data-toggle="tab">More Info</a></li>
+                        <li><a href="#tabC" data-toggle="tab">Careers</a></li>
+                        <li class="visitToWeb">
+                            @if (ViewBag.AcccessPlanId == 19)
+                            {
+                            }
+                            else
+                            {
+                                <a href="@Model.CompanyURL" target="_blank">
+                                    <button class="btn btn-warning">Visit to Website</button>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabA">
+                            <p>@Html.Raw(Model.BusinessDetails)</p>
+                        </div>
+                        <div class="tab-pane" id="tabB">
+                            <p>@Model.ContactPerson</p>
+                            <p>@Model.Designation</p>
+                            <p>@Model.Regno</p>
+                            <p>@Model.Phone</p>
+                            <p>@Model.TradeEmailId</p>
+                            <p>@Model.Address</p>
+                        </div>
+                        <div class="tab-pane" id="tabC">
+                            @if (Model.BusinessJobs.Count == 0)
+                            {
+                                <p>No Vacancy..........</p>
+                            }
+                            else
+                            {
+                                foreach (var Job in Model.BusinessJobs)
+                                {
+                                <h4>
+                                    <p>@Job.JobTitle</p>
+                                </h4>
+                                <p>@Job.Description</p>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                @* <div class="profileContent">
+                    <p>@Model.Designation</p>
+                </div>*@
+            </div>
+            <div class="col-sm-4" style="margin-top: -20px;">
+                <h3>Latest News</h3>
+                <div class="news-blog">
+                    @foreach (var item in Model.NewsUpdates)
+                    {
+                        string str = item.Description;
+                        if (str.Length > 100)
+                        {
+                            str = str.Substring(0, 100);
+                        }
+                        else
+                        {
+                            str = item.Description;
+                        }
+    
+                        <h4>@item.NewsTitle</h4>
+                        <p>@str
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal-@item.BusinessNewsId" style="padding: 0 5px; font-size: 14px;">More</button>
+                        </p>
+                        <!-- Modal -->
+                        <div class="modal fade homepop" id="myModal-@item.BusinessNewsId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">"@item.NewsTitle"</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @item.Description
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="tabs">
+                <!-- Nav tabs -->
+                <div class="clearfix"></div>
+                <!-- Tab panes -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="brands">
+    <section class="container brands brands-bottom-contain">
+        <div class="">
+            @* <h2>Products</h2>*@
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="products-bxslider" style="width: 100%">
+                        @if (Model.ProductsList.Count == 0)
+                        {
+                            <li>
+                                <div class="item item-bottom">
+                                    <strong class="item-bottom-heading">No Offer</strong>
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/Images/noImage.png" alt="">
+                                    </a>
+                                    <p style="color: #000">No Products</p>
+                                </div>
+                                @*<div class="item item-bottom">
+                                    <img src="~/Images/noImage.png" />
+                                </div>*@
+                            </li>
+                            <li>
+                                <div class="item item-bottom">
+                                    <strong class="item-bottom-heading">No Offer</strong>
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/Images/noImage.png" alt="">
+                                    </a>
+                                    <p style="color: #000">No Products</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item item-bottom">
+                                    <strong class="item-bottom-heading">No Offer</strong>
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/Images/noImage.png" alt="">
+                                    </a>
+                                    <p style="color: #000">No Products</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item item-bottom">
+                                    <strong class="item-bottom-heading">No Offer</strong>
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/Images/noImage.png" alt="">
+                                    </a>
+                                    <p style="color: #000">No Products</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item item-bottom">
+                                    <strong class="item-bottom-heading">No Offer</strong>
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/Images/noImage.png" alt="">
+                                    </a>
+                                    <p style="color: #000">No Products</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item item-bottom">
+                                    <strong class="item-bottom-heading">No Offer</strong>
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/Images/noImage.png" alt="">
+                                    </a>
+                                    <p style="color: #000">No Products</p>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            foreach (var ProdList in Model.ProductsList)
+                            {
+                                string str = ProdList.ProductDesc;
+                                if (str.Length > 48)
+                                {
+                                    str = str.Substring(0, 48);
+                                }
+                                else
+                                {
+                                    str = ProdList.ProductDesc;
+                                }
+                            <li>
+                                <div class="item item-bottom" style="height:264px">
+                                    <strong class="item-bottom-heading">@ProdList.ProductName</strong>
+                                    <a href="#myModaldummy-@ProdList.ProductId" data-toggle="modal" data-target="#myModaldummy-@ProdList.ProductId">
+                                        @if (ProdList.ProductImage == null)
+                                        {
+                                            <img src="~/Images/noImage.png" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Areas/Admin/ProjectImages/ProductImage/@ProdList.ProductImage" alt="">
+                                        }
+                                    </a>
+                                    @*  <a href="#divAddProduct;" onclick="PopUpDisplayProduct('@ProdList.ProductId');" >*@
+                                    <p style="color: #000">@str </p>
+                                    @* </a>*@
+                                </div>
+                            </li> 
+                           
+                            }
+                        }
+                    </ul>
+                </div>
+                @foreach (var ProdList in Model.ProductsList)
+                {
+                    <div class="modal fade prodDisplayModal" id="myModaldummy-@ProdList.ProductId">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">@ProdList.ProductName</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="~/Areas/Admin/ProjectImages/ProductImage/@ProdList.ProductImage" alt="">
+                                    <h4 class="modal-title">Products Details</h4>
+                                    <p>
+                                        @ProdList.ProductDesc
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-primary">Save changes</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+</div>
+<div id="divAddProduct" class="login-popup" style="display: none;">
+    <a href="#" class="close" style="position: absolute; top: -1px; right: 2px;">
+        <img src="../../Content/images/close_pop_New.png" class="btn_close" title="Close Window" alt="Close" /></a>
+    @* <div id="LoadProduct" style="overflow: overlay; height: 100%; width: 100%">
+        @Html.Partial("_AddProduct")
+    </div>*@
+</div>
+<!--jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<!--<Include all compiled plugins (below), or include individual files as needed -->
+@*<script src="/Content/lib/jquery/jquery-1.10.2.min.js"></script>*@
+<script src="/Content/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/Content/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+<script src="/Content/script/custom.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#msg').hide();
+        }, 60000);
+        //$('#txtSearch').keydown(function () {
+        //    var txt = $('#txtSearch').val();
+        //    if (txt != null || txt != "") {
+        //        debugger;
+        //        if (e.keyCode == 13) {
+        //            $(this).trigger(".btn");
+        //        }
+        //    }
+        //});
+        $('#frmsearch').submit(function (e) {
+            e.preventDefault();
+            debugger;
+            var txt = $('#txtSearch').val();
+            if (txt != "") {
+                var txtVal = $('.form-control').val();
+                window.location.href = '/Home/Searching?searchValue=' + txtVal;
+            }
+            else { alert('Enter text to search'); $('#txtSearch').focus(); }
+            //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+            // if (data != null)
+            // {
+            // }
+            //});
+        });
+        $('.btn_close').click(function myfunction() {
+            $('#mask , .login-popup').fadeOut(300, function () {
+                $('#mask').remove();
+                $("input[type='text']").val('');
+            });
+            return false;
+        });
+    });
+</script>
+
+<script>
+    var interval = 4000;
+    var s = '@Url.Content("~/Images/TargetBrandingImages/")';
+    var i = 1;
+    var images = new Array();
+    var currentAdid;
+    $.ajax({
+        url: "@Url.Content("~/Home/GetAds")",
+        //data: { id: id },
+        datatype: "json",
+        success: function (data) {
+            images = data;
+            Show();
+        }
+    });
+    function Show() {
+        setInterval(ChangeImages, interval); // Line 4: timer that will run after every interval
+    }
+    // function that will change the images
+    var rl = "#";
+    function ChangeImages() {
+        if (i == images.length) {
+            i = 0;
+        }
+        var strsplit = images[i].split('~');
+        $("#wow").fadeIn('slow', function () {
+            //if (strsplit.length > 1) {
+            //    currentAdid = strsplit[2];
+            //    rl = strsplit[1];
+            //}
+            //else {
+            //    currentAdid = strsplit[1];
+            //}
+            $(this).attr('src', s + strsplit[0]);
+            $(this).parent().attr('href', strsplit[1]);
+            i++;
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+    function PopUpDisplayProduct(val) {
+        debugger
+        var ival = val;
+        $('#LoadProduct').load('/Home/VisitProDetail?id=' + ival);
+
+        // Getting the variable's value from a link 
+        var loginBox = $('a.Requestlink').attr('href');
+
+        //Fade in the Popup and add close button
+        $(loginBox).fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = ($(loginBox).height() + 24) / 2;
+        var popMargLeft = ($(loginBox).width() + 24) / 2;
+
+        $(loginBox).css({
+            'margin-top': -popMargTop,
+            'margin-left': -popMargLeft
+        });
+        $('#divAddProduct').show();
+        // Add the mask to body
+        $('body').append('<div id="mask"></div>');
+        $('#mask').fadeIn(300);
+        $("input[type='text']").val('');
+        return false;
+    }
+    function SaveData() {
+        var email = document.getElementById('txtEmail').value;
+        var Uid = document.getElementById('msgToId').value;
+        var msg = document.getElementById('txtMessage').value;
+        var currid = document.getElementById('currentid').value;
+        if (email == "") {
+            alert('Please Enter Email Address');
+        }
+        else if (msg == "") {
+            alert('Please Enter Message Text');
+        }
+        else {
+            debugger;
+            $.post("/Messages/SendEnquiryUser", { email: email, userId: Uid, Message: msg }, function (data) {
+                debugger;
+                if (data) {
+                    alert('Success Fully sent Enquery');
+                    if (currid == "del") {
+                        document.getElementById('txtEmail').value = "";
+                    }
+                    document.getElementById('txtMessage').value = "";
+                }
+                else {
+                    alert('Sorry Error has occured, Please try later');
+                    //window.location.href = '/Home/UsersProfile';
+                }
+            });
+        }
+    }
+
+    function Login() {
+        var email = document.getElementById('txtEmail1').value;
+        var password = document.getElementById('txtpassword').value;
+
+        if (email == "") {
+            alert('Please Enter Email Address');
+        }
+        else if (password == "") {
+            alert('Please Enter password');
+        }
+        else {
+            debugger;
+            $.post("/Home/HomeLogin", { email: email, pwd: password }, function (data) {
+                if (data) {
+                    location.reload(true);
+                }
+                else {
+                    $("#msglogin").text("Invalid Email or Password");
+                }
+            });
+        }
+    }
+</script>
+
+
+
+

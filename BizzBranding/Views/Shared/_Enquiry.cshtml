@@ -1,0 +1,182 @@
+﻿<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Reset();
+        PostCountMethods('enquiry');
+        LoadEnquiry(s, t);
+
+        $('#message_previousenquiry').click(function () {
+            Previous_Enquiry();
+        });
+
+        $('#message_nextenquiry').click(function () {
+            Next_Enquiry();
+        });
+
+    });
+
+    function Previous_Enquiry() {
+        var previousvalue = parseInt($('#enquiry_first').html());
+
+        if (previousvalue != 1) {
+            currentPageIndex = parseInt(currentPageIndex, 10) - 1;
+            var current = parseInt($('#message_paging').val());
+            var t = 10;
+            var s = current - t;
+            Paging('#enquiry_first', '#enquiry_length');
+            LoadEnquiry(s, t);
+            $('#message_paging').val(s);
+        }
+        else {
+        }
+    }
+
+    function Next_Enquiry() {
+        var nextvalue = parseInt($('#enquiry_length').html());
+        var totalvalue = parseInt($('#totalenquiry').html());
+
+        if (nextvalue >= totalvalue) {
+        }
+        else {
+            currentPageIndex = parseInt(currentPageIndex, 10) + 1;
+            var current = parseInt($('#message_paging').val());
+            var t = 10;
+            var s = current + t;
+            Paging('#enquiry_first', '#enquiry_length');
+            LoadEnquiry(s, t);
+            $('#message_paging').val(s);
+        }
+    }
+
+    function LoadEnquiry(s, t) {
+
+        $("#tblEnquiry").html('');
+        $.post("/Messages/FillEnquiryMessages", { skip: s, take: t },
+        function (data) {
+            var rowEnquiry = "";
+            var Enquiry = '"Enquiry"';
+
+            $.each(data, function () {
+                var Subject = this.MessageTitle;
+                var attachment = this.Messagefile;
+                var dateEnqiury = new Date(parseInt(this.CreatedOn.substr(6)));
+                if (attachment != null) {
+                    attachment = "<a href='#'><img alt='' style='height: 18px;width: 19px;padding-left: 5px;' src='../../Content/Images/attachment.png'/></a>";
+                }
+                else {
+                    attachment = "";
+                }
+                if (Subject == "") {
+                    Subject = "No Subject";
+                }
+                if (this.IsReadTo == false) {
+                    rowEnquiry = rowEnquiry + "<tr id=trEnquiry_" + this.MessageId + " style='font-weight: bold;'><td><input type='checkbox' id=" +
+                    this.MessageId + " class='chkEnquiry'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                    this.MessageId + "," + Enquiry + ")'>" + Subject.substring(0, 40) + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                    this.MessageId + "," + Enquiry + ")'>" + dateEnqiury.toDateString() + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                    this.MessageId + "," + Enquiry + ")'>" + attachment + "</td></tr>";
+                }
+                else {
+                    rowEnquiry = rowEnquiry + "<tr id=trEnquiry_" + this.MessageId + "><td><input type='checkbox' id=" +
+                    this.MessageId + " class='chkEnquiry'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                    this.MessageId + "," + Enquiry + ")'>" + Subject.substring(0, 40) + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                    this.MessageId + "," + Enquiry + ")'>" + dateEnqiury.toDateString() + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                    this.MessageId + "," + Enquiry + ")'>" + attachment + "</td></tr>";
+                }
+            });
+            $("#tblEnquiry").html('');
+            var tBody = " <tr><th width='2%'><input type='checkbox' id='chkAllEnquiry' name='chkAllEnquiry' class='chkHeaderInbox' onclick='CkeckAllEnquiry()' /></th><th class='th' style='width: 300px;'>Subject</th><th class='th' style='width:100px;'>Date</th><th class='th' style='width: 30px'>File</th></tr>";
+            $("#tblEnquiry").append(tBody);
+            $("#tblEnquiry").append(rowEnquiry);
+            Paging('#enquiry_first', '#enquiry_length');
+        });
+    }
+
+    
+
+    function CkeckAllEnquiry() {
+        if ($('input[name=chkAllEnquiry]').is(":checked")) {
+            document.getElementById("EnquiryResult").innerHTML = " ";
+            $('.chkEnquiry').each(function () {
+                $(this).attr('checked', true);
+            });
+        }
+        else {
+            $('.chkEnquiry').each(function () {
+                $(this).attr('checked', false);
+            });
+        }
+    }
+
+    function DeleteAllEnquiry() {
+        if ($('input[class=chkEnquiry]').is(":checked")) {
+            if (confirm('Are you sure you want to delete Enquiry Messages?')) {
+                $('.chkEnquiry').each(function () {
+                    var id = $(this).attr("id");
+                    if ($('#' + id).is(":checked")) {
+                        $.post("/Messages/DeleteMessage", { MessageID: id },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        $('#trEnquiry_' + id).remove();
+                        LoadEnquiry(0, 10);                        
+                        document.getElementById("EnquiryResult").innerHTML = "Message Deleted !";
+                    }
+                    else {
+                        document.getElementById("EnquiryResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+                    }
+                });
+            }
+        }
+        else {
+            document.getElementById("EnquiryResult").innerHTML = "Please Select Messages.";
+        }
+    }
+
+    function DeleteMessage(e) {
+        if (confirm('Are you sure you want to delete ?')) {
+            $.post("/Messages/DeleteMessage", { MessageID: e },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        $('#trEnquiry_' + e).remove();
+                        LoadEnquiry(0, 10);
+                        document.getElementById("EnquiryResult").innerHTML = "Message Deleted !";
+                    }
+                    else {
+                        document.getElementById("EnquiryResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+        }
+    }
+   
+</script>
+<div id="pager" class="pager" style="list-style: none; float: right; padding-right: 10px;
+    margin: 0px;">
+    <br />
+    <ul>
+        <li id="enquiry_first"></li>
+        -
+        <li id="enquiry_length"></li>
+        of
+        <li id="totalenquiry"></li>
+        <li>&nbsp;&nbsp;
+            <img src="../../Content/images/message_left.jpg" id="message_previousenquiry" height="22"
+                title="Previous" style="cursor: pointer;" /></li>
+        <li>
+            <img src="../../Content/images/message_right.jpg" id="message_nextenquiry" height="22"
+                title="Next" style="cursor: pointer;" /></li>
+    </ul>
+</div>
+<div class="grid" style="padding: 35px 0px 0px 0px;">
+    <div class="wrapp">
+        <div id="EnquiryResult" style="padding-left: 15px; padding-bottom: 5px; color: red;">
+        </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" id="tblEnquiry">
+        </table>
+    </div>
+</div>

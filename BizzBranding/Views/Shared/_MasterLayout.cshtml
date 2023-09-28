@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @RenderSection("metatags", required: false)
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="icon" href="/Assets/img/logo1.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="/Assets/favicon.png" sizes="16x16 32x32" type="image/png">
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="/Assets/css/jquery.bxslider.css" />
+    <link rel="stylesheet" href="/Assets/css/issoslider.css" />
+    <link rel="stylesheet" href="/Assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="/Assets/css/layout.css" />
+
+
+    <script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        $ = jQuery.noConflict();
+        $(document).ready(function () {
+
+            $('#formMainsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#txtSearch').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '/Home/Searching?searchValue=' + txtVal;
+                }
+                else { alert('Search Business'); $('#txtSearch').focus(); }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+
+            $('#formMainsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#search').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '/Home/Searching?searchValue=' + txtVal;
+                }
+                // else { alert('Search Business'); }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+        });
+    </script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-48520583-1', 'businessbranding.in');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body>
+    <header>
+        @if (ViewBag.IsHome != null)
+        {
+            <section class="nav2">
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="logo col-md-4">
+                            <a href="@Url.Action("Index", "Home") "><img src="/Assets/img/logo.PNG" /></a>
+                        </div>
+                        <div class="col-md-4 search">
+
+                            <form id="formMainsearch" role="form">
+                                <ul>
+                                    <li class="col-md-10 col-xs-10">
+                                        <input type="text" class="form-control" id="txtSearch" placeholder="Search Business by Industry / Location / Name">
+                                       
+                                    </li>
+                                    <li class="col-md-2 col-xs-2">
+                                        <button type="submit" id="search"><i class="fa fa-search"></i> </button>
+                                       @*<a id="search" href="#"><i class="fa fa-search"></i></a>*@
+                                    </li>
+                                </ul>
+                            </form>
+
+
+
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="inline">
+
+                                @if (Session["UserId"] != null)
+                                {
+                                    <a href="@Url.Action("UsersProfile", "Home")" class="btn">My Profile</a> @*@Convert.ToString(Session["EmailId"])*@
+                                    <a href="@Url.Action("Logout", "Home")" class="btn yellow">Log Out</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "Home")" class="btn" style=" border-radius:4px; margin-left:19px;">Sign In</a>
+                                    <a href="@Url.Action("UserRegistration", "Home")" class="btn yellow">Sign Up</a>
+                                }
+
+                                @*<li>
+                                    <a href="#" class="btn">Sign in</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn yellow">Sign up</a>
+                                </li>*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <div class="navbar navbar-default " role="navigation">
+
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse ">
+                        <ul class="nav navbar-nav ">
+                            <li>
+                                @*<a class="home" href="@Url.Action("Index", "Home")">Home</a>*@
+                                <a  href="@Url.Action("Index", "Home")">Home</a>
+                            </li>
+                            @*<li>
+                                <a href="@Url.Action("CMS", "Home", new { id = "6" })">About Us</a>
+                            </li>*@
+                            <li>
+                                <a href="@Url.Action("CoBrandedUserList", "Home", new { id = "" })">Co-Branding</a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("FranchiserList", "Home")">Franchise Options</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("GlobalBrandList", "Home")">Global Branding</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("CorporateBrandList", "Home")">Corporate Branding</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("InvestorPartnerList", "Home")">Investor Partnering</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("TargetBrandingCMS", "Home", new { id = "3" })">Target Branding</a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("ViewallAdminNews", "Home")">Business News</a>
+                            </li>
+
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </div><!-- navbar-default -->
+        }
+        else
+        {
+
+                       <section class="nav2">
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="logo col-md-4">
+                            <a href="@Url.Action("Index", "Home")"><img src="/Assets/img/logo.PNG" /></a>
+                        </div>
+                        <div class="col-md-4 search">
+                            <form id="formMainsearch" role="form">
+                                <ul>
+                                    <li class="col-md-10 col-xs-10">
+                                        <input type="text" class="form-control" id="txtSearch" placeholder="Search Business by Industry / Location / Name">
+
+                                    </li>
+                                    <li class="col-md-2 col-xs-2">
+                                        <button type="submit" id="search"><i class="fa fa-search"></i> </button>
+                                        @*<a id="search" href="#"><i class="fa fa-search"></i></a>*@
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="inline">
+
+                                @if (Session["UserId"] != null)
+                                {
+                                    <a href="@Url.Action("UsersProfile", "Home")" class="btn">My Profile</a> @*@Convert.ToString(Session["EmailId"])*@
+                                    <a href="@Url.Action("Logout", "Home")" class="btn yellow">Log Out</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "Home")" class="btn" style=" border-radius:4px; margin-left:19px;">Sign In</a>
+                                    <a href="@Url.Action("UserRegistration", "Home")" class="btn yellow">Sign Up</a>
+                                }
+
+                                @*<li>
+                                    <a href="#" class="btn">Sign in</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn yellow">Sign up</a>
+                                </li>*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <div class="navbar navbar-default " role="navigation">
+
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse ">
+                        <ul class="nav navbar-nav ">
+                            <li>
+                                <a class="home" href="@Url.Action("Index", "Home")">Home</a>
+                            </li>
+                            @*<li>
+                                <a  href="@Url.Action("CMS", "Home", new { id = "6" })">About Us</a>
+                            </li>*@
+                            <li>
+                                <a href="@Url.Action("CoBrandedUserList", "Home", new { id = "" })">Co-Branding</a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("FranchiserList", "Home")">Franchise Options</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("GlobalBrandList", "Home")">Global Branding</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("CorporateBrandList", "Home")">Corporate Branding</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("InvestorPartnerList", "Home")">Investor Partnering</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("TargetBrandingCMS", "Home", new { id = "3" })">Target Branding</a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("ViewallAdminNews", "Home")">Business News</a>
+                            </li>
+
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </div><!-- navbar-default -->
+
+        }
+    </header>
+    <!-- ---------------------------------header-end--------------------------------- -->
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+
+    <!-- ---------------------------------footer--------------------------------- -->
+    <footer>
+        <div class="container">
+            <div class="col-md-6">
+                <ul class="inline">
+                    <li>
+                        <a href="@Url.Action("Contact", "Home") ">Contact</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CMS", "Home", new { id = "23" })">Disclmer</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CMS", "Home", new { id = "22" })">Terms&Conditions</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CMS", "Home", new { id = "6" })">About us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    The Business Branding Copyright 2015. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.iosslider.js"></script>
+    <script type="text/javascript" src="/Assets/js/jquery.bxslider.js"></script>
+    <script src="/Assets/js/bootstrap.js"></script>
+    <script>
+        $('#slider1').bxSlider({
+
+            speed: 20000
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var sliderThumbnail = $('.iosSlider1');
+            var sliderText = $('.iosSlider2');
+            var slide_text = true;
+            var slide_thumbnail = true;
+            var slide_started = false;
+            var current_slide = 1;
+
+            var sliderChange = function (args, type) {
+
+                if (slide_started) {
+                    return false;
+                }
+
+                slide_started = true;
+
+                var current_slide = (args.currentSlideNumber);
+
+                if (type == 'thumbnail') {
+
+                    if (slide_thumbnail == true) {
+
+                        sliderThumbnail.iosSlider('goToSlide', current_slide);
+
+                    }
+
+                } else {
+
+                    if (slide_text == true) {
+
+                        sliderText.iosSlider('goToSlide', current_slide);
+
+                    }
+
+                }
+
+                $('.iosSlider2 .indicatorsBlock .indicators .item').removeClass('selected').eq(current_slide - 1).addClass('selected');
+
+            }
+            var slideComplete = function (e) {
+
+                slide_started = false;
+
+            }
+
+            sliderThumbnail.iosSlider({
+                snapToChildren: true,
+                desktopClickDrag: true,
+                infiniteSlider: true,
+                onSlideStart: function (args) {
+                    slide_started = false;
+                },
+                onSlideChange: function (args) {
+                    slide_text = true;
+                    slide_thumbnail = false;
+                    sliderChange(args, 'text');
+                },
+                onSlideComplete: slideComplete,
+                navNextSelector: $('.iosSlider1 .next'),
+                navPrevSelector: $('.iosSlider1 .prev')
+            });
+
+            sliderText.iosSlider({
+                snapToChildren: true,
+                desktopClickDrag: false,
+                infiniteSlider: true,
+                onSlideStart: function (args) {
+                    slide_started = false;
+                },
+                onSlideChange: function (args) {
+                    slide_text = false;
+                    slide_thumbnail = true;
+                    sliderChange(args, 'thumbnail')
+                },
+                onSlideComplete: slideComplete
+            });
+        });
+    </script>
+    <script>
+        $('.iosSlider1').iosSlider({
+            desktopClickDrag: true,
+            snapToChildren: true,
+            infiniteSlider: true,
+            autoSlide: true,
+            autoSlideTimer: 2000,
+            startAtSlide: '1',
+            scrollbar: true,
+            navNextSelector: $('.iosSlider1 .next'),
+            navPrevSelector: $('.iosSlider1 .prev'),
+        });
+    </script>
+</body>
+
+</html>

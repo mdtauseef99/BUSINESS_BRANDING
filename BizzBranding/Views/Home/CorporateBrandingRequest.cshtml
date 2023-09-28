@@ -1,0 +1,61 @@
+﻿@model BizzBranding.CommonUtility.CorporateBrandingModel
+
+@{
+    ViewBag.Title = "CorporateBrandingRequest";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("CorporateBrandingRequest", "Home", FormMethod.Post))
+{
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                @Html.HiddenFor(x => x.CorporateBrandingId)
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                      
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Corporate Branding Request</h2>
+
+                    <form role="form" method="post">
+                         <div class="form-margin">
+                        <div class="form-group">
+                            <label>Corporate Branding Details</label>
+                            <b style="color: red">*</b>
+                            @Html.TextAreaFor(x => x.CorporateBrandDetails, new { @class = "form-control", @placeholder = "Enter your Corporate Branding Details" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.CorporateBrandDetails)</b>
+                        </div>
+
+                        <input type="submit" class="btn btn-success" />
+                        <input type="button" value="Cancel" class="btn btn-warning" onclick="window.location.href = '/Home/UsersProfile'" />
+                        @* <button type="submit" class="btn btn-default btn-success">Submit</button>
+                            <button type="submit" class="btn btn-default btn-success">Reset</button>*@
+                    </div> </form>
+
+                    @*  </div>
+                            <input type="submit" class="btn btn-default btn-success">Submit</>
+                             <input type="button" value="Cancel" style="width: auto !important;" onclick="window.location.href = '/Home/Index'"  class="btn btn-default btn-success"/>
+                        </form>*@
+                </div>
+            </div>
+        </div>
+    </section>  
+}
+

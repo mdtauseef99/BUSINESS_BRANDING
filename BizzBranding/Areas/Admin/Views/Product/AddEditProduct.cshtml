@@ -1,0 +1,116 @@
+﻿@model BizzBranding.Areas.Admin.Models.ProductWebModel
+@{
+    ViewBag.Title = "AddEditProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        // $("#cid").hide();
+        //$("#eid").hide();
+        $('#categoryid').change(function () {
+            debugger;
+            var ID = document.getElementById('categoryid').value;
+
+            $.post("../Product/GetSubCategory", { id: ID },
+            function (data) {
+                debugger;
+                var elements = data;
+                $.each(data, function () {
+                    elements = elements + '<option value="' + this.SubCategoryId + '">' + this.SubCatgoryName + '</option>'
+                })
+                $('#subcategoryid').empty().attr('disabled', false).append("<option value='0'>--Select--</option>")
+                $('#subcategoryid').append(elements);
+            });
+        });
+    });
+</script>
+
+
+<div id="page-heading">
+    <h1>Add / Edit Products</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditProduct", "Product", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    
+    @Html.HiddenFor(x => x.ProductId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+                <div class="row">
+            <div ><span class="rowleft">Product Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.ProductName, new { @class = "inp-form", @placeholder = "Product Name" })
+                @Html.ValidationMessageFor(x => x.ProductName)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">Category Name</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x=>x.CategoryId, Model.CategoryNames, "Select", new { @class = "styledselect_form_1",@id="categoryid" })
+                @Html.ValidationMessageFor(x => x.CategoryId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">SubCategory Name</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x=>x.SubCategoryId, Model.SubCategoryNames, "Select", new { @class = "styledselect_form_1",@id="subcategoryid" })
+                @Html.ValidationMessageFor(x => x.SubCategoryId)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft"><span>Product Detail</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.ProdDetails, new { @class = "form-textarea" })
+                 @Html.ValidationMessageFor(x => x.ProdDetails)
+            </div>
+        </div>
+         <div class="row">
+            <div><span class="rowleft">Product Image</span></div>
+            <div class="rowright">
+                <input type="file" name="file"  id="file" multiple="multiple" onchange="fileChange()"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("Products","Product")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

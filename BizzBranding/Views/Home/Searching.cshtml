@@ -1,0 +1,163 @@
+﻿@model BizzBranding.CommonUtility.SearchwordsModel
+
+@{
+    ViewBag.Title = "Searching";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+   
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+<link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+
+@*<link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link href="~/Content/style/custom.css" rel="stylesheet" media="screen">*@
+
+
+<section class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info">Search Results for "@ViewBag.SearchKey" </div>
+                @*<ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#">
+                            <span class="badge pull-right">@Model.searchkeywords.Count()</span>
+                            Results By Industry                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="badge pull-right">@Model.searchkeywords.Count()</span>
+                            Results By City
+                        </a>
+                    </li>
+                </ul>*@
+                <hr />
+                <div class="list-group">
+                    @foreach (var BList in Model.searchkeywords)
+                    {
+                        //string str = BList.BusineeDetails;
+                        //if (str.Length > 100)
+                        //{
+                        //    str = str.Substring(0, 150);
+                        //}
+                        <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.Id })" class="list-group-item">
+                            <h4 class="list-group-item-heading" style="color: rgb(22, 108, 157)">
+                                <img height="50px" width="70px" src="~/Content/Images/CoLogo/@BList.CompanyLogo" style=" margin-right:20px;" />@BList.BusinessName</h4>
+                           @* <p class="list-group-item-text">@Html.Raw(str)</p>*@
+                        </a>
+                    }
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+                <!--<div class="form search">
+                    <form class="form-inline" role="form" id="frmsearch">
+                        <div class="form-group">
+                            <label class="sr-only" for="located">Located In</label>
+                            <input type="text" class="form-control input-sm" id="txtSearching" placeholder="Search with keyword">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm" id="btnSearch">Search</button>
+                    </form>
+                </div>
+                <br />-->
+                <!-- Nav tabs -->
+                <!-- <div class="tabs">
+                   
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left">
+                            <h3>Brands By</h3>
+                        </li>
+                        <li class="pull-right"><a href="#tabB" data-toggle="tab">City</a></li>
+                        <li class="active pull-right"><a href="#tabA" data-toggle="tab">Industry</a></li>
+                    </ul>
+                    <div class="clearfix"></div>-->
+                <!-- Tab panes -->
+                <!-- <div class="tab-content">
+                        <div class="tab-pane active" id="tabA">
+                            <ul class="list-group">
+                                @foreach (var Ind in Model.IndustryList)
+                                {
+                                    <li class="list-group-item"><a href="@Url.Action("SearchbyIndustry", "Home", new { @id = Ind.IndustryId })">@Ind.IndustryName</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tabB">
+                            <div class="list-group">
+                                @foreach (var ct in Model.CityList)
+                                {
+                                    <a href="@Url.Action("SearchByCity", "Home", new { @CityId = ct.CityId })" class="list-group-item">
+                                        <h4 class="list-group-item-heading">@ct.CityName</h4>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div style="margin-top: 31px;">-->
+                @*<h3  class="firstH3">Latest News</h3>*@
+                @*<div class="news-blog news">*@
+                    @* @if (Session["UserId"] != null)
+                      {
+                           *@
+                  @*  @foreach (var item in Model.NewsUpdates)
+                    {
+                        string str = item.Description;
+                        if (str.Length > 100)
+                        {
+                            str = str.Substring(0, 100);
+                        }
+    
+                        <h4>@item.NewsTitle</h4>
+                        <p>@str
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal-@item.BusinessNewsId" style="padding: 0 5px; font-size: 14px;">More</button>
+                        </p>
+                   
+            
+                        <!-- Modal -->
+                        <div class="modal fade homepop" id="myModal-@item.BusinessNewsId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">"@item.NewsTitle"</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @item.Description
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
+                    }
+                     <div><a href="@Url.Action("ViewallAdminNews", "Home")" class="pull-right more-news">View More...</a> </div>*@
+                    @*  }
+                      else
+                      {
+                          @Html.Action("News", "Home")
+                      }*@
+
+                </div>
+                @*<h3>Facebook Updates</h3>
+                <div id="facebook-plugin" class="news-blog">*@
+                @* <div class="fb-like-box" data-href="http://www.facebook.com/FacebookDevelopers" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>*@
+                @*<div class="fb-like-box" data-href="http://www.facebook.com/sabdulmujeeb" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+</section>
+

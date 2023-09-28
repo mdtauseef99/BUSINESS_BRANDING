@@ -1,0 +1,58 @@
+﻿@model BizzBranding.Areas.Admin.Models.NewsWebModel
+
+@{
+    ViewBag.Title = "ViewNews";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewCms";
+}
+
+<h2>@Html.DisplayFor(x => x.NewsTitle)</h2>
+@Html.HiddenFor(x => x.NewsId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+    @{
+        string data = Model.NewsDescription.ToString();
+                  
+    }
+
+     <div class="row">
+        <div ><span class="rowleft">News Title</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.NewsTitle)
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">News Description</span></div>
+        <div class="rowright">
+           @* @Html.DisplayFor(x => x.NewsDescription)*@
+            @Html.Raw(data)
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">HomePage News Image</span></div>
+        <div class="rowright">
+            @if (Model.NewsImage==null)
+            {
+               <img width="80px" height="80px" src="~/Areas/Admin/ProjectImages/HomepageNews/noimage.png" />
+            }
+            else
+            {
+                <img width="80px" height="80px" src="~/Areas/Admin/ProjectImages/HomepageNews/@Html.DisplayFor(x => x.NewsImage)" />
+            }
+        </div>
+    </div>
+
+  @*  @Html.Raw(data)*@
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("News", "MasterData")" class="form-reset">Back</a>
+        </div>
+
+    </div>
+</div>
+

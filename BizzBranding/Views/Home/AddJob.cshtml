@@ -1,0 +1,63 @@
+﻿@model BizzBranding.CommonUtility.BusinessJobModel
+
+@{
+    ViewBag.Title = "AddJob";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+@using (Html.BeginForm("AddJob", "Home", FormMethod.Post))
+{
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                @Html.HiddenFor(x => x.BusinessJobId)
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                      
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Add Job</h2>
+
+                    <form role="form" method="post">
+                        <div class="form-margin">
+                            <div class="form-group">
+                                <label>Job Title</label>
+                                <b style="color: red">*</b>
+                                @Html.TextBoxFor(x => x.JobTitle, new { @class = "form-control", @placeholder = "Enter Job Title" })
+                                <b style="color: red">@Html.ValidationMessageFor(x => x.JobTitle)</b>
+                            </div>
+
+                             <div class="form-group">
+                                <label>Job Description</label>
+                                <b style="color: red">*</b>
+                                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Enter Job Description" })
+                                <b style="color: red">@Html.ValidationMessageFor(x => x.Description)</b>
+                            </div>
+                            <input type="submit" class="btn btn-success" />
+                            <input type="button" value="Cancel" class="btn btn-warning" onclick="window.location.href = '/Home/UsersProfile'" />
+                            @* <button type="submit" class="btn btn-default btn-success">Submit</button>
+                            <button type="submit" class="btn btn-default btn-success">Reset</button>*@
+                        </div>
+                    </form>
+
+                    @*  </div>
+                            <input type="submit" class="btn btn-default btn-success">Submit</>
+                             <input type="button" value="Cancel" style="width: auto !important;" onclick="window.location.href = '/Home/Index'"  class="btn btn-default btn-success"/>
+                        </form>*@
+                </div>
+            </div>
+        </div>
+    </section>  
+}
+

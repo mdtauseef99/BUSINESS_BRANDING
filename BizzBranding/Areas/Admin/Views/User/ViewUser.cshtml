@@ -1,0 +1,119 @@
+﻿@model BizzBranding.Areas.Admin.Models.UserWebModel
+@{
+    ViewBag.Title = "ViewUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="page-heading">
+    <h1>View User</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.UserId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div><span class="rowleft">Business Name</span></div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.BusinessName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">EmailId</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.EmailId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Company Logo</div>
+            <div class="rowright">
+                <img width="50px" height="50px" src="~/Content/Images/CoLogo/@Html.DisplayFor(x=>x.CompanyLogo)"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Company RegNo</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.CoRegNo)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Industry Name</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.IndustryName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Country Name</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.CountryName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">City Name</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.CityName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Company Address</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.CoAddress)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Phone</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.Phone)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Fax</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.Fax)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Contact Person</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.ContactPerson)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Designation</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.Designation)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Trade EmaiIId</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.TradeEmaiIId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Business Details</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.BusinessDetails)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(X => X.IsActive)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <a href="@Url.Action("Users", "User")" class="form-reset">Back</a>
+
+            </div>
+
+        </div>
+    </div>
+}

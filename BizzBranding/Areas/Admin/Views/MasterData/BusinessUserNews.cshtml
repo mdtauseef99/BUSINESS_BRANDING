@@ -1,0 +1,134 @@
+﻿@model BizzBranding.CommonUtility.BusinessNewsModel
+
+@{
+    ViewBag.Title = "BusinessUserNews";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "BusinessUserNewsList";
+}
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+<div id="page-heading">
+    <h1>All News</h1>
+
+    @if (Session["Success"] != null)
+    {
+        <div class="successmsg">
+            @Session["Success"].ToString()
+        </div>
+        Session["Success"] = null;
+    }
+    else if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+
+
+</div>
+
+<div id="tableouterdiv">
+    @if (Convert.ToBoolean(Session["Add"]))
+    {
+@*<div style="margin: 15px 0 0 0;">
+            @Html.ActionLink("Create New", "AddEditCms", "MasterData", new { @class = "mybtncreate" })
+        </div>*@
+    }
+    <a href="@Url.Action("AddEditBusinessUserNews", "MasterData")" style="font-size:16px;color:black;margin-left: 30px;">Create News</a>
+    <div id="content-table-inner">
+        <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">BusinessUserNews Title</a></th>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">BusinessUserNews Description</a></th>
+                    @*  <th class="table-header-repeat line-left minwidth-1"><a href="#">IsActive</a></th>*@
+                    @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {
+                        <th class="table-header-options line-left"><a href="#">Options</a></th>
+                        
+                    }
+                </tr>
+
+                @foreach (var item in Model.BusinessNewsList)
+                {
+                    <tr>
+                        <td>@item.NewsTitle</td>
+                        <td>@Html.Raw(item.Description)</td>
+                        @*<td>@item.IsActive</td>*@
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditBusinessUserNews", "MasterData", new { @id = item.BusinessNewsId })" title="Edit" class="icon-1 info-tooltip"></a>
+                            
+                           
+                                }
+
+                                @if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.BusinessNewsId" class="icon-5"></a>
+
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.BusinessNewsId" class="inactive"></a>
+                                    
+                                }
+                                @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewBusinessUserNews", "MasterData", new { @id = item.BusinessNewsId })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+            <tbody>
+                <tr>
+                    <td>
+                        @{
+                            
+                            if (Model.PageID > 0)
+                            {
+                            <a href="@Url.Action("BusinessUserNews", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                            }
+                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                            if (Model.PageID + 1 < Model.Pagecount)
+                            {
+                            <a href="@Url.Action("BusinessUserNews", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                            }
+                          
+                        }
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            $("a.icon-5,a.inactive").click(function (e) {
+                e.preventDefault();
+                var userid = $(this).attr("data-uid");
+
+                $.post("/Admin/MasterData/ChangeBusinessNewsStatus", { id: userid });
+
+                $(this).toggleClass('icon-5');
+                $(this).toggleClass('inactive');
+
+            });
+
+        </script>
+        <div class="clear"></div>
+        <div class="clear"></div>
+    </div>
+</div>

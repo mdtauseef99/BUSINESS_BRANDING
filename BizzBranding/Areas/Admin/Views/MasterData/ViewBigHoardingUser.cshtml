@@ -1,0 +1,72 @@
+﻿@model BizzBranding.CommonUtility.HomeBannerModel
+
+@{
+    ViewBag.Title = "ViewHomeBanner";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h2>@Html.DisplayFor(x => x.CityName)</h2>*@
+@Html.HiddenFor(x => x.HomeBannerID)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+    <div class="row">
+        <div><span class="rowleft">Business Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.BusinessName)
+        </div>
+    </div>
+    <div class="row">
+        <div><span class="rowleft">Email ID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.EmailId)
+        </div>
+    </div>
+    <div class="row">
+        <div><span class="rowleft">Trade EmailID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.TradeEmaiIId)
+        </div>
+    </div>
+    <div class="row">
+        <div><span class="rowleft">Address</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CoAddress)
+        </div>
+    </div>
+    <div class="row">
+        <div><span class="rowleft">Phone</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Phone)
+        </div>
+    </div>
+
+    <div class="row">
+        <div><span class="rowleft">Business Logo</span></div>
+        <div class="rowright">
+            @* @foreach (var item in Model.HomeBannerImgList)
+            {*@
+                <img width="150px" height="150px" src="~/Scripts/jquery.bxslider/images/@Html.DisplayFor(x=>x.BannerImage)"/>
+            @*}*@
+            
+        </div>
+    </div>
+
+   <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("BigHoarding", "MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>
+

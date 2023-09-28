@@ -1,0 +1,115 @@
+﻿@model BizzBranding.Models.BizUserLoginModel
+
+@{
+    ViewBag.Title = "Login";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    ViewData["Message"] = TempData["AlertMessage"];
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<div id="msg"><p style="color:green; padding-left:8%"><strong> @ViewData["Message"]</strong></p></div>
+
+@*@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#msg').hide();
+        }, 60000);
+    });
+</script>
+@Html.HiddenFor(x=>x.ReturnUrl)
+@using (Html.BeginForm("Login", "Home", new { returnurl = Request.QueryString["returnurl"] }, FormMethod.Post))
+{
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                <div id="page-heading" style="color: red">
+                    @* @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }*@
+
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Sign In Your Account</h2>
+
+                    <form role="form">
+                         <div class="form-margin">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Enter Email" })
+                            <b style="color: red">@Html.ValidationMessageFor(Model => Model.Email)</b>
+                            @* <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">*@
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Enter Password" })
+                            <b style="color: red">@Html.ValidationMessageFor(Model => Model.Password)</b>
+                            @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">*@
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-success">Login</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href = '../Home/Index'">Cancel</button>
+                        <a href="@Url.Action("ForgotPassword", "Home")" style="padding-left: 30px;">Forgot Password</a>
+                    </form>
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+@* @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <p>
+            <input type="submit" value="Login" />
+           <input type="button" value="Cancel" style="width: auto !important;" onclick="window.location.href = '/Home/Index'"  />
+            <a href="@Url.Action("ForgotPassword","Home")">Forgot Password</a> @*class="btn btn-default btn-sm"
+        </p>
+    </fieldset>*@
+}
+
+
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

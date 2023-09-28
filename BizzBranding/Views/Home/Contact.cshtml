@@ -1,0 +1,247 @@
+﻿@model BizzBranding.CommonUtility.CustomerEnquiriesModel
+@{
+    ViewBag.Title = "Business Branding: Contact Us";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+@section metatags 
+        {
+    <meta name='keywords' content='@ViewBag.MetaKeywords'/>
+    <meta name='description' content='@ViewBag.MetaDescription'/>
+}
+
+<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+@*<link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">*@
+
+@*<link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link href="~/Content/style/custom.css" rel="stylesheet" media="screen">*@
+
+
+
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function () {
+        $('#frmsearch').submit(function (e) {
+            e.preventDefault();
+            debugger;
+            var txtVal = $('#txtSearching').val();
+            if (txtVal != "") {
+                var txt = $('.form-control').val();
+                $('#Displaytext').text(txtVal);
+                window.location.href = '/Home/Searching?searchValue=' + txt;
+
+            }
+            else { alert('Enter text to search'); $('#txtSearch').focus(); }
+
+        });
+    });
+</script>
+@using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+{
+    
+<section class="brands">
+    <div class="container">
+        <div class="row">
+             
+            <div class="col-sm-6">
+                @*  <h2>@Model.CMSTitle</h2>*@
+                <div class="list-group">
+                    <h4 class="list-group-item-heading"><strong>Contact Us</strong></h4>
+                    <p class="list-group-item-text">
+                        @*@Html.Raw(Model.Description)*@
+
+                       @* List group item heading Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product.
+                        Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product. Brand is the "name, term,
+                        design, symbol, or any other feature that identifies one seller's product Brand is the "name, term, design, symbol, or any other
+                        feature that identifies one seller's product Brand is the "name, term, design, symbol, or any other feature that identifies one 
+                        seller's product Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product
+                        List group item heading Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product
+                    </p>*@
+                    <br />
+                    <div id="page-heading" style="color: green">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+                    <div class="clear"></div>
+                    <div class="">
+                         @if (ViewBag.LoggedInUser == true)
+                         {
+                             <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-sm-12"> 
+                                    <label>Subject</label>
+                                    <b style="color: red">*</b>
+                                                @Html.HiddenFor(x => x.CustomerPhone)
+                                                @Html.HiddenFor(x => x.CustEmailId)
+                                                @Html.HiddenFor(x => x.CustomerName)
+                                    
+                                    @Html.TextBoxFor(x => x.CustSubject, new { @class = "form-control", @placeholder = "Subject" })
+                                    <b style="color: red">@Html.ValidationMessageFor(x => x.CustSubject) </b>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label>Enquiry</label>
+                                    <b style="color: red">*</b>
+
+                                    @Html.TextAreaFor(x => x.CustEnquiry, new { @class = "form-control", @placeholder = "Your Enquiry Details" })
+                                    <b style="color: red">@Html.ValidationMessageFor(x => x.CustEnquiry) </b>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-12">
+                                    <input type="submit" class="btn btn-success" value="Submit" />
+                                    <input type="button" value="Cancel" class="btn btn-warning" onclick="window.location.href = '/Home/Index'" />
+                                </div>
+                            </div>
+
+                        </form>
+                         }
+                         else
+                         {
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label>Name</label>
+                                        <b style="color: red">*</b>
+                                        @Html.TextBoxFor(x => x.CustomerName, new { @class = "form-control", @placeholder = "Enter Name" })
+                                        <b style="color: red">@Html.ValidationMessageFor(x => x.CustomerName) </b>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label>Email</label>
+                                        <b style="color: red">*</b>
+                                        @Html.TextBoxFor(x => x.CustEmailId, new { @class = "form-control", @placeholder = "Enter Email Id" })
+                                        <b style="color: red">@Html.ValidationMessageFor(x => x.CustEmailId) </b>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label>Phone</label>
+                                        <b style="color: red">*</b>
+                                        @Html.TextBoxFor(x => x.CustomerPhone, new { @class = "form-control", @placeholder = "Enter Phone" })
+                                        <b style="color: red">@Html.ValidationMessageFor(x => x.CustomerPhone) </b>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label>Subject</label>
+                                        <b style="color: red">*</b>
+
+                                        @Html.TextBoxFor(x => x.CustSubject, new { @class = "form-control", @placeholder = "Subject" })
+                                        <b style="color: red">@Html.ValidationMessageFor(x => x.CustSubject) </b>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <div class="col-sm-12">
+                                        <label>Enquiry</label>
+                                        <b style="color: red">*</b>
+
+                                        @Html.TextAreaFor(x => x.CustEnquiry, new { @class = "form-control", @placeholder = "Your Enquiry Details" })
+                                        <b style="color: red">@Html.ValidationMessageFor(x => x.CustEnquiry) </b>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-12" style="margin-top:20px">
+                                        <input type="submit" class="btn btn-success" value="Submit" />
+                                        <input type="button" value="Cancel" class="btn btn-warning" onclick="window.location.href = '/Home/Index'" />
+                                    </div>
+                                </div>
+
+                            </form>
+                         }
+                        
+                    </div>
+                </div>
+
+                @*<div class="col-sm-4">
+
+                    <br />
+                    <div class="tabs">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left">
+                                <h3>Brands By</h3>
+                            </li>
+                            <li class="pull-right"><a href="#tabB" data-toggle="tab">City</a></li>
+                            <li class="active pull-right"><a href="#tabA" data-toggle="tab">Industry</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabA">
+                                <ul class="list-group">
+                                    @foreach (var Ind in Model.IndustryList)
+                                    {
+                                        <li class="list-group-item"><a href="@Url.Action("SearchbyIndustry", "Home", new { @id = Ind.IndustryId })">@Ind.IndustryName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="tabB">
+                                <div class="list-group">
+                                    @foreach (var ct in Model.CityList)
+                                    {
+                                        <a href="@Url.Action("SearchByCity", "Home", new { @CityId = ct.CityId })" class="list-group-item">
+                                            <h4 class="list-group-item-heading">@ct.CityName</h4>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-top: 31px;">
+                            @if (Session["UserId"] != null)
+                            {
+                                <h2>News <i class="icon-bullhorn"></i></h2>
+                                foreach (var item in Model.NewsUpdates)
+                                {
+                                    string str = item.Description;
+                                    if (str.Length > 100)
+                                    {
+                                        str = str.Substring(0, 100);
+                                    }
+    
+                                <h3>@item.NewsTitle</h3>
+                                <p>@str</p>
+                                }
+
+                            }
+                            else
+                            {
+                                @Html.Action("News", "Home")
+                            }
+                        </div>
+                        @*  <p>Know more about it.. <span class="label label-primary">New</span></p>
+                    </div>
+                </div>*@
+                </div>
+            <div class="col-sm-6">
+                <h4 class="list-group-item-heading"><strong>The Business Branding Contact  Location</strong></h4>
+                <div class="map">
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d951.7285899116879!2d78.44587679572265!3d17.41589708995186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9730c46a0783%3A0xff4d5d9d38483d54!2sFarhat+Building!5e0!3m2!1sen!2sin!4v1405415168904" width="600" height="450" frameborder="0" style="border:0"></iframe>
+                     <br>
+                      @*  <small>
+                            <a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Behind+Al+Wahda+Discount+Center&amp;aq=&amp;sll=25.332429,55.398259&amp;sspn=0.005896,0.010568&amp;ie=UTF8&amp;hq=Behind+Al+Wahda+Discount+Center&amp;hnear=&amp;t=m&amp;ll=25.323798,55.392487&amp;spn=0.006788,0.00912&amp;z=16&amp;iwloc=lyrftr:m,14703726127582963306,25.322014,55.392659" style="color: #0000FF; text-align: left">View Larger Map</a>
+                        </small>*@
+    </div>
+            </div>
+            </div>
+        </div>
+</section>
+}

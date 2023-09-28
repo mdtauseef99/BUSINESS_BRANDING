@@ -1,0 +1,132 @@
+﻿@model BizzBranding.Areas.Admin.Models.CountryWebModel
+@{
+    ViewBag.Title = "Country";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+<div id="page-heading">
+    <h1>All Countries</h1>
+    @if (Session["Success"] != null)
+    {
+        <div class="successmsg">
+            @Session["Success"].ToString()
+        </div>
+        Session["Success"] = null;
+    }
+    else if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+
+
+</div>
+
+<div id="tableouterdiv">
+    @if (Convert.ToBoolean(Session["Add"]))
+    {
+        <div style="margin: 15px 0 0 0;">
+            @Html.ActionLink("Create New", "AddEditCountry", "MasterData", new { @class = "mybtncreate" })
+        </div>
+    }
+    @*<div style="float: right; margin: -20px 54px 0 0;">
+        Sort By:
+                @Html.DropDownListFor(x => x.ParentCourseID, Model.ParentCourses, "Select", new { @id = "institute" })
+        @Html.DropDownListFor(x => x.CourseID, Model.Course, "Select", new { @id = "course" })
+        <a href="@Url.Action("Courses", "MasterData", new { @cid = Model.CourseID })" class = "mybtncreate" >Go</a>
+    </div>*@
+    <div id="content-table-inner">
+        <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">Country Name</a></th>
+                    @*<th class="table-header-repeat line-left minwidth-1"><a href="">Country Code</a></th>*@
+                    @*<th class="table-header-repeat line-left minwidth-1"><a href="#">Created Date</a></th>*@
+                  @*  <th class="table-header-repeat line-left minwidth-1"><a href="#">IsActive</a></th>*@
+                    @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {
+                        <th class="table-header-options line-left"><a href="#">Options</a></th>
+                        
+                    }
+                </tr>
+                @foreach (var item in Model.Countries)
+                {
+                    <tr>
+                      
+                        <td>@item.CountryName</td>
+                        @*<td>@item.CountryCode</td>*@
+                        @*<td>@item.CreatedDate</td>*@
+                       @* <td>@item.IsActive</td>*@
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditCountry", "MasterData", new { @id = item.CountryId })" title="Edit" class="icon-1 info-tooltip"></a>
+                            
+                           
+                                }
+                                @if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.CountryId" class="icon-5"></a>
+
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.CountryId" class="inactive"></a>
+                                    
+                                }
+                                 @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewCountry", "MasterData", new { @id = item.CountryId })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+            <tbody>
+                <tr>
+                    <td>
+                          @{
+                            
+                            if (Model.PageID > 0)
+                            {
+                            <a href="@Url.Action("Country", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                            }
+                            
+                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                            if (Model.PageID + 1 < Model.Pagecount)
+                            {
+                            <a href="@Url.Action("Country", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                            }
+                           
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+         <script>
+             $("a.icon-5,a.inactive").click(function (e) {
+                 e.preventDefault();
+                 var userid = $(this).attr("data-uid");
+
+                 $.post("/Admin/MasterData/ChangeCountryStatus", { id: userid });
+
+                 $(this).toggleClass('icon-5');
+                 $(this).toggleClass('inactive');
+
+             });
+
+        </script>
+        <div class="clear"></div>
+    </div>
+</div>

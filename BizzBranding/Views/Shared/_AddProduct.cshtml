@@ -1,0 +1,164 @@
+﻿@model BizzBranding.CommonUtility.ProductModel
+
+<style> 
+    /* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+textarea-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+</style>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min%20(2).js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+ <h3>Add a Product</h3>
+@using (Html.BeginForm("AddProduct", "Home", FormMethod.Post, new { @enctype="multipart/form-data"}))
+{@Html.ValidationSummary(true)
+    @*<div class="modal fade" id="AddProductsPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h2 class="modal-title" id="myModalLabel">Employee Branding</h2>
+                            <form role="form" style="margin: 20px 20px;">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Product Name</label>
+                                    @Html.TextBoxFor(x=>x.ProductName) @Html.ValidationMessageFor(x => x.ProductName)
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Product Description</label>
+                                     @Html.TextAreaFor(x=>x.ProdDetails)<br />@Html.ValidationMessageFor(x => x.ProdDetails)
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Product Image</label>
+                                    <input type="file" name="imgFile"  id="productImage" multiple="multiple" onchange="fileChange(this)"/>
+                                    <label align="left" id="servicelist" class="image-upload" style='height: inherit;'>
+                                    </label>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    <table>
+        <tr>
+            <td>Product Name</td>
+            <td>@Html.TextBoxFor(x=>x.ProductName)<br />@Html.ValidationMessageFor(x => x.ProductName)</td>
+
+        </tr>
+        <tr>
+            <td>Product Description</td>
+            <td>@Html.TextAreaFor(x=>x.ProdDetails)<br />@Html.ValidationMessageFor(x => x.ProdDetails)</td>
+        </tr>
+        <tr>
+            <td>Product Image</td>
+            <td>
+                <input type="file" name="imgFile"  id="productImage" multiple="multiple" onchange="fileChange(this)"/></td>
+        </tr>
+         <tr>
+                        <td>
+                            
+                            <label align="left" id="servicelist" class="image-upload" style='height: inherit;'>
+                            </label>
+                        </td>
+                    </tr>
+        <tr>
+            <td>
+                <input type="submit" name="submit" value="Submit" id="btnSubmit" /></td>
+            <td><input type="button" name="cancel" value="Cancel" id="btnCancel" /></td>
+        </tr>
+       
+    </table>
+}
+
+<script type="text/javascript">
+
+    function fileChange(e) {
+        debugger;
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+
+
+    var staticnum = 0;
+    function handleFileSelect(evt) {
+        debugger;
+        var files = evt.target.files; // FileList object
+        staticnum++;
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+
+                return function (e) {
+                    // Render thumbnail.
+                    var span = document.createElement('td');
+                    span.id = staticnum;
+                    span.innerHTML = ['&nbsp<img width="100px" height="100px" style="cursor:pointer"  class="thumb" src="', e.target.result, '"id="', staticnum, '"onclick="ImgClose(', staticnum, ')',
+                            '" title="', escape(theFile.name), ' Do U want to Remove ? Just DbClick"/>'].join('');
+                    document.getElementById('servicelist').appendChild(span); //.insertBefore(span, null);
+
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+    }
+
+    document.getElementById('productImage').addEventListener('change', handleFileSelect, false);
+</script>
+
+<script type="text/ecmascript" >
+    //$(document).ready(function () {
+
+       
+        $('#btnCancel').click(function myfunction() {
+            debugger;
+            $('#mask , .login-popup').fadeOut(300, function () {
+                $('#mask').remove();
+                $("input[type='text']").val('');
+            });
+            return false;
+        });
+    //});
+</script>

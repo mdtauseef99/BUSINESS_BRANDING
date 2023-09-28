@@ -1,0 +1,104 @@
+﻿@model BizzBranding.Areas.Admin.Models.RoleWebModel
+@{
+    ViewBag.Title = "ViewRoles";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewRoles";
+}
+
+<div id="page-heading">
+    <h1>View Roles</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.RoleID)
+    @Html.HiddenFor(x => x.Pagecount, new { @name = "pagecount" })
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.RoleName)</div>
+            <div class="rowright">
+                @Html.DisplayFor(x=>x.RoleName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.IsActive)
+            </div>
+        </div>
+        <div class="row">
+            @{int i = 1;}
+            @foreach (var item in Model.Rolemanages)
+            {
+                <input type="hidden" name="hd_page@(i)" value="@item.PageID" />
+                <div class="rowleft">
+                    @item.PageName
+                </div>
+                <div class="rowright">
+                    @{
+                if (item.Add)
+                {
+                         <label>Add</label> <label>True</label>
+                }
+                else
+                {
+                        <label>Add</label> <label>False</label>
+                }
+
+                if (item.Edit)
+                {
+                        <label>Edit</label> <label>True</label>
+                }
+                else
+                {
+                        <label>Edit</label> <label>False</label>
+                }
+
+                if (item.Delete)
+                {
+                       <label>Delete</label> <label>True</label>
+                }
+                else
+                {
+                       <label>Delete</label> <label>False</label>
+                }
+
+                if (item.View)
+                {
+                        <label>View</label> <label>True</label>
+                }
+                else
+                {
+                        <label>View</label> <label>False</label>
+                }
+
+                i++;
+                    }
+                </div>
+                <div style="clear: both"></div>
+            }
+
+        </div>
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <a href="@Url.Action("Roles", "MasterData")" class="form-reset">Back</a>
+                @*<input type="reset" value="" class="form-reset">*@
+            </div>
+
+        </div>
+    </div>
+    
+    
+}

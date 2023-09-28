@@ -1,0 +1,150 @@
+﻿@*@if (Session["UserId"] != null)
+{
+    <div class="tagline">
+    </div>
+}
+else
+{
+    <div class="tagline">
+        <p>To connect with the above business &amp; more <a href="@Url.Action("UserRegistration", "Home")" class="btn btn-info">sign up now</a></p>
+    </div>
+}*@
+
+
+<div class="footerMenu">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h3>Address</h3>
+                <ul class="">
+                    <li>Farhat Building</li>
+                    <li>Flat no:301, 8-2-596/F/447 </li>
+                    <li>Banjara Hills Road no:10</li>
+                    <li>Hyderabad</li>
+                    <li>Telangana- 500034, India.</li>
+                    <li>Landline Phone : +918790252265</li>
+                    <li>Email : info@thebusinessbranding.com 
+                                support@thebusinessbranding.com
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-3">
+                <h3>Upcoming Services</h3>
+                <ul class="">
+                    <li><a href="@Url.Action("CMS", "Home", new { id = "14" })">Smart Products </a></li>
+                    <li><a href="@Url.Action("CMS", "Home", new { id = "15" })">Upcoming Products </a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <h3>Follow Us</h3>
+                <ul class="social-icon">
+                    <li><a href=" ">
+                        <img src="../../Images/EmployeeBrandingImages/facebookIcon.png" title="face book"></a></li>
+                    <li><a href="https://twitter.com/bizzbranding">
+                        <img src="../../Images/EmployeeBrandingImages/twiterIcons.png" title="twitter"></a></li>
+                    <li><a href="Contact.html">
+                        <img src="../../Images/EmployeeBrandingImages/inIcons.png" title="in"></a></li>
+                     <li><a href="https://plus.google.com/113804345655166623348" rel="publisher">
+                        <img src="~/Images/EmployeeBrandingImages/header-google-icon.png" title="Google Plus"></a></li>
+                   @*<li>
+                        <!-- Place this tag where you want the share button to render. -->
+                        <div class="g-plus" data-action="share"></div>
+
+                        <!-- Place this tag after the last share tag. -->
+                        <script type="text/javascript">
+                            (function () {
+                                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                po.src = 'https://apis.google.com/js/platform.js';
+                                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                            })();
+                        </script>
+                    </li>*@
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                @*<h3>Payments</h3>*@
+                <ul class="">
+                    <li><a href="" style="margin-top: 16px; display: block;">
+                        <img src="../../Images/EmployeeBrandingImages/payment_options_sans_mc.gif" title="facebook"></a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row footer-bottom">
+            <div class="col-sm-7">
+                <a href="@Url.Action("Contact", "Home")">Contact</a>
+                <a href="@Url.Action("CMS", "Home", new { id = "23" })">Disclaimer</a>
+                <a href="@Url.Action("CMS", "Home", new { id = "22" })">Terms & Conditions</a>
+                <a href="@Url.Action("CMS", "Home", new { id = "6" })">About us</a>
+            </div>
+            <div class="col-sm-5 text-right">
+                <p>TheBusinessBranding Copyright 2014. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+
+   @* <!-- Place this tag where you want the share button to render. -->
+    <div class="g-plus" data-action="share"></div>
+
+    <!-- Place this tag after the last share tag. -->
+    <script type="text/javascript">
+        (function () {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+    </script>*@
+</footer>
+
+
+
+
+@*<div class="footerMenu">
+    <div class="container">
+        <div class="row">
+          
+            <div class="col-sm-4">
+                <h3>About Company</h3>
+                <ul class="">
+                    <li><a href="@Url.Action("CMS", "Home", new { id = "6" })">About Us</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Advertise With US</a></li>
+                  
+                    <li><a href="@Url.Action("CMS", "Home", new { id = "15" })">Upcoming Products</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Contact Sales Team</a></li>
+                    <li><a href="@Url.Action("CMS", "Home", new { id = "11" })">Global Branding</a></li>
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>
+        Copy Right &copy; 2014-2015 
+    </p>
+    <p class="footer-icons">
+        <a href="#"><i
+            class="icon-google-plus-sign"></i></a>
+
+        <a href="https://plus.google.com/103940052496170589318" rel="publisher">Google+</a>
+
+
+        <!-- Place this tag where you want the share button to render. -->
+        <div class="g-plus" data-action="share"></div>
+
+        <!-- Place this tag after the last share tag. -->
+        <script type="text/javascript">
+            (function () {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/platform.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+    </p>
+</footer>*@
+

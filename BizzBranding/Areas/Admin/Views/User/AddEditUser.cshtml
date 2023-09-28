@@ -1,0 +1,184 @@
+﻿@model BizzBranding.Areas.Admin.Models.UserWebModel
+@{
+    ViewBag.Title = "AddEditUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        // $("#cid").hide();
+        //$("#eid").hide();
+        $('#ddlCountryid').change(function () {
+            debugger;
+            var ID = document.getElementById('ddlCountryid').value;
+
+            $.post("../User/GetCity", { id: ID },
+            function (data) {
+                debugger;
+                var elements = data;
+                $.each(data, function () {
+                    elements = elements + '<option value="' + this.CityId + '">' + this.CityName + '</option>'
+                })
+                $('#ddlCityid').empty().attr('disabled', false).append("<option value='0'>--Select--</option>")
+                $('#ddlCityid').append(elements);
+            });
+        });
+    });
+</script>
+
+<div id="page-heading">
+    <h1>Add / Edit User</h1>
+     @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{ Html.EnableClientValidation(); Html.ValidationSummary(true); }
+@using (Html.BeginForm("AddEditUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+   @Html.HiddenFor(x => x.UserId) 
+                                    
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div ><span class="rowleft">Business Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.BusinessName, new { @class = "inp-form", @placeholder = "Business Name" })
+                 @Html.ValidationMessageFor(x => x.BusinessName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">EmailId</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.EmailId, new { @class = "inp-form", @placeholder = "Email" })
+                @Html.ValidationMessageFor(x => x.EmailId)
+            </div>
+        </div>
+        @if (Model.UserId == 0)
+        {
+            <div class="row">
+                <div class="rowleft">@Html.LabelFor(x => x.Password)</div>
+                <div class="rowright">
+                    @Html.PasswordFor(x => x.Password, new { @value = Model.Password, @class = "inp-form", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(x => x.Password)
+                </div>
+            </div>
+            <div class="row">
+                <div ><span class="rowleft">Confirm Password</span></div>
+                <div class="rowright">
+                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "inp-form", @placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div ><span class="rowleft">Company Logo</span></div>
+            <div class="rowright">
+                 <input type="file" name="file" />
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft">Company RegNo</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CoRegNo, new { @class = "inp-form", @placeholder = "Company RegNo" })
+                @Html.ValidationMessageFor(x => x.CoRegNo)
+            </div>
+        </div> 
+        <div class="row">
+            <div class="rowleft">Industry Name</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "styledselect_form_1" })
+                @Html.ValidationMessageFor(x => x.IndustryName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Country Name</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.CountryId, Model.CountryNames, "Select", new { @class = "styledselect_form_1",@id="ddlCountryid" })
+                @Html.ValidationMessageFor(x => x.CountryName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">City Name</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.CityId, Model.CityNames, "Select", new { @class = "styledselect_form_1",@id="ddlCityid"})
+                @Html.ValidationMessageFor(x => x.CityName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Company Address</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CoAddress, new { @class = "inp-form", @placeholder = "Company Address" })
+                @Html.ValidationMessageFor(x => x.CoAddress)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft">Phone</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.Phone, new { @class = "inp-form", @placeholder = "Phone" })
+                @Html.ValidationMessageFor(x => x.Phone)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft">Fax</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.Fax, new { @class = "inp-form", @placeholder = "Fax" })
+                @Html.ValidationMessageFor(x => x.Fax)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft">Contact Person</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.ContactPerson, new { @class = "inp-form", @placeholder = "ContactPerson" })
+                @Html.ValidationMessageFor(x => x.ContactPerson)
+            </div>
+        </div>
+                 <div class="row">
+            <div class="rowleft">Designation</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.Designation, new { @class = "inp-form", @placeholder = "Designation" })
+                @Html.ValidationMessageFor(x => x.Designation)
+            </div>
+        </div>
+                 <div class="row">
+            <div class="rowleft">Trade EmaiIId</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.TradeEmaiIId, new { @class = "inp-form", @placeholder = "Trade EmaiIId" })
+                @Html.ValidationMessageFor(x => x.TradeEmaiIId)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft">Business Details</div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.BusinessDetails, new { @class = "inp-form", @placeholder = "Business Details" })
+                @Html.ValidationMessageFor(x => x.BusinessDetails)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(X => X.IsActive)
+                @Html.ValidationMessageFor(x => x.IsActive)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">
+               
+            </div>
+            <div class="rowright">
+                 <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("Users", "User")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}
+

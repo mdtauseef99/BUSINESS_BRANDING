@@ -1,0 +1,52 @@
+﻿@model BizzBranding.Areas.Admin.Models.CountryWebModel
+@{
+    ViewBag.Title = "AddEditCountry";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<div id="page-heading">
+    <h1>Add / Edit Countries</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.CountryId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        
+        <div class="row">
+            <div ><span class="rowleft">Country Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CountryName, new { @class = "inp-form", @placeholder = "Country Name" })
+                @Html.ValidationMessageFor(x => x.CountryName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("Country","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

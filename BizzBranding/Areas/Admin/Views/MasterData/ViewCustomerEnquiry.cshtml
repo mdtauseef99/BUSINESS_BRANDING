@@ -1,0 +1,61 @@
+﻿@model BizzBranding.CommonUtility.CustomerEnquiriesModel
+
+@{
+    ViewBag.Title = "ViewCustomerEnquiry";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewCustomerEnquiry";
+}
+
+<h2>Customer Enquiry Details</h2>
+
+@*<h2>@Html.DisplayFor(x => x.CityName)</h2>*@
+@Html.HiddenFor(x => x.ContactId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+   <div class="row">
+        <div ><span class="rowleft">Customer Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CustomerName)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Customer EmailID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CustEmailId)
+        </div>
+    </div>
+      
+    <div class="row">
+        <div ><span class="rowleft">Phone</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CustomerPhone)
+        </div>
+    </div>
+
+    <div class="row">
+        <div ><span class="rowleft">Subject</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CustSubject)
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">Enquiry Made</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CustEnquiry)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("CustomerEnquiry","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>
+
+

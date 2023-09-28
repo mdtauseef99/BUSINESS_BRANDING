@@ -1,0 +1,123 @@
+﻿@model BizzBranding.Models.LandingPageModel
+@{
+    ViewBag.Title = "EditProfile";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+      Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ddlCountryid').change(function () {
+            debugger;
+            var ID = document.getElementById('ddlCountryid').value;
+
+            $.post("/Home/GetCity", { id: ID },
+                function (data) {
+                    debugger;
+                    var elements = data;
+                    $.each(data, function () {
+                        elements = elements + '<option value="' + this.CityId + '">' + this.CityName + '</option>'
+                    })
+                    $('#ddlCityid').empty().attr('disabled', false).append("<option value='0'>--Select--</option>")
+                    $('#ddlCityid').append(elements);
+                });
+
+        });
+    });
+  </script>
+<div class="container brands">
+    @Html.HiddenFor(x => x.CompanyLogo)
+    @Html.HiddenFor(x => x.CompanyBanner)
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h2>Edit Profile</h2>
+
+            <form enctype="multipart/form-data" class=" form-horizontal" role="form" action="UpdateProfileTabs" method="post">
+                <div class="form-margin" style="margin: 25px;">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Business Details</label>
+                        @Html.TextAreaFor(x => x.BusinessDetails, new { @class = "ckeditor", placeholder = "Business Details" })
+                        @Html.ValidationMessageFor(x => x.BusinessDetails)
+                        @* <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ex : Wec345">*@
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Register.No</label>
+                        @*<input type="Text" class="form-control" id="inputEmail3" placeholder="Ex : Wec345">*@
+                        @Html.TextBoxFor(x => x.Regno, new { @class = "form-control", placeholder = "Ex : Wec345" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contact Person</label>
+                        @Html.TextBoxFor(x => x.ContactPerson, new { @class = "form-control", placeholder = "John" })
+                        @*<input type="Text" class="form-control" id="inputEmail3" placeholder="John">*@
+                        @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="John">*@
+                    </div>
+                    <div class="form-group">
+                        <label>Industry Type</label>
+                        <b style="color: red">*</b>
+                        @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "form-control", @id = "ddlIndustryId" })@*@class=styledselect_form_1*@
+                        <b style="color: red">@Html.ValidationMessageFor(x => x.IndustryNames) </b>
+                    </div>
+                    <div class="form-group">
+                        <label>Suggest Us Your Targeted Industries</label>
+                        @* <b style="color: red">*</b>*@
+                        @Html.ListBoxFor(x => x.SelectItems, Model.IndustryNames, new { size = 6, @class = "form-control", @id = "ddl", Multiple = "multiple" })
+                        @* @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "form-control", @id = "ddlIndustryId" })*@@*@class=styledselect_form_1*@
+                        <b style="color: red">@Html.ValidationMessageFor(x => x.IndustryNames) </b>
+                    </div>
+                    <div class="form-group">
+                        <label>Country Name</label>
+                        <b style="color: red">*</b>
+                        @Html.DropDownListFor(x => x.CountryId, Model.CountryNames, "Select", new { @class = "form-control", @id = "ddlCountryid" })@*@class=styledselect_form_1*@
+                        <b style="color: red">@Html.ValidationMessageFor(x => x.CountryId) </b>
+                    </div>
+                    <div class="form-group">
+                        @* @Html.LabelFor( x=> x.CityName)*@
+                        <label>City Name</label>
+                        <b style="color: red">*</b>
+                        @Html.DropDownListFor(x => x.CityId, Model.CityNames, "Select", new { @class = "form-control", @id = "ddlCityid" })@*@class=styledselect_form_1*@
+                        <b style="color: red">@Html.ValidationMessageFor(x => x.CityId) </b>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Phone</label>
+                        @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", placeholder = "Contact Number" })
+                        @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contact Number">*@
+                    </div>
+                    <div class="form-group">
+                        <label>Fax</label>
+                        @Html.TextBoxFor(x => x.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Address</label>
+                        @Html.TextBoxFor(x => x.Address, new { @class = "form-control", placeholder = "Location City" })
+                        @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Location City">*@
+                    </div>
+                    <div class="form-group">
+                        <label>Company URL</label>
+                        @Html.TextBoxFor(model => model.CompanyURL, new { @class = "form-control", @placeholder = "Company URL" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Designation</label>
+                        @Html.TextBoxFor(x => x.Designation, new { @class = "form-control", placeholder = "Manager, Software Engeneer" })
+                        @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Manager, Software Engeneer">*@
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Trade Email Id</label>
+                        @Html.TextBoxFor(x => x.TradeEmailId, new { @class = "form-control", placeholder = "abc@businessbarnding.in" })
+                        @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="abc@businessbarnding.in">*@
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Submit" />
+                    <button type="button" class="btn  btn-warning" onclick="window.location.href = '../Home/UsersProfile'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>

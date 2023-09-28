@@ -1,0 +1,68 @@
+﻿@model BizzBranding.CommonUtility.HomeBannerModel
+
+@{
+    ViewBag.Title = "UpdateHomeBanner";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>
+
+@using (Html.BeginForm("UpdateHomeBanner", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.HomeBannerID)
+    
+    @Html.HiddenFor(model => model.UserId)
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Update your Home Banner Image</h2>
+                    <form role="form">
+                        <div class="form-margin">
+                            <div class="form-group">
+                                <label>Home Banner URL</label>
+                                @Html.TextBoxFor(x => x.CompanyURL, new { @class = "form-control", @placeholder = "Enter your Business Url" })
+                                @Html.ValidationMessageFor(model => model.CompanyURL)
+                                @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">*@
+                            </div>
+                            <div class="form-group">
+                                <label>Home Banner Images</label>
+                                <input type="file" name="file" id="file" multiple="multiple" onchange="fileChange()" />
+                                <p class="help-block">For Best Visibility Upload Image of 1300px*500px</p>
+                                @*@Html.ValidationMessageFor(model => model.ProdDetails)*@
+                                @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">*@
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-warning" onclick="window.location.href = '../../Home/HomeBanner'">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+}

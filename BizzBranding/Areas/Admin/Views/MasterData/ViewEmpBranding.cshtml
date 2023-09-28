@@ -1,0 +1,90 @@
+﻿@model BizzBranding.CommonUtility.EmpBrandingModel
+
+@{
+    ViewBag.Title = "ViewCoBrand";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ViewEmpBranding</h2>
+
+
+
+@*<h2>@Html.DisplayFor(x => x.CityName)</h2>*@
+@Html.HiddenFor(x => x.EmpBrandingId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+   <div class="row">
+        <div ><span class="rowleft">Employer</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.EmployerName)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Employee Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.EmpName)
+        </div>
+    </div>
+      
+    <div class="row">
+        <div ><span class="rowleft">Message</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Message)
+        </div>
+    </div>
+
+     <div class="row">
+        <div><span class="rowleft">Employee Image</span></div>
+        <div class="rowright">
+                <img width="70px" height="70px" src="~/Images/EmployeeBrandingImages/@Html.DisplayFor(x=>x.EmpImage)"/>
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">Activated On</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CreateOn)
+        </div>
+    </div>
+
+     @*<div class="row">
+        <div ><span class="rowleft">Expires On</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.ExpiresOn)
+        </div>
+    </div>*@
+
+     <div class="row">
+        <div ><span class="rowleft">Validity in Months</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.No_Month)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+     @*<div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsApproved)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsApproved)
+        </div>
+    </div>*@
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("EmpBranding","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>
+

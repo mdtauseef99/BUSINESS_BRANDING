@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4C4B407-E2CF-49EC-87DC-03E1F8B17006}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BizzBranding.BLL</RootNamespace>
+    <AssemblyName>BizzBranding.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Helpers">
+      <HintPath>\\SERVER\Users\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessPlanBLL.cs" />
+    <Compile Include="AdministratorBLL.cs" />
+    <Compile Include="BusinessJobBLL.cs" />
+    <Compile Include="BusinessNewsBLL.cs" />
+    <Compile Include="CategoryBLL.cs" />
+    <Compile Include="CityBLL.cs" />
+    <Compile Include="CMSBLL.cs" />
+    <Compile Include="CoBrandBLL.cs" />
+    <Compile Include="CoBrandingProImgBLL.cs" />
+    <Compile Include="CorporateBrandingBLL.cs" />
+    <Compile Include="CountryBLL.cs" />
+    <Compile Include="CurrencyBLL.cs" />
+    <Compile Include="CustomerEnquiryBLL.cs" />
+    <Compile Include="EmailTemplateBLL.cs" />
+    <Compile Include="EmpBrandingBLL.cs" />
+    <Compile Include="FranchiseBLL.cs" />
+    <Compile Include="GlobalBrandingBLL.cs" />
+    <Compile Include="HomeBannerBLL.cs" />
+    <Compile Include="IndustryBLL.cs" />
+    <Compile Include="InvestorPartnerBLL.cs" />
+    <Compile Include="MembershipBLL.cs" />
+    <Compile Include="NewsBLL.cs" />
+    <Compile Include="NewsLetterBLL.cs" />
+    <Compile Include="PaymentTransactionBLL.cs" />
+    <Compile Include="ProductBLL.cs" />
+    <Compile Include="ProductImageBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesBLL.cs" />
+    <Compile Include="SearcbyKeywordBLL.cs" />
+    <Compile Include="SubCategoryBLL.cs" />
+    <Compile Include="BussinessUserBLL.cs" />
+    <Compile Include="TargerBrandBLL.cs" />
+    <Compile Include="TargetImageBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BizzBranding.CommonUtility\BizzBranding.CommonUtility.csproj">
+      <Project>{71d2230b-e76d-498e-b48d-0947e0716e45}</Project>
+      <Name>BizzBranding.CommonUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BizzBranding.DAL\BizzBranding.DAL.csproj">
+      <Project>{91325bc2-7f28-43b8-882b-a601760ef9d9}</Project>
+      <Name>BizzBranding.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Fakes Include="Fakes\Microsoft.Web.Helpers.fakes" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

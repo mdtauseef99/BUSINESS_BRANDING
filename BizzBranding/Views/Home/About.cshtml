@@ -1,0 +1,66 @@
+﻿@model BizzBranding.Models.LandingPageModel
+@{
+    ViewBag.Title = "About: Business Branding";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+@section metatags 
+        {
+    <meta name='keywords' content='@ViewBag.MetaKeywords'/>
+    <meta name='description' content='@ViewBag.MetaDescription'/>
+}
+
+<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<script src="~/Content/lib/bootstrap/bootstrap.min.js"></script>
+<script src="~/Content/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+<script src="~/Content/script/custom.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+<link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link href="~/Content/style/custom.css" rel="stylesheet" media="screen">
+
+
+
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function () {
+        $('#frmsearch').submit(function (e) {
+            e.preventDefault();
+            debugger;
+            var txtVal = $('#txtSearching').val();
+            if (txtVal != "") {
+                var txt = $('.form-control').val();
+                $('#Displaytext').text(txtVal);
+                window.location.href = '/Home/Searching?searchValue=' + txt;
+
+            }
+            else { alert('Enter text to search'); $('#txtSearch').focus(); }
+
+        });
+    });
+</script>
+
+
+
+<section class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>@Model.CMSTitle</h2>
+                <div class="form-margin">
+
+                <div class="list-group">
+                    <h4 class="list-group-item-heading"><strong></strong></h4>
+                    <p class="list-group-item-text">
+                        @Html.Raw(Model.Description)
+                    </p>
+                </div>
+            </div></div>
+        </div>
+    </div>
+    </div>
+</section>

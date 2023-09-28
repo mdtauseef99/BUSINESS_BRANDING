@@ -1,0 +1,160 @@
+﻿@model BizzBranding.Models.LandingPageModel
+
+@{
+    ViewBag.Title = "FilteredByCity";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+
+<section class="brands">
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm-8">
+                <div class="row">
+                    <h2>Corporate Brands</h2>
+                    @foreach (var Premium in Model.PremiunBrand)
+                    {
+                        <div id="item-filterdBrand" class="col-sm-5 item ">
+                            <a href="@Url.Action("VisitorPage", "Home", new { @id = Premium.UserId })">
+                                <img src="~/Content/Images/CoLogo/@Premium.CompanyLogo" class="img-thumbnail " alt="" />
+                                <p>@Premium.BusinessName</p>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = Premium.UserId })" class="btn pull-left btn-primary">Connect <i class="icon-plus-sign"></i></a>
+                                <div data-toggle="tooltip" title="@Premium.TotalConnectCount  Connections" class="alert alert-success pull-right" data-original-title="4 Connections">
+                                    @if (Premium.TotalConnectCount > 99999)
+                                    {
+                                        <text>100K+</text>
+                                    }
+                                    else if (Premium.TotalConnectCount > 9999)
+                                    {
+                                        <text>10K+</text>
+                                    }
+                                    else if (Premium.TotalConnectCount > 999)
+                                    {
+                                        <text>1K+</text>
+                                    }
+                                    else if (Premium.TotalConnectCount > 10)
+                                    {
+                                        <text>10+</text>
+                                    }
+                                    else
+                                    {
+                                        @Premium.TotalConnectCount<text>+</text>     
+                                    }
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <h2>Most Connected Brands</h2>
+                <div class="row">
+                    @foreach (var MostConnected in Model.MostConnected)
+                    {
+                        <div id="item-filterdBrand" class="col-sm-5 item ">
+                            <a href="@Url.Action("VisitorPage", "Home", new { @id = MostConnected.UserId })">
+                                <img src="~/Content/Images/CoLogo/@MostConnected.CompanyLogo" class="img-thumbnail " alt="" width="180" height="160" />
+                                <p>@MostConnected.BusinessName</p>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = MostConnected.UserId })" class="btn pull-left btn-primary">Connect <i class="icon-plus-sign"></i></a>
+                                <div data-toggle="tooltip" title=" @MostConnected.TotalConnectCount Connections" class="alert alert-success pull-right" data-original-title="4 Connections">
+                                    @if (MostConnected.TotalConnectCount > 99999)
+                                    {
+                                        <text>100K+</text>
+                                    }
+                                    else if (MostConnected.TotalConnectCount > 9999)
+                                    {
+                                        <text>10K+</text>
+                                    }
+                                    else if (MostConnected.TotalConnectCount > 999)
+                                    {
+                                        <text>1K+</text>
+                                    }
+                                    else if (MostConnected.TotalConnectCount > 10)
+                                    {
+                                        <text>10+</text>
+                                    }
+                                    else
+                                    {
+                                        @MostConnected.TotalConnectCount<text>+</text>     
+                                    }
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <h2>Recently Joined Brands</h2>
+                <div class="row">
+                    @foreach (var recent in Model.RecentJoinee)
+                    {
+                        <div id="item-filterdBrand" class="col-sm-5 item ">
+                            <a href="@Url.Action("VisitorPage", "Home", new { @id = recent.UserId })">
+                                <img src="~/Content/Images/CoLogo/@recent.CompanyLogo" class="img-thumbnail " alt="" width="180" height="160" />
+                                <p>@recent.BusinessName</p>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = recent.UserId })" class="btn pull-left btn-primary">Connect <i class="icon-plus-sign"></i></a>
+                                <div data-toggle="tooltip" title="@recent.TotalConnectCount Connections" class="alert alert-success pull-right" data-original-title="4 Connections">
+                                    @if (recent.TotalConnectCount > 99999)
+                                    {
+                                        <text>100K+</text>
+                                    }
+                                    else if (recent.TotalConnectCount > 9999)
+                                    {
+                                        <text>10K+</text>
+                                    }
+                                    else if (recent.TotalConnectCount > 999)
+                                    {
+                                        <text>1K+</text>
+                                    }
+                                    else if (recent.TotalConnectCount > 10)
+                                    {
+                                        <text>10+</text>
+                                    }
+                                    else
+                                    {
+                                        @recent.TotalConnectCount<text>+</text>     
+                                    }
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3>News <i class="icon-bullhorn"></i></h3>
+                <div class="news-blog news">
+                    @if (Session["UserId"] != null)
+                    {
+                        <h2>News <i class="icon-bullhorn"></i></h2>
+                        <div class="news-blog news"></div>
+                        foreach (var item in Model.NewsUpdates)
+                        {
+                            string str = item.Description;
+                            if (str.Length > 100)
+                            {
+                                str = str.Substring(0, 100);
+                            }
+    
+                        <h4>@item.NewsTitle</h4>
+                        <p>@str</p>
+                        }
+
+                    }
+                    else
+                    {
+                        @Html.Action("News", "Home")
+                    }
+                    <div><a href="@Url.Action("ViewallAdminNews", "Home")" class="pull-right more-news">View More...</a> </div>
+                    <div class="tabs">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            @*<p>Know more about it.. <span class="label label-primary">New</span></p>*@
+        </div>
+    </div>
+    </div>
+</section>

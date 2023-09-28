@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/Images/logoIcon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+    <link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+    <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" media="screen">
+    <script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/visits.js"></script>
+    @*    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript" ></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>*@
+    @*<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.11.min.js" type="text/javascript"></script>*@
+    @*   <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.16.custom.min.js"></script>*@
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="lib/html5shiv/html5shiv.js"></script>
+      <script src="lib/respond/respond.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+	<link href="lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+    <![endif]-->
+    <script type="text/javascript">
+        $ = jQuery.noConflict();
+        $(document).ready(function () {
+
+            $('#formMainsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#txtSearch').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '/Home/Searching?searchValue=' + txtVal;
+                }
+                else { alert('Search Business'); $('#txtSearch').focus(); }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+
+            $('#formMainsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#search').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '/Home/Searching?searchValue=' + txtVal;
+                }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+        });
+    </script>
+
+</head>
+
+<body class="home">
+    <!----------------------my new code----------------------------->
+
+    <div class="navbar navbar-inverse">
+
+        <!--  navbar-fixed-top -->
+        <div class="container">
+            <div class="row form form-block">
+                <div class="col-sm-4">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span><span
+                                class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Action("Index", "Home")"></a>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <form class="form-inline" id="formMainsearch" role="form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="txtSearch" placeholder="Search Business by Industry / Location / Name">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-success" id="search">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
+                @if (Session["UserId"] != null)
+                {
+                    <div class="col-sm-4 col-md-3 text-right">
+                        <div class="btn-group btn-profile">
+                            <a href="@Url.Action("UsersProfile", "Home")"  class="btn btn-success" style="margin-right:10px">My Profile</a> @*@Convert.ToString(Session["EmailId"])*@
+                            <a href="@Url.Action("Logout", "Home")"  class="btn btn-warning">Log Out</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-4 col-md-3 text-right">
+                        <div class="btn-group btn-profile">
+                            <a href="@Url.Action("Login", "Home")"  class="btn btn-success" style=" border-radius:4px; margin-left:19px;">Log In</a>
+                            <a href="@Url.Action("UserRegistration", "Home")"  class="btn btn-warning" style=" border-radius:4px; margin-left:19px;">Sign Up</a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                <div class="collapse navbar-collapse navbar-BGcolor">
+                    <ul class="nav navbar-nav">
+
+                        @*<li><a href="@Url.Action("Services", "Home", new { id = "9" })">Services</a></li>
+                            <li><a href="@Url.Action("About", "Home", new { id = "6" })">About us</a></li>
+                            <li><a href="@Url.Action("CMS", "Home", new { id = "12" })">Products</a></li>
+                            <li><a href="@Url.Action("OurWork", "Home", new { id = "10" })">Our Work</a></li>
+                            <li><a href="@Url.Action("GlobalBranding", "Home", new { id = "11" })">Global Branding</a></li>
+                            <li><a href="@Url.Action("Contact", "Home", new { id = "7" })">Contact</a></li>
+                                    @*  <li><a href="@Url.Action("CMS", "Home", new { id = "9" })">Services</a></li>
+                                      <li><a href="@Url.Action("CMS", "Home", new { id = "14" })">Smart Products</a></li>
+                                    <li><a href="@Url.Action("EmpBrandingList", "Home")">Employee Branding</a></li>*@
+                        @* <li><a href="@Url.Action("CMS", "Home", new { id = "15" })">Upcoming Products</a></li>
+                                      <li><a href="@Url.Action("CMS", "Home", new { id = "12" })">Products</a></li>*@
+                        <li><a href="@Url.Action("CMS", "Home", new { id = "6" })">About us</a></li>
+                        <li><a href="@Url.Action("CoBrandedUserList", "Home", new { id = "" })">Co-Branding</a></li>
+                        <li><a href="@Url.Action("FranchiserList", "Home")">Franchise</a></li>
+                        <li><a href="@Url.Action("GlobalBrandList", "Home")">Global Brands</a></li>
+                        <li><a href="@Url.Action("CorporateBrandList", "Home")">Corporate Brands</a></li>
+                        <li><a href="@Url.Action("InvestorPartnerList", "Home")">Investor Partnering</a></li>
+                        <li><a href="@Url.Action("TargetBrandingCMS", "Home", new { id = "3" })">Target Branding</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!--/.nav-collapse -->
+        </div>
+
+
+
+        @RenderBody()
+
+
+
+        @Html.Action("FooterLinks", "Home")
+
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript" ></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+        <script src="~/Content/lib/bootstrap/bootstrap.min.js"></script>
+        <script src="~/Content/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+        <script src="~/Content/script/custom.js"></script>
+
+        @*<script src="~/Scripts/jquery-ui-1.8.16.custom.min.js"></script>*@
+        @*<script type="text/javascript">
+        $(document).ready(function () {
+            //$('#txtSearch').keydown(function () {
+            //    var txt = $('#txtSearch').val();
+            //    if (txt != null || txt != "") {
+            //        debugger;
+            //        if (e.keyCode == 13) {
+            //            $(this).trigger(".btn");
+            //        }
+            //    }
+            //});
+            $('#frmsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#txtSearch').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '../../Home/Searching?searchValue=' + txtVal;
+                }
+                else { alert('Enter text to search'); $('#txtSearch').focus(); }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+        });
+    </script>*@
+    </div>
+  
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿<div class=" brands">
+    <div class="container">
+        @model BizzBranding.CommonUtility.InvestorPartneringModel
+
+        @{
+            ViewBag.Title = "InvestorPartnerList";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+        }
+
+        <section class="co-branded-list">
+            <div class="container">
+                @*<h2 class="">Investor Partner List</h2>*@
+                <div class="form-margin">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="hasScroll">
+                                <ul class="list-group">
+
+                                    @foreach (var item in Model.InvestorPartneringList)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="row co-brand">
+                                                <div class="col-xs-4 col-sm-4">
+                                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = item.BusinessUserId })">
+                                                        <h4>@item.BusinessName</h4>
+                                                        <img src="~/Content/Images/CoLogo/@item.CompanyLogo" alt="..." class=" investor-img">
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+                                                    <p>@Html.Raw(item.Details)</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-------------------------------------------------------popup---------------------------------->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content modal-content-Block">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Medco Machines</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis Cum sociis natoque penatibus et magnis dis parturient montes, 
+          nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-------------------------------------------------------popup-end--------------------------------->
+                        <div class="col-sm-3 brand-list-right">
+                            @*<h2 style="font-size: 17px;">What is Investors Partnering?</h2>*@
+                            <p  >@Html.Raw(Model.Description)</p>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        @*<div class="related-connections">
+            <h2>Co-Brand Business Connections</h2>
+            <div class="list-group">
+                @foreach (var BList in Model.CoBrandList)
+                {
+                    <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.PartnerA })" class="list-group-item">
+                        <img src="~/Content/Images/CoLogo/@BList.CompanyLogo" class="img-thumbnail" alt="" />
+                        <h4 class="list-group-item-heading">@BList.BusinessNameA</h4>
+                        <p class="list-group-item-text">@str</p>
+                    </a> 
+                    
+                }
+            </div>
+        </div>*@
+        @*<table border="" width="80%" cellpadding="5" cellspacing="5" id="product-table">
+    <tbody>
+    <tr>
+        <th class="table-header-repeat line-left minwidth-1"><a href="#">Investor Partner Business</a></th>
+        <th  class="table-header-repeat line-left minwidth-1">Company Logo</th>
+        <th class="table-header-repeat line-left"><a href="#">Investor Partnering Details</a></th>
+    </tr>
+    @foreach (var item in Model.InvestorPartneringList)
+    {
+        <tr>
+
+              <td><a href="@Url.Action("VisitorPage", "Home", new { @id = item.BusinessUserId })" class="list-group-item">@item.BusinessName</a></td>
+            <td><img class="img-thumbnail"   height="50px" width="50px" src="~/Content/Images/CoLogo/@item.CompanyLogo"  alt=""/></td>
+            <td><a href="#" class="list-group-item">@item.Details</a></td>
+
+        </tr>
+    }
+        </tbody>
+</table>*@
+    </div>
+</div>

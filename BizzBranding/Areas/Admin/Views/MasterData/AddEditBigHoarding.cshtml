@@ -1,0 +1,184 @@
+﻿@model BizzBranding.CommonUtility.HomeBannerModel
+
+@{
+    ViewBag.Title = "AddEditBigHoarding";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@*<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>*@
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/config.js")"></script>
+<script src="../../../../Scripts/jquery.uploadify.v2.1.4.js" type="text/javascript"></script>
+<script src="../../../../Scripts/jquery.uploadify.v2.1.4.min.js" type="text/javascript"></script>
+<script src="../../../../Scripts/swfobject.js" type="text/javascript"></script>
+
+@*<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>*@
+<div id="page-heading">
+    <h1>Add / Edit Big Hoarding</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditBigHoarding", "MasterData", FormMethod.Post))
+{
+     @*@Html.HiddenFor(x => x.CompanyURL)*@
+    @Html.HiddenFor(x => x.HomeBannerID)
+    @Html.HiddenFor(x => x.UserId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+
+        <div class="row">
+            <div class="rowleft"><span>Business Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.BusinessName, new { @class = "inp-form" })
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="rowleft"><span>Upload Big Hoarding</span></div>
+            <div class="rowrigh">
+                <input type="button" id="selectImage" />
+                <span id="error"></span>
+            </div>
+        </div>*@
+        @Html.HiddenFor(x => x.BannerImage)
+        <input type="button" id="selectImage" />
+        <span id="error"></span>
+        <div class="row">
+            <div class="rowleft"><span>Big Hoarding Banner Images</span></div>
+            <div class="rowright">
+                <img width="80px" height="80px" src="~/Scripts/jquery.bxslider/images/@Model.BannerImage" />
+               @* <table>
+                    <tr>
+                        @foreach (var item in Model.HomeBannerImgList)
+                        {
+                            <td>
+                                <img id="@item.BannerImage" src='@Url.Content("~/Scripts/jquery.bxslider/images/")@item.BannerImage' alt="@item.BannerImage" width="100px" height="100px"/><br />
+                                <input type="button" value="Remove" id="btnimage_@(item.HomeBannerID)" onclick="removeimg('@item.BannerImage    ','btnimage_@(item.HomeBannerID)    ')" />
+                            </td>
+                        }
+                    </tr>
+                </table>*@
+                <table>
+                    <tr id="trPreview">
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        @*<div class="row">
+            <div><span class="rowleft">Product Image</span></div>
+            <div class="rowright">
+                <input type="file" name="file"  id="file" multiple="multiple" onchange="fileChange()"/>
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("BigHoarding", "MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}
+
+@*<script type="text/javascript">
+    var $xx = jQuery.noConflict();
+    $xx(document).ready(function () {
+        $xx('#selectImage').uploadify({
+            'uploader': '@Url.Content("~/Content/Uploadify/uploadify.swf")',
+            'script': '@Url.Action("UploadAsync", "Travel")',
+            'cancelImg': '@Url.Content("~/Content/Uploadify/cancel-uploading.png")',
+            'auto': true,
+            'multi': true,
+            "buttonText": "Select file",
+
+            "onComplete": function (event, ID, fileObj, response, data) {
+
+                var json = jQuery.parseJSON(response);
+
+                if (json == 'error') {
+                    $xx("#error").html('extension not supported');
+                }
+                else {
+                    $xx("#error").html('');
+                    $xx(".uploadifyQueue").hide();
+                    var imgs = document.getElementById('BannerImage');
+                    //var thumbs = document.getElementById('thumbnails');
+                    if (imgs.value != null)
+                        imgs.value = imgs.value + '~' + json;
+                    else
+                        imgs.value = json;
+                    var myTr = document.getElementById('trPreview');
+
+                    var td0 = document.createElement('td');
+                    td0.setAttribute("align", "center");
+                    var img0 = document.createElement('img');
+                    img0.setAttribute("id", json);
+                    var src0 = '@Url.Content("~/Content/UpImages/Dynamic/Travel/")' + json;
+                    img0.setAttribute("src", src0);
+                    img0.setAttribute("height", "100");
+                    img0.setAttribute("width", "100");
+                    td0.appendChild(img0);
+                    var br0 = document.createElement('br');
+                    td0.appendChild(br0);
+                    myTr.appendChild(td0);
+                    // var br = document.createElement('br');
+                    // myTr.appendChild(br);
+                    var btn = document.createElement('input');
+                    btn.setAttribute("type", "button");
+                    btn.setAttribute("value", "Remove");
+                    btn.setAttribute("class", "t-button");
+                    var btnId = "btn" + json + "";
+                    btn.setAttribute("id", btnId);
+                    var func = "removeimg('" + json + "','" + btnId + "')";
+                    btn.setAttribute("onclick", func);
+                    td0.appendChild(btn);
+                    myTr.appendChild(td1);
+                    //thumbs.appendChild(tbl1);
+                    //document.getElementById('imgprogress').style.display = 'none';
+                }
+            }
+        });
+
+    });
+
+    function removeimg(filename, btnid) {
+        debugger;
+        var str = document.getElementById('BannerImage').value;
+        // var pattern = filename + '~';
+        var pattern = filename;
+        str = str.replace(pattern, '');
+        document.getElementById('BannerImage').value = str;
+        //make request to remove the name
+        document.getElementById(filename).style.display = 'none';
+        document.getElementById(btnid).style.display = 'none';
+    }
+</script>*@

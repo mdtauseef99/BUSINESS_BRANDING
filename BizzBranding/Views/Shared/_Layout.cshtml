@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="../Images/favicontrans.ico">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @RenderSection("metatags", required: false)
+
+    <link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+    <link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+
+    @* <link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>*@
+
+
+    <script type="text/javascript">
+        $ = jQuery.noConflict();
+        $(document).ready(function () {
+
+            $('#formMainsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#txtSearch').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '/Home/Searching?searchValue=' + txtVal;
+                }
+                else { alert('Search Business'); $('#txtSearch').focus(); }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+
+            $('#formMainsearch').submit(function (e) {
+                e.preventDefault();
+                debugger;
+                var txt = $('#search').val();
+                if (txt != "") {
+                    var txtVal = $('.form-control').val();
+                    window.location.href = '/Home/Searching?searchValue=' + txtVal;
+                }
+                // else { alert('Search Business'); }
+                //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+                // if (data != null)
+                // {
+                // }
+                //});
+            });
+        });
+    </script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-48520583-1', 'businessbranding.in');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="home">
+    <div class="navbar navbar-inverse">
+
+        @if (ViewBag.IsHome != null)
+        {
+            <!--  navbar-fixed-top -->
+            <div class="container">
+                <div class="row form form-block">
+                    <div class="col-sm-4">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span><span
+                                    class="icon-bar"></span><span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="@Url.Action("Index", "Home")"></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-5">
+                        <form class="form-inline" id="formMainsearch" role="form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtSearch" placeholder="Search Business by Industry / Location / Name">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-success " id="search"><span class="icon-search"></span></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-4 col-md-3 text-right">
+                        <div class="btn-group btn-profile">
+                            @if (Session["UserId"] != null)
+                            {
+                                <a href="@Url.Action("UsersProfile", "Home")"  class="btn btn-success BTN-Block" style="margin-right:10px">My Profile</a> @*@Convert.ToString(Session["EmailId"])*@
+                                <a href="@Url.Action("Logout", "Home")"  class="btn btn-warning">Log Out</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Login", "Home")"  class="btn btn-success BTN-Block" style=" border-radius:4px; margin-left:19px;">Log In</a>
+                                <a href="@Url.Action("UserRegistration", "Home")"  class="btn btn-warning" style=" border-radius:4px; margin-left:19px;">Sign Up</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="collapse navbar-collapse navbar-BGcolor">
+                        <ul class="nav navbar-nav">
+                            <li><a href="@Url.Action("CMS", "Home", new { id = "6" })">About us</a></li>
+                            <li><a href="@Url.Action("CoBrandedUserList", "Home", new { id = "" })">Co-Branding</a></li>
+                            <li><a href="@Url.Action("FranchiserList", "Home")">Franchise Options</a></li>
+                            <li><a href="@Url.Action("GlobalBrandList", "Home")">Global Branding</a></li>
+                            <li><a href="@Url.Action("CorporateBrandList", "Home")">Corporate Branding</a></li>
+                            <li><a href="@Url.Action("InvestorPartnerList", "Home")">Investor Partnering</a></li>
+                            <li><a href="@Url.Action("TargetBrandingCMS", "Home", new { id = "3" })">Target Branding</a></li>
+                            <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!---------------------fullpage Slider--------------------->
+            <section>
+
+                <div id="homeBanner" class="mainBanner">
+                    @if (ViewBag.Banner != null)
+                    {
+                        //display Banner within validity
+                   
+                        <ul>
+                            @foreach (var item in (List<BizzBranding.DAL.HomeBanner>)ViewBag.Banner)
+                            {
+                                <li>
+                                    <a href="@item.URL" target="_blank"><img src="~/Scripts/jquery.bxslider/images/@item.BannerImage" /></a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        //// Banner not engaged
+                        @* <img src="~/Content/Images/bannerIMG.jpg" />*@
+                        <ul>
+                            <li>
+                                <img src="~/Scripts/jquery.bxslider/images/banner5.png" />
+                            </li>
+                            <li>
+                                <img src="~/Scripts/jquery.bxslider/images/banner1.png" />
+                            </li>
+                            <li>
+                                <img src="~/Scripts/jquery.bxslider/images/banner3.png" /></li>
+                            <li>
+                                <img src="~/Scripts/jquery.bxslider/images/banner4.png" /></li>
+                            <li>
+                                <img src="~/Scripts/jquery.bxslider/images/banner2.png" />
+                            </li>
+                        </ul>  
+                                
+                    }
+                </div>
+
+            </section>
+
+            <!---------------------Two Slider--------------------------->
+            <section class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="homBannerLeft">
+                            <ul>
+                                @foreach (var PLeft in Model.PremiumLeft)
+                                {
+                                    string str = PLeft.BusinessDetails;
+
+                                    if (str.Length > 100)
+                                    {
+                                        str = str.Substring(0, 100);
+                                    }
+                                    else
+                                    {
+                                        str = PLeft.BusinessDetails;
+                                    }
+                                    <li>
+                                        <a href="@Url.Action("VisitorPage", "Home", new { @id = PLeft.UserId })">
+                                            <img src="~/Content/Images/CoBanner/@PLeft.CompanyBanner" />
+                                            <div>
+                                                <h2>@PLeft.BusinessName</h2>
+                                                <p>
+                                                    @str
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="homBannerRight">
+                            <ul>
+                                @foreach (var PRight in Model.PremiumRight)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("VisitorPage", "Home", new { @id = PRight.UserId })">
+                                            <img src="~/Content/Images/CoBanner/@PRight.CompanyBanner" /></a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!---------------------Two Slider end--------------------->
+            <!--/.nav-collapse -->
+       
+        }
+        else
+        {
+            <div class="container">
+                <!--  navbar-fixed-top -->
+                <div class="row form form-block">
+                    <div class="col-sm-4">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span><span
+                                    class="icon-bar"></span><span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="@Url.Action("Index", "Home")"></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-5">
+                        <form class="form-inline" id="formMainsearch" role="form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtSearch" placeholder="Search Business by Industry / Location / Name">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-success" id="search">Search</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    @if (Session["UserId"] != null)
+                    {
+                        <div class="col-sm-4 col-md-3 text-right">
+                            <div class="btn-group btn-profile">
+                                <a href="@Url.Action("UsersProfile", "Home")"  class="btn btn-success" style="margin-right:10px">My Profile</a>
+                                <a href="@Url.Action("Logout", "Home")"  class="btn btn-warning">Log Out</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-4 col-md-3 text-right">
+                            <div class="btn-group btn-profile">
+                                <a href="@Url.Action("Login", "Home")"  class="btn btn-success" style=" border-radius:4px; margin-left:19px;">Log In</a>
+                                <a href="@Url.Action("UserRegistration", "Home")"  class="btn btn-warning" style=" border-radius:4px; margin-left:19px;">Sign Up</a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="row">
+                    <div class="collapse navbar-collapse navbar-BGcolor">
+                        <ul class="nav navbar-nav">
+                            <li><a href="@Url.Action("CMS", "Home", new { id = "6" })">About us</a></li>
+                            <li><a href="@Url.Action("CoBrandedUserList", "Home", new { id = "" })">Co-Branding</a></li>
+                            <li><a href="@Url.Action("FranchiserList", "Home")">Franchise Options</a></li>
+                            <li><a href="@Url.Action("GlobalBrandList", "Home")">Global Branding</a></li>
+                            <li><a href="@Url.Action("CorporateBrandList", "Home")">Corporate Branding</a></li>
+                            <li><a href="@Url.Action("InvestorPartnerList", "Home")">Investor Partnering</a></li>
+                            <li><a href="@Url.Action("TargetBrandingCMS", "Home", new { id = "3" })">Target Branding</a></li>
+                            <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @RenderBody()
+
+
+        @Html.Action("FooterLinks", "Home")
+        <script src="../Content/lib/bootstrap/bootstrap.min.js"></script>
+        <script src="../Content/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+        <script src="../Content/script/custom.js"></script>
+        <script src="../Content/lib/jquery.bxslider/plugins/jquery.fitvids.js"></script>
+
+    </div>
+</body>
+</html>

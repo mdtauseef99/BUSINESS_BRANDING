@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BizzBranding.CommonUtility.CustomerEnquiriesModel>
+
+@{
+    ViewBag.Title = "SearchCustomerEnquiry";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Search Customer Enquiry</h2>
+<div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left"><a href="#">Customer Name</a></th>
+                    <th class="table-header-repeat line-left"><a href="#">Customer Emailid</a></th>
+                    <th class="table-header-options line-left"><a href="#">Phone</a></th>
+                     <th class="table-header-options line-left"><a href="#">Subject</a></th>
+                     <th class="table-header-options line-left"><a href="#">Created Date</a></th>
+                    @*<th class="table-header-options line-left"><a href="#">Enquiry Made</a></th>*@
+                    @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {
+                        <th class="table-header-options line-left"><a href="#">Options</a></th>
+                    }
+                </tr>
+               @foreach (var item in Model)
+               {
+                    <tr>
+                        <td> @item.CustomerName</td>
+                        <td>@item.CustEmailId</td>
+                        <td>@item.CustomerPhone </td>
+                        <td>@item.CustSubject</td>
+                        <td>@item.CreatedDate</td>
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditProduct", "User", new { @id = item.ContactId })" title="Edit" class="icon-1 info-tooltip"></a>
+                                }
+                                @if (Convert.ToBoolean(Session["Delete"]))
+                                {
+                                    <a href="@Url.Action("RemoveCustomerEnquiry", "MasterData", new { @id = item.ContactId })" title="Delete" class="icon-2 info-tooltip"></a>
+                                }
+                                @*@if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.ContactId" class="icon-5"></a>
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.ContactId" class="inactive"></a>
+                                }*@
+                                @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewCustomerEnquiry", "MasterData", new { @id = item.ContactId })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+
+            </table>
+        </div>

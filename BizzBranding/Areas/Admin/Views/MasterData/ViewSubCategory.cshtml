@@ -1,0 +1,44 @@
+﻿@model BizzBranding.Areas.Admin.Models.SubCategoryWebModel
+@{
+    ViewBag.Title = "ViewSubCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "City";
+}
+
+<h2>@Html.DisplayFor(x => x.SubCatgoryName)</h2>
+@Html.HiddenFor(x => x.SubCategoryId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+         <div class="row">
+        <div ><span class="rowleft">Category Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CategoryName)
+        </div>
+    </div>
+
+    <div class="row">
+        <div ><span class="rowleft">SubCategory Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.SubCatgoryName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("SubCategory","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

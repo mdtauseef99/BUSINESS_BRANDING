@@ -1,0 +1,108 @@
+﻿@model BizzBranding.Areas.Admin.Models.AccessPlanWebModel
+@{
+    ViewBag.Title = "ViewAccessPlan";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewAccessPlan";
+
+}
+
+<h2>@Html.DisplayFor(x => x.AccessPlanName)</h2>
+@Html.HiddenFor(x => x.AccessPlanId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+  
+    <div class="row">
+        <div ><span class="rowleft">Access Plan Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.AccessPlanName)
+        </div>
+    </div>
+     <div class="row">
+        <div ><span class="rowleft">Access Plan Image</span></div>
+        <div class="rowright">
+            @*@foreach (var item in Model.ProductImages)
+            {*@
+              <img width="50px" height="50px" src="~/Areas/Admin/ProjectImages/AccessPlanImage/@Html.DisplayFor(x=>x.AccessPlanImage)"/>
+            @*}*@
+                </div>
+    </div>
+        <div class="row">
+        <div ><span class="rowleft">Description</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Description)
+        </div>
+    </div>
+@*    <div class="row">
+        <div ><span class="rowleft">Max No.Of Deals</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.MaxNoDeals)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Products Per Month</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.ProdPerMonth)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Updates Per Month</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.UpdatesPerMonth)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Add Post Charge</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.AddPostCharge)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Add Update Charge</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.AddUpdCharge)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">News Charge</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.NewsCharge)
+        </div>
+    </div>*@
+    <div class="row">
+        <div ><span class="rowleft">Membership Fee</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.MembershipFee)
+        </div>
+    </div>
+      <div class="row">
+        <div ><span class="rowleft">Currency Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CurrencyName)
+        </div>
+    </div>
+      <div class="row">
+        <div ><span class="rowleft">Validity</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Validity)
+        </div>
+    </div>
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("AccessPlan","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

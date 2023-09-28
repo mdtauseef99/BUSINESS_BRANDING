@@ -1,0 +1,62 @@
+﻿@model BizzBranding.Areas.Admin.Models.CmsWebModel
+@{
+    ViewBag.Title = "AddEditCms";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditCms";
+}
+
+<div id="page-heading">
+    <h1>Add / Edit CMS</h1>
+     @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.CMSId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div ><span class="rowleft">CMS Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CMSTitle, new { @class = "inp-form", @placeholder = "CMS Name" })
+                @Html.ValidationMessageFor(x => x.CMSTitle)
+            </div>
+        </div>
+
+        <div class="row">
+            <div ><span class="rowleft">Description</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.Description, new { @class = "ckeditor" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+               
+            </div>
+            <div class="rowright">
+                 <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("CMS","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}
+
+

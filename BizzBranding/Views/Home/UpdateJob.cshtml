@@ -1,0 +1,51 @@
+﻿@model BizzBranding.CommonUtility.BusinessJobModel
+@{
+    ViewBag.Title = "UpdateBusinessJob";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+
+@using (Html.BeginForm("UpdateJob", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.BusinessJobId)
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Update your Business Job</h2>
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-margin">
+                            <div class="form-group">
+                                <label>Job Title</label>
+                                @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control", @placeholder = "Job Title Here" })
+                                <b style="color: red">@Html.ValidationMessageFor(model => model.JobTitle)</b>
+                            </div>
+                            <div class="form-group">
+                                <label>Job Description</label>
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Enter Brief Description" })
+                                <b style="color: red">@Html.ValidationMessageFor(model => model.Description)</b>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-warning" onclick="window.location.href = '../../Home/ManageJobs'">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+    <link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+    <title>_TestLayout</title>
+</head>
+<body class="home">
+    <div class="navbar navbar-inverse">
+        <!--  navbar-fixed-top -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="#">BUSINESS <span>BRANDING</span></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Our Work</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#" class="btn btn-default btn-sm">Login</a></li>
+                    <li><a href="#" class="btn btn-default btn-sm">Sign Up</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+    <div id="body">
+        @RenderBody()
+    </div>
+    <div class="tagline">
+        <p>To connect with the above business &amp; more <a href="#" class="btn btn-info">sign up now</a></p>
+    </div>
+    <div class="footerMenu">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3>Brands By Item I</h3>
+                    <ul class="">
+                        <li><a href="#">IT</a></li>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li><a href="#">Manufacturing</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Brands By Item II</h3>
+                    <ul class="">
+                        <li><a href="#">IT</a></li>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li><a href="#">Manufacturing</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Brands By Item III</h3>
+                    <ul class="">
+                        <li><a href="#">IT</a></li>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li><a href="#">Manufacturing</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Brands By Item IV</h3>
+                    <ul class="">
+                        <li><a href="#">IT</a></li>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Marketing</a></li>
+                        <li><a href="#">Manufacturing</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2012-2013 Business Branding. Toll Free Number: 000-100-100-10000 <a href="#">Terms of Service</a> | <a href="#">Privacy</a> Aenean rutrum placerat libero, eu tincidunt turpis tempus ut</p>
+        <p class="footer-icons"><a href="#"><i class="icon-facebook-sign"></i></a><a href="#"><i class="icon-linkedin-sign"></i></a><a href="#"><i class="icon-google-plus-sign"></i></a></p>
+    </footer>
+    <script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+    <script src="~/Content/script/custom.js"></script>
+</body>
+</html>

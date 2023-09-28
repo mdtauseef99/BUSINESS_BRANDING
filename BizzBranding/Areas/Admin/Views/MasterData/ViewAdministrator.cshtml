@@ -1,0 +1,81 @@
+﻿@model BizzBranding.Areas.Admin.Models.AdministratorWebModel
+@{
+    ViewBag.Title = "ViewAdministrator";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="page-heading">
+    <h1>Administrator Details</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.AdminId)
+    @Html.HiddenFor(x => x.Password)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+      
+
+        <div class="row">
+            <div ><span class="rowleft">First Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.FirstName)
+            </div>
+        </div>
+                <div class="row">
+            <div ><span class="rowleft">First Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.FirstName)
+            </div>
+        </div>
+
+        <div class="row">
+            <div ><span class="rowleft">Last Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.LastName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.Email)</div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.Email)
+
+            </div>
+        </div>
+
+@*        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.SubjectID)</div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.Subject)
+
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.RoleID)</div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.Role)
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.DisplayTextFor(x => x.IsActive)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <a href="@Url.Action("AllAdministrators", "MasterData")" class="form-reset">Cancel</a>
+
+            </div>
+
+        </div>
+    </div>
+}
+
+

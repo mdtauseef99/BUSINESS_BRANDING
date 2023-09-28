@@ -1,0 +1,247 @@
+﻿
+ <script src="../../Scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+    var $fm = jQuery.noConflict();
+</script>
+<style>
+    .viewmessage
+    {
+        line-height: 22px;
+        padding: 5px;
+        text-indent: 50px;
+        text-align: justify;
+        color: rgb(105, 108, 111);
+        border: 1px solid #DDD;
+        border-radius: 4px;
+        height: 350px;
+        width: 600px;
+        overflow: scroll;
+    }
+</style>
+<script type="text/javascript">
+
+    function ReadMessage(e, type) {
+        var GetTable = document.getElementById("tblViewMessage");
+
+        while (GetTable.firstChild) {
+            GetTable.removeChild(GetTable.firstChild);
+        }
+
+        $("#tblViewMessage").css("display", "block");
+        $("#PartialViewMessage").css("display", "block");
+        $("#PartialInbox").css("display", "none");
+        $("#PartialOutbox").css("display", "none");
+        $("#PartialTrash").css("display", "none");
+        $('#PartialEnquiry').css("display", "none");
+        $("#PartialSearch").css("display", "none");
+        $.post("/Messages/ViewMessage", { MessageID: e, type: type },
+                function (data) {
+                    var rowBody4 = "<hr style='margin: 10px;'></hr>";
+                    var date = new Date(parseInt(data[0].Date.substr(6)));
+                    var ToName = data[0].ToName;
+                    var touser = "";
+                    if (ToName != null) {
+                        touser = "<br/>  to  " + ToName;
+                    }
+                    else {
+                        touser = "to : me";
+                    }
+                    if (data[0].Subject.indexOf("[Spam]") >= 0) {
+                        $("#anSpam").css("display", "block");
+                        $("#anSpam").attr('href', "~" + e);
+                    }
+                    else {
+                        $("#anSpam").css("display", "none");
+                    }
+                    if (data[0].From == null) {
+
+                        var rowBody1 = "";
+                    }
+                    else {
+                        var rowBody1 = "<tr><td style='width: 470px;'>From : <b id='messagefrom'>" + data[0].From + "</b><br/>" + touser + "</td><td style='color:black;'>" + date.toDateString() + "</td></tr>";
+                    }
+                    var rowBody2 = "<tr><td style='height:30px;color:black;'><br/>Subject : " + data[0].Subject + "</td></tr>";
+                    var rowBody3 = "<tr><td colspan='2' style='color:black;'><br/><div id='messagebody' class='viewmessage'>" + data[0].Message + "</div><br/></td></tr>";
+
+                    var file = "<input type='hidden' id='message_attachments' value='" + data[0].MessageFile + "'/><a id='attachment-1' href='#' style='display:none'></a><br/>";
+                    for (var i = 0; i < data[0].MessageFile.length; i++) {
+                        var nametodisplay = data[0].MessageFile[i].split('/');
+                        file += "<a id='attachment" + i + "' href='/Messages/UserAttachmentName/?MessageID=" + e + "'  target='_blank' title='Download'>" + nametodisplay[1] + "</a><br/>";
+                    }
+
+                    var rowBody5 = "<tr><td id='tdattachment' style='padding-left:5px;'><br/>" + file + "</td></tr>";
+
+                    $("#tblViewMessage").append(rowBody4);
+                    $("#tblViewMessage").append(rowBody1);
+                    $("#tblViewMessage").append(rowBody2);
+                    $("#tblViewMessage").append(rowBody3);
+                    $("#tblViewMessage").append(rowBody4);
+                    $("#tblViewMessage").append(rowBody5);
+                    document.getElementById("anDelete").id = e;
+                });
+    }
+
+    $fm(document).ready(function () {
+        $("#anReply").click(function () {
+            $("#tblViewMessage").css("display", "none");
+
+            $("#PartialViewMessage").css("display", "none");
+            $("#btnCompose").attr("class", "btn btn-warning");
+            $("#btnInbox").attr("class", "btn btn-warning");
+            $("#btnOutbox").attr("class", "btn btn-warning");
+            $("#btnTrash").attr("class", "btn btn-warning");
+            $("#btnEnquiry").attr("class", "btn btn-warning");
+
+            $("#PartialCompose").css("display", "block");
+            $("#PartialEnquiry").css("display", "none");
+            $("#PartialTrash").css("display", "none");
+            $("#PartialOutbox").css("display", "none");
+            $("#PartialInbox").css("display", "none");
+            $("#PartialSearch").css("display", "none");
+            $("#MessageSearch").css("display", "none");
+
+            var messagefrom = $("#messagefrom").html();
+            $("#txtToAllemail").attr("value", messagefrom);
+            $("#ComposeResult").html('');
+            $("#txtMessageTitle").val('');
+            $("#txtMessageBody").val('');
+            $("#msgattachfile").css("display", "block");
+            $("#lblfilename").css("display", "none");
+        });
+
+        $("#anForward").click(function () {
+            $("#tblViewMessage").css("display", "none");
+            $("#PartialViewMessage").css("display", "none");
+            $("#btnCompose").attr("class", "btn btn-warning");
+            $("#btnInbox").attr("class", "btn btn-warning");
+            $("#btnOutbox").attr("class", "btn btn-warning");
+            $("#btnTrash").attr("class", "btn btn-warning");
+            $("#btnEnquiry").attr("class", "btn btn-warning");
+
+            $("#PartialCompose").css("display", "block");
+            $("#PartialEnquiry").css("display", "none");
+            $("#PartialTrash").css("display", "none");
+            $("#PartialOutbox").css("display", "none");
+            $("#PartialInbox").css("display", "none");
+            $("#PartialSearch").css("display", "none");
+            $("#MessageSearch").css("display", "none");
+
+            var messagebody = $("#messagebody").html();
+            $("#txtMessageBody").attr("value", messagebody);
+
+            var att = $("#message_attachments").val();
+
+            //attachment forward
+            var length = $("#tdattachment > a").size();
+            var attachname = "";
+            for (var i = -1; i < length - 1; i++) {
+                attachname += $("#attachment" + i + "").html() + "<br/>";
+            }
+            $("#lblfilename").html(attachname);
+            var fullname = $("#lblfilename").html();
+            $("#filename").val(att);
+            if (attachname == "<br/>") {
+                $("#msgattachfile").css("display", "block");
+                $("#lblfilename").css("display", "none");
+            }
+            else {
+                $("#msgattachfile").css("display", "none");
+                $("#lblfilename").css("display", "block");
+            }
+
+            $("#ComposeResult").html('');
+            $("#txtToAllemail").val('');
+            $("#txtMessageTitle").val('');
+        });
+
+    });
+
+    function DeleteViewMessage(e) {
+        if (confirm('Are you sure you want to delete ?')) {
+            $.post("/Messages/DeleteMessage", { MessageID: e },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+
+                        LoadInBox(0, 10);
+                        $("#btnInbox").css("color", "black");
+                        $("#btnOutbox").css("color", "white");
+                        $("#btnTrash").css("color", "white");
+                        $("#btnCompose").css("color", "white");
+                        $("#btnEnquiry").css("color", "white");
+
+                        $("#PartialInbox").css("display", "block");
+                        $("#MessageSearch").css("display", "block");
+                        $("#PartialOutbox").css("display", "none");
+                        $("#PartialTrash").css("display", "none");
+                        $("#PartialCompose").css("display", "none");
+                        $("#PartialEnquiry").css("display", "none");
+                        $("#PartialSearch").css("display", "none");
+                        $("#PartialViewMessage").css("display", "none");
+
+
+                    }
+                    else {
+                        document.getElementById("InBoxResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+        }
+    }
+
+    function UnBlockUser(e) {
+        var messageid = e.split('~');
+        $.post("/Messages/UnBlockUser", { id: messageid[1] },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+
+                        LoadInBox(0, 10);
+                        $("#btnInbox").css("color", "black");
+                        $("#btnOutbox").css("color", "white");
+                        $("#btnTrash").css("color", "white");
+                        $("#btnCompose").css("color", "white");
+                        $("#btnEnquiry").css("color", "white");
+
+                        $("#PartialInbox").css("display", "block");
+                        $("#MessageSearch").css("display", "block");
+                        $("#PartialOutbox").css("display", "none");
+                        $("#PartialTrash").css("display", "none");
+                        $("#PartialCompose").css("display", "none");
+                        $("#PartialEnquiry").css("display", "none");
+                        $("#PartialSearch").css("display", "none");
+                        $("#PartialViewMessage").css("display", "none");
+
+
+                    }
+                    else {
+                        document.getElementById("InBoxResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+    }
+                    
+</script>
+<div style='height: 25px;'>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" id="tblMessageAction">
+    <tr>
+        <td align='center'>
+            <a href='#' title='Reply' id="anReply">Reply</a> &nbsp&nbsp&nbsp&nbsp&nbsp
+        </td>
+        <td align='center'>
+            <a href='#' title='Forward' id="anForward">Forward</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+        </td>
+        <td align='center'>
+            <a href='#' title='Delete' id="anDelete" onclick="DeleteViewMessage(id);">Delete</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+        </td>
+        <td align='center'>
+            <a href='#' title='Spam' id="anSpam" style="display: none;" onclick="UnBlockUser(this.href);">
+                Not a Spam</a>
+        </td>
+    </tr>
+</table>
+<div style="height: 20px;">
+</div>
+<table border="0" cellpadding="5" cellspacing="5" id="tblViewMessage">
+</table>

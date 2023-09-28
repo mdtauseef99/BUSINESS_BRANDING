@@ -1,0 +1,37 @@
+﻿@model BizzBranding.Models.LandingPageModel
+
+@*<section class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">*@
+                <ul class="bxslider">
+                    @foreach (var IndList in Model.MostConnected)
+                    {
+                        <li>
+                            <div class="item">
+                                <a href="@Url.Action("VisitorPage", "Home", new { @id = IndList.UserId })">
+                                    <img src="~/Content/Images/CoLogo/@IndList.CompanyLogo" alt="" />
+                                    <p>@IndList.BusinessName</p>
+                                    <div data-toggle="tooltip" title=" @IndList.TotalConnectCount Connections" class="alert alert-success pull-right">
+                                        @if (IndList.TotalConnectCount > 10)
+                                        {
+                                            <text>10+</text>
+                                        }
+                                        else
+                                        {
+                                            @IndList.TotalConnectCount<text>+</text>     
+                                        }
+                                    </div>
+                                </a>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = IndList.UserId })" class="btn pull-left btn-primary">Connect <i class="icon-plus-sign"></i></a>
+                            </div>
+                        </li>
+                    }
+
+               </ul>
+             @*</div>
+        </div>
+    </div>
+</section>*@
+
+

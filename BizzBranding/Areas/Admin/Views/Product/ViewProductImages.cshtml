@@ -1,0 +1,49 @@
+﻿@model BizzBranding.Areas.Admin.Models.ProductImageWebModel
+@{
+    ViewBag.Title = "ViewProductImages";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@Html.DisplayFor(x => x.ProductName)</h2>
+@Html.HiddenFor(x => x.ProductImgId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+             <div class="row">
+        <div ><span class="rowleft">Product Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.ProductName)
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div ><span class="rowleft">Product Images</span></div>
+        <div class="rowright">
+            @foreach (var item in Model.ProductImages)
+            {
+                <img width="50px" height="50px"  src="~/Areas/Admin/ProjectImages/ProductImage/@item.ProdImage"/>
+            }
+          
+           @* @Html.DisplayFor(x => x.ProductImage)*@
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("ProductImages","Product")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

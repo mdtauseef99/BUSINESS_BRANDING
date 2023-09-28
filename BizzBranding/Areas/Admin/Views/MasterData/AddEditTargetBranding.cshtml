@@ -1,0 +1,218 @@
+﻿@model BizzBranding.CommonUtility.TargetBrandingModel
+@{
+    ViewBag.Title = "AddEditTargetBranding";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>
+@*<script>
+    var $d = jQuery.noConflict();
+    //$d(function () {
+    //    $d("#txtFromDt").datepicker();
+
+    //});
+
+    $d(document).ready(function () {
+        $d("#txtFromDt").datepicker({ dateFormat: 'dd/mm/yy' });
+        //$d("#txtToDt").datepicker({ dateFormat: 'dd/mm/yy' });
+
+        $d('#txtFromDt').change(function () {
+            var avbl = $d("#hdnDate").val();
+            var fDate = $d("#txtFromDt").val();
+            debugger;
+            avbl = avbl.split('/');
+            fDate = fDate.split('/');
+            avbl = avbl[1] + "/" + avbl[0] + "/" + avbl[2];
+            fDate = fDate[1] + "/" + fDate[0] + "/" + fDate[2];
+            var date1 = new Date(avbl);
+            var date2 = new Date(fDate);
+
+
+            //if (avbl > fDate) {
+            if (date1 > date2) {
+                alert('Banner Already engaged on selected Date, Please select another date')
+                $d("#txtFromDt").val('');
+
+            }
+            else {
+                var test = Add7Days();
+                $d("#lblmsg").text("Banner Validity ends on " + test);
+                $('#txtToDt').val(test);
+            }
+
+        });
+
+        function Add7Days() {
+            var date = $d('#txtFromDt').val();
+            var Validity = $d('#hdndays').val();
+            var ndate = DateFromString(date, Validity);
+            return ndate;
+        }
+        function DateFromString(str, Validity) {
+            str = str.split(/\D+/);
+            str = new Date(str[2], str[1] - 1, (parseInt(str[0]) + (parseInt(Validity) - 1)));
+            return MMDDYYYY(str);
+        }
+        function MMDDYYYY(str) {
+            var ndateArr = str.toString().split(' ');
+            var Months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec';
+            return ndateArr[2] + '/' + (parseInt(Months.indexOf(ndateArr[1]) / 4) + 1) + '/' + ndateArr[3];
+        }
+
+        $d("#btnRenew").click(function () {
+            var fDate = $d("#txtFromDt").val();
+            var eDate = $d("#txtToDt").val();
+            var amt = $("#hdnMoney").val();
+            if (fDate == "" || eDate == "") {
+                alert('Please select From Date');
+            }
+            else {
+                $.post("/Home/UpdradeBannerMembership", { amount: amt, sDate: fDate, eDate: eDate }, function (data) {
+                    if (data) {
+                        // alert('Membership has been upgraded');
+                        $('body').append(data);
+                    }
+                    else {
+                        alert('Sorry Error has occured, Please try later');
+                        window.location.href = '/Home/UsersProfile';
+                    }
+
+                });
+            }
+
+        });
+    });
+
+</script>*@
+
+<div id="page-heading">
+    <h1>Add / Edit Target Branding</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);
+  
+
+    string date = ViewBag.Date.ToString("yyyy/MM/dd");
+  
+  }
+
+@using (Html.BeginForm("AddEditTargetBranding", "MasterData", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.TargetBrandingId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div class="rowleft">Business User</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.BusinessUserId, Model.BusinessNames, "Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.BusinessUserId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">Select Target Industry</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "form-control", @id = "ddlIndustryId" })@*@class=styledselect_form_1*@
+                <b style="color: red">@Html.ValidationMessageFor(x => x.IndustryNames) </b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">Select Target City</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.CityId, Model.CityNames, "Select", new { @class = "form-control", @id = "ddlCityid" })@*@class=styledselect_form_1*@
+                <b style="color: red">@Html.ValidationMessageFor(x => x.CityId) </b>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Target Ad Image</span></div>
+            <div class="rowright">
+                <input type="file" name="file" id="file"/>  @*multiple="multiple" onchange="fileChange()"*@ 
+            </div>
+        </div>
+        <div class="row">
+            <div><span class="rowleft">Activated On</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CreatedDate, new { @class = "inp-form", @placeholder = "Valid From", @id = "date" })
+                @Html.ValidationMessageFor(x => x.CreatedDate)
+            </div>
+        </div>
+        <div class="row">
+            <div><span class="rowleft">Expires On</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.ExpiresOn, new { @class = "inp-form", @placeholder = "Valid To", @id = "date1" })
+                @Html.ValidationMessageFor(x => x.ExpiresOn)
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="rowleft"><span>Co-Branding Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CoBrandedName)
+                 @Html.ValidationMessageFor(x => x.CoBrandedName)
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="rowleft"><span>URL</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.URL, new { @class = "inp-form", @placeholder = "Enter URL" })
+                @Html.ValidationMessageFor(x => x.URL)
+            </div>
+        </div>
+
+        @*<div class="row">
+            <div><span class="rowleft">Activated On</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.ActivatedOn, new { @class = "inp-form", @placeholder = "Valid From", @id = "date" })
+                @Html.ValidationMessageFor(x => x.ActivatedOn)
+            </div>
+        </div>*@
+
+       @* <div class="row">
+            <div><span class="rowleft">Validity in Months</span></div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.No_Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Month")
+            </div>
+        </div>*@
+        @* <div class="row">
+            <div ><span class="rowleft">City Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CityName, new { @class = "inp-form", @placeholder = "City Name" })
+                @Html.ValidationMessageFor(x => x.CityName)
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("TargetBranding", "MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

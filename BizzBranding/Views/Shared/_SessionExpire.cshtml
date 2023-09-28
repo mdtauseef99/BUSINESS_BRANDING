@@ -1,0 +1,52 @@
+﻿
+@model BizzBranding.Models.BizUserLoginModel
+
+<div class="SessionError">
+    Yor Session expired, Please Login again
+</div>
+
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Sign In Your Account</h2>
+
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Enter Email" })
+                            @Html.ValidationMessageFor(Model => Model.Email)
+                            @* <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">*@
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Enter Password" })
+                            @Html.ValidationMessageFor(Model => Model.Password)
+                            @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">*@
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-default btn-success">Login</button>
+                        <button type="button" class="btn btn-default btn-success" onclick="window.location.href = '../Home/Index'">Cancel</button>
+                       @* <a href="@Url.Action("ForgotPassword", "Home")" style="padding-left: 30px;">Forgot Password</a>*@
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,28 @@
+﻿@model BizzBranding.CommonUtility.BusinessNewsModel
+
+@{
+    ViewBag.Title = "ViewBusinessUserNews";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewBusinessUserNews";
+}
+
+<h2>@Html.DisplayFor(x => x.NewsTitle)</h2>
+@Html.HiddenFor(x => x.BusinessNewsId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+    @{
+        string data = Model.Description.ToString();
+                  
+    }
+
+    @Html.Raw(data)
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("BusinessUserNews", "MasterData")" class="form-reset">Back</a>
+        </div>
+
+    </div>
+</div>

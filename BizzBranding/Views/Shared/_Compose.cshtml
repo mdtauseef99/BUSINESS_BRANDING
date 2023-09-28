@@ -1,0 +1,167 @@
+﻿<link href="~/Content/AutoComplete/jquery-ui.css" rel="stylesheet" type="text/css" />
+@*<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>*@
+<script src="~/Content/AutoComplete/jquery-1.8.3.js"></script>
+<script src="~/Content/AutoComplete/jquery-ui.js"></script>
+<script> var $auto = jQuery.noConflict();</script>
+<script type="text/javascript">
+    //CLEAR FORM
+    function ClearFormFields() {
+        document.getElementById("txtToAllemail").value = null;
+        document.getElementById("txtMessageTitle").value = null;
+        document.getElementById("txtMessageBody").value = null;
+        document.getElementById("msgattachfile").value = null;
+        document.getElementById("chkSAll").checked = false;
+    }
+    //Get filesize from FileUpload
+    function fileChange(e) {
+
+        var iSize = ($("#msgattachfile")[0].files[0].size / 1024);
+
+        iSize = (Math.round(iSize * 100) / 100)
+        var sizeinkb = iSize + "kb";
+    }
+
+    //form submityy
+    $(document).ready(function () {
+
+        var availableTags = new Array();
+        $.post("../Messages/FindNames", function (data) {
+            for (var i = 0; i < data.length; i++) {
+                availableTags[i] = data[i];
+            }
+        });
+
+
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+        $auto("#txtToAllemail,#txtsearch")
+        // don't navigate away from the field on tab when selecting an item
+            .bind("keydown", function (event) {
+                if (event.keyCode === $auto.ui.keyCode.TAB &&
+                        $auto(this).data("autocomplete").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 0,
+                source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    response($auto.ui.autocomplete.filter(
+                        availableTags, extractLast(request.term)));
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(",");
+                    return false;
+                }
+            });
+
+
+
+        $("#ComposeMail").submit(function (e) {
+            debugger;
+            var tomail = $("#txtToAllemail").val();
+            var checkAll = $('#chkSAll').prop('checked');
+            if (tomail == "" && checkAll==false) {
+                e.preventDefault();
+                $("#txtToAllemail").css("border", "1px solid red");
+                return false;
+            }
+            else {
+                $("#txtToAllemail").css("border", "");
+                return true;
+            }
+        });
+    });
+</script>
+@using (Html.BeginForm("ComposeMail", "Messages", FormMethod.Post, new { @enctype = "multipart/form-data", @target = "MessageTarget", @id = "ComposeMail" }))
+{
+    <iframe id="MessageTarget" name="MessageTarget" style="position: relative; height: 25px;
+        margin-top: -8px;" frameborder="0" scrolling="no" onload="parent.ClearFormFields()"></iframe>
+    <div class="row">
+        <div class="col-sm-12">
+    <div>
+        <table border="0" cellpadding="0" cellspacing="0">
+             <tr>
+                <td>
+                    <input type="checkbox" name="chkSelectAll" id="chkSAll" value="true" /><a class="btn btn-warning btn-enquir" style="border-radius: 4px; margin-bottom: 9px; width: 82%; font-size: 15px; text-align: left;"> Check to Send mail to all business Connections Instantly </a> 
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    To:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input  id="txtToAllemail" name="txtToAllemail" rows="2" style="width: 100%; height: 30px"></input>
+                    @*<input id="txtMessageTitle" name="txtMessageTitle" style="width: 100%; height: 30px"
+                        type="text" value="" />*@
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Title:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="txtMessageTitle" name="txtMessageTitle" style="width: 100%; height: 30px"
+                        type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Message:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea cols="20" id="txtMessageBody" name="content" rows="2" style="width: 500px;
+                        height: 200px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Attach File:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="file" id="msgattachfile" name="msgattachfile" value=" " onchange="fileChange(this)"
+                        multiple="true" />
+                    <a id='lblfilename' href="#" style="display: none;"></a>
+                    <input type="hidden" name="filename" id="filename" value="" />
+                    <label id="filesize" style="display: none;">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input id="btnSendMail" type="submit" name="btnSendMail" value="Send" style="background-color: #1ba3f7;
+                        background: url(/Content/images/button-messages.png) no-repeat center top; width: 73px;
+                        height: 30px; border: none; color: #FFF;" />
+                </td>
+            </tr>
+        </table>
+        <div class="clear">
+        </div>
+    </div> 
+            </div></div>      
+}

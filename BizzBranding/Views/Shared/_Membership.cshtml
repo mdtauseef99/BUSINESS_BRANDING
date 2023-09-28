@@ -1,0 +1,56 @@
+﻿
+
+<table>
+    <tr>
+        <td>Upgrade your membership :</td>
+        <td>
+           
+        </td>
+    </tr>
+    <tr>
+        <td>Amount:</td>
+        <td>
+           @ViewBag.Money
+            <input type="hidden" name="hdnMoney" value="@ViewBag.Money" id="hdnModey"/>
+            <input type="hidden" name="hdnCurrency" value="@ViewBag.Currency" id="hdnCurrency" />
+        </td>
+       
+    </tr>
+     <tr>
+        <td></td>
+        <td>
+           @* <img src="~/Content/Images/payU.jpg" alt="Alternate Text" >*@
+            <input type="Image" src="~/Content/Images/payU.jpg" name="upgrade" value="Upgrade" id="btnUpgrade" width="80px"/> 
+            <input type="button" name="cancel" value="Cancel" id="btnCancel" />
+        </td>
+    </tr>
+</table>
+
+<script type="text/ecmascript" >
+     $('#btnCancel').click(function myfunction() {
+            debugger;
+            $('#mask , .login-popup').fadeOut(300, function () {
+                $('#mask').remove();
+                $("input[type='text']").val('');
+            });
+            return false;
+        });
+     $('#btnUpgrade').click(function myfunction() {
+         var amt=$("#hdnModey").val();
+         $.post("/Home/UpgradeMembership",{amount:amt,}, function (data) {
+             if (data) {
+                // alert('Membership has been upgraded');
+                 $('body').append(data);
+                 //window.location.href = '/Home/UsersProfile';
+             }
+             else {
+                 alert('Error while Upgrading Membership, Please try later');
+                 window.location.href = '/Home/UsersProfile';
+             }
+            
+         });
+
+         //window.location.href = "/Home/UpgradeMembership?amount=" + amt;
+         
+     });
+</script>

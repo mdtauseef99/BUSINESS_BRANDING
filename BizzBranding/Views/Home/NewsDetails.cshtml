@@ -1,0 +1,88 @@
+﻿
+<div class="brands newsDetails">
+    <div class="container">
+        @model BizzBranding.CommonUtility.NewsModel
+        @{
+            ViewBag.Title = "GlobalBrandingList";
+            //Layout = "~/Views/Shared/_Layout.cshtml";
+                Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+        }
+
+        <section class="co-branded-list">
+            <div class="container">
+                <h2 class="">News</h2>
+                <div class="form-margin row" style="margin-top:15px">
+                    <div class="col-sm-8 news-details">
+                        <img class="img-thumbnail" src="~/Areas/Admin/ProjectImages/HomepageNews/@Html.DisplayFor(x => x.NewsImage)" />
+                        <strong>@Model.NewsTitle </strong>
+                       
+                        <p>
+                            @Html.Raw(Model.NewsDesc)
+                        </p>
+                        <p>
+                           
+                        </p>
+
+                    </div>
+
+                    <!-------------------------------------------------------------------------popup---------------------------------->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-content-Block">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">Medco Machines</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis Cum sociis natoque penatibus et magnis dis parturient montes, 
+          nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-------------------------------------------------------popup-end--------------------------------->
+                    <div class="col-sm-4">
+                        <h2 style="font-size: 15px;">Latest News</h2>
+                        <div class="news-blog news">
+                            @foreach (var item in Model.NewsList)
+                            {
+                                string str = item.NewsDesc;
+                                if (str.Length > 100)
+                                {
+                                    str = str.Substring(0, 100);
+                                }
+                                <a href="@Url.Action("NewsDetails", "Home", new { @id = item.NewsId })">
+                                    <div class="news-img">
+                                        <img class="" data-src="holder.js/140x140" alt="140x140" src="~/Areas/Admin/ProjectImages/HomepageNews/@item.NewsImage" style="">
+                                    </div>
+                                    <div class="news-content">
+                                        <h5>@item.NewsTitle</h5>
+                                        <p>@str</p>
+                                    </div>
+                                </a>
+                                <div class="clearfix"></div>
+                            }
+                            <!--div><a href="ViewallAdminNews.html" class="pull-right more-news">View More...</a> </div--->
+                            <div class="tabs">
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

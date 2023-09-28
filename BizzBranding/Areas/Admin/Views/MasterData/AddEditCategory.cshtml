@@ -1,0 +1,52 @@
+﻿@model BizzBranding.Areas.Admin.Models.CategoryWebModel
+@{
+    ViewBag.Title = "AddEditCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditCategory";
+}
+
+<div id="page-heading">
+    <h1>Add / Edit Categories</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.CategoryId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        
+        <div class="row">
+            <div ><span class="rowleft">Category Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CategoryName, new { @class = "inp-form", @placeholder = "Category Name" })
+                @Html.ValidationMessageFor(x => x.CategoryName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("Category","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

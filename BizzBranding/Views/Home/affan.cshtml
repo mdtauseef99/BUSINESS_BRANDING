@@ -1,0 +1,156 @@
+﻿@model BizzBranding.Models.LandingPageModel
+@{
+    ViewBag.Title = "Business to business Network, B2B network, B to B Marketing, Business branding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags
+        {
+    <meta name='keywords' content='@ViewBag.MetaKeywords' />
+    <meta name='description' content='@ViewBag.MetaDescription' />
+}
+
+
+<section class="brands corporate ">
+    <div class="container ">
+        <div class="row">
+            <div class="col-sm-8">
+                @* <h2>Corporate Brands <a class="text-small"href="@Url.Action("ViewAllBrands", "Home", new { @iVal = 20 })">View All</a></h2>
+                    <img src="~/Images/MACDOWNALD.jpg" width="740" height="338" />*@
+                <div class="row">
+                    @foreach (var Corp in Model.PremiumBottom)
+                    {
+                        <div class="col-sm-4">
+                            <div class="company-block">
+                                <a href="@Url.Action("VisitorPage", "Home", new { @id = Corp.UserId })">
+                                    <img class="" data-src="holder.js/140x140" alt="140x140" src="~/Content/Images/CoLogo/@Corp.CompanyLogo" style="width: 220px; height: 160px;">
+                                </a>
+                                <span class="text-heding">@Corp.BusinessName</span>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = Corp.UserId })" class="btn btn-warning pull-right btn-connect">Connect <i class="icon-plus-sign"></i></a>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+                @* <h2 class="firstH2">Corporate Brands</h2>*@
+                <ul id="" class="corporate-bxslider">
+                    @foreach (var Corp in Model.PremiumBottom)
+                    {
+                        <li>
+                            <div class="item">
+                                <a href="@Url.Action("VisitorPage", "Home", new { @id = Corp.UserId })">
+                                    <img src="~/Content/Images/CoLogo/@Corp.CompanyLogo" alt="" />
+                                    <p>@Corp.BusinessName</p>
+                                    <div data-toggle="tooltip" title="@Corp.TotalConnectCount Connections" class="alert alert-success pull-right">
+                                        @if (Corp.TotalConnectCount > 99999)
+                                        {
+                                            <text>100K+</text>
+                                        }
+                                        else if (Corp.TotalConnectCount > 9999)
+                                        {
+                                            <text>10K+</text>
+                                        }
+                                        else if (Corp.TotalConnectCount > 999)
+                                        {
+                                            <text>1K+</text>
+                                        }
+                                        else if (Corp.TotalConnectCount > 10)
+                                        {
+                                            <text>10+</text>
+                                        }
+                                        else
+                                        {
+                                            @Corp.TotalConnectCount<text>+</text>
+                                        }
+                                    </div>
+                                </a>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = Corp.UserId })" class="btn pull-left btn-primary">Connect <i class="icon-plus-sign"></i></a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+
+                @* <h2>Most Connected Brands*@ @*<a class="text-small text-small-brand2" href="@Url.Action("ViewAllBrands", "Home", new { @iVal = 19 })">View All</a>*@@*</h2>*@
+
+                <ul class="connected">
+                    @foreach (var MostConnected in Model.MostConnected)
+                    {
+                        <li>
+                            <div class="item">
+                                <a href="@Url.Action("VisitorPage", "Home", new { @id = MostConnected.UserId })">
+                                    <img src="~/Content/Images/CoLogo/@MostConnected.CompanyLogo" alt="" />
+                                    <p>@MostConnected.BusinessName</p>
+                                    <div data-toggle="tooltip" title=" @MostConnected.TotalConnectCount connections" class="alert alert-success pull-right">
+                                        @if (MostConnected.TotalConnectCount > 99999)
+                                        {
+                                            <text>100K+</text>
+                                        }
+                                        else if (MostConnected.TotalConnectCount > 9999)
+                                        {
+                                            <text>10K+</text>
+                                        }
+                                        else if (MostConnected.TotalConnectCount > 999)
+                                        {
+                                            <text>1K+</text>
+                                        }
+                                        else if (MostConnected.TotalConnectCount > 10)
+                                        {
+                                            <text>10+</text>
+                                        }
+                                        else
+                                        {
+                                            @MostConnected.TotalConnectCount<text>+</text>
+                                        }
+                                    </div>
+                                </a>
+                                <a href="@Url.Action("SendRequest", "Home", new { @id = MostConnected.UserId })" class="btn pull-left btn-primary">Connect <i class="icon-plus-sign"></i></a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!---------------------------------------------right container latest news---------------------------------------------->
+            <div class="col-sm-4 home-news">
+                <h2>Latest News </h2>
+                <div class="news-blog news">
+                    @foreach (var item in Model.AdminHomeNews)
+                    {
+                        string str = item.NewsDesc;
+
+                        if (str.Length > 100)
+                        {
+                            str = str.Substring(0, 100);
+                        }
+                        <a href="@Url.Action("NewsDetails", "Home", new { @id = item.NewsId })">
+                            <div class="news-img">
+                                <img class="" data-src="holder.js/140x140" alt="140x140" src="~/Areas/Admin/ProjectImages/HomepageNews/@item.NewsImage" style="">
+                            </div>
+                            <div class="news-content">
+                                <h5>@item.NewsTitle</h5>
+                                <p>@str</p>
+                            </div>
+                        </a>
+                        <div class="clearfix"></div>
+
+
+                    }
+
+
+                </div>
+                <div><a href="@Url.Action("ViewallAdminNews", "Home")" class="pull-right more-news">View More...</a> </div>
+                <div class="home-add">
+                    @if (Session["UserId"] != null)
+                    {
+                        <a href="@Url.Action("MyMessage", "Messages")"><img src="~/Images/Promotionimage.png" /></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Home")"><img src="~/Images/Promotionimage.png" /></a>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+

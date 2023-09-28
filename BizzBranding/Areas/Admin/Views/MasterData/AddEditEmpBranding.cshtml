@@ -1,0 +1,133 @@
+﻿@model BizzBranding.CommonUtility.EmpBrandingModel
+
+@{
+    ViewBag.Title = "AddEditEmpBranding";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AddEditEmpBranding</h2>
+
+<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>
+<div id="page-heading">
+    <h1>Add / Edit Employee Branding</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditEmpBranding", "MasterData", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    
+    @Html.HiddenFor(x => x.EmpBrandingId)
+    @Html.HiddenFor(x=>x.EmpImage)
+    //@Html.HiddenFor(x=>x.PartnerA)
+    //@Html.HiddenFor(x=>x.PartnerB)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div class="rowleft"><span>Employer Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.EmployerName)
+                @*  @Html.TextBoxFor(x => x.EmployerName, new { @class = "inp-form", @placeholder = "CoBranded Name" })
+                 @Html.ValidationMessageFor(x => x.EmployerName)*@
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Employee Name</span>
+                <div class="rowight">
+                    @Html.DisplayFor(x => x.EmpName)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Employee Image</span></div>
+            <div class="rowright">
+                <img width="70px" height="70px" src="~/Images/EmployeeBrandingImages/@Html.DisplayFor(x => x.EmpImage)"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Message</span>
+                <div class="rowight">
+                    @Html.DisplayFor(x => x.Message)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Created On</span>
+                <div class="rowight">
+                    @Html.DisplayFor(x => x.CreateOn)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Created By</span>
+                <div class="rowight">
+                    @Html.DisplayFor(x => x.CreatedBy)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Updated On</span>
+                <div class="rowight">
+                    @Html.DisplayFor(x => x.UpdatedOn)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Updated By</span>
+                <div class="rowight">
+                    @Html.DisplayFor(x => x.UpdateBy)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Validity in Months</span></div>
+            <div class="rowright">
+                @Html.DropDownListFor(x => x.No_Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Month")
+                @* @Html.TextBoxFor(x => x.ExpiresOn, new { @class = "inp-form", @placeholder = "Valid To", @id = "date1" })
+                @Html.ValidationMessageFor(x => x.ExpiresOn)*@
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("EmpBranding", "MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

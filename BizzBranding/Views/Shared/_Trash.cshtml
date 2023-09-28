@@ -1,0 +1,193 @@
+﻿<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">   
+
+    $(document).ready(function () {
+
+        $('#message_previoustrash').click(function () {            
+            Previous_Trash();
+        });
+
+        $('#message_nexttrash').click(function () {            
+            Next_Trash();
+        });
+        
+    });
+      
+
+    function Previous_Trash() {
+        var previousvalue = parseInt($('#trash_first').html());
+
+        if (previousvalue != 1) {
+            currentPageIndex = parseInt(currentPageIndex, 10) - 1;
+            var current = parseInt($('#message_paging').val());
+            var t = 10;
+            var s = current - t;
+            Paging('#trash_first', '#trash_length');
+            LoadTrashBox(s, t);
+            $('#message_paging').val(s);
+        }
+        else {
+        }
+    }
+
+    function Next_Trash() {
+        var nextvalue = parseInt($('#trash_length').html());
+        var totalvalue = parseInt($('#totaltrash').html());
+
+        if (nextvalue >= totalvalue) {
+
+        }
+        else {
+            currentPageIndex = parseInt(currentPageIndex, 10) + 1;
+            var current = parseInt($('#message_paging').val());
+            var t = 10;
+            var s = current + t;
+            Paging('#trash_first', '#trash_length');
+            LoadTrashBox(s, t);
+            $('#message_paging').val(s);
+        }
+    }
+
+    function LoadTrashBox(s, t) {
+
+        $("#tblTrashMsg").html('');
+        $.post("/Messages/PopulateTrash", { skip: s, take: t },
+                function (data) {
+                    var rowTrash = "";
+                    var Trash = '"Trash"';
+
+                    $.each(data, function () {
+                        var Subject = this.MsgTitle;
+                        var From = this.MessageFromName;
+                        var attachment = this.Messagefile;
+                        var datetrash = new Date(parseInt(this.CreatedOn.substr(6)));
+                        if (attachment != null) {
+                            attachment = "<a href='#'><img alt='' style='height: 18px;width: 19px;padding-left: 5px;' src='../../Content/Images/attachment.png'/></a>";
+                        }
+                        else {
+                            attachment = "";
+                        }
+                        if (Subject == "") {
+                            Subject = "No Subject";
+                        }
+                        if (From == "") {
+                            From = "Enquiry";
+                        }
+                        if (this.IsReadTo == false) {
+                            rowTrash = rowTrash + "<tr id = trTrash_" + this.MessageId + " style='font-weight: bold;'><td><input type='checkbox' id = " +
+                            this.MessageId + " class='chkTrash'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + From + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + this.MessageToName + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + Subject.substring(0, 25) + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + datetrash.toDateString() + "</td><td>" + attachment + "</td></tr>";
+                        }
+                        else {
+                            rowTrash = rowTrash + "<tr id = trTrash_" + this.MessageId + " ><td><input type='checkbox' id = " +
+                            this.MessageId + " class='chkTrash'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + From + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + this.MessageToName + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + Subject.substring(0, 25) + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Trash + ")'>" + datetrash.toDateString() + "</td><td>" + attachment + "</td></tr>";
+                        }
+                    });
+                    $("#tblTrashMsg").html('');
+                    var tBody = " <tr><th width='2%'><input type='checkbox' id='chkAllTrash' class='chkHeaderInbox' onclick='CkeckAllTrash()' /></th><th class='th' style='width: 180px'>From</th><th class='th' style='width: 80px'>To</th><th class='th'>Subject</th><th class='th' style='width: 180px'>Date</th><th class='th' style='width: 50px'>File&nbsp;</th></tr>";
+                    $("#tblTrashMsg").append(tBody);
+                    $("#tblTrashMsg").append(rowTrash);
+                    Paging('#trash_first', '#trash_length');
+                });
+    }
+
+    function CkeckAllTrash() {
+        if ($('input[name=chkAllTrash]').is(":checked")) {
+            document.getElementById("TrashResult").innerHTML = " ";
+            $('.chkTrash').each(function () {
+                $(this).attr('checked', true);
+            });
+        }
+        else {
+            $('.chkTrash').each(function () {
+                $(this).attr('checked', false);
+            });
+        }
+    }
+
+    function RestoreMessage() {
+        if ($('input[class=chkTrash]').is(":checked")) {
+            $('.chkTrash').each(function () {
+                var id = $(this).attr("id");
+                if ($('input[id=' + id + ']').is(":checked")) {
+                    $.post("/Messages/RestoreMessages", { MessageID: id },
+                function (data) {
+                    if (data == true) {
+                        $('#trTrash_' + id).remove();
+                        LoadTrashBox(0, 10);
+                        document.getElementById("TrashResult").innerHTML = "Message Restored !";
+                    }
+                    else {
+                        document.getElementById("TrashResult").innerHTML = "Message can not be Restored !";
+                    }
+                });
+                }
+            });
+        }
+        else {
+            document.getElementById("TrashResult").innerHTML = "Please Select Messages.";
+        }
+    }
+
+    function DeleteAllTrash() {
+        if ($('input[class=chkTrash]').is(":checked")) {
+            if (confirm('Are you sure you want to permanently delete Trash Messages ?')) {
+                $('.chkTrash').each(function () {
+                    var id = $(this).attr("id");
+                    if ($('#' + id).is(":checked")) {
+                        $.post("/Messages/DeleteTrashMessage", { MessageID: id },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        $('#trTrash_' + id).remove();
+                        LoadTrashBox(0, 10);
+                        document.getElementById("TrashResult").innerHTML = "Message Deleted !";
+
+                    }
+                    else {
+                        document.getElementById("TrashResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+                    }
+                });
+            }
+        }
+        else {
+            document.getElementById("TrashResult").innerHTML = "Please Select Messages.";
+        }
+    }
+
+</script>
+<div id="pager" class="pager" style="list-style: none; float: right; padding-right: 10px;
+    margin: 0px;">
+    <br />
+    <ul>
+        <li id="trash_first"></li>
+        -
+        <li id="trash_length"></li>
+        of
+        <li id="totaltrash"></li>
+        <li>&nbsp;&nbsp;
+            <img src="../../Content/images/message_left.jpg" id="message_previoustrash" height="22"
+                title="Previous" style="cursor: pointer;" /></li>
+        <li>
+            <img src="../../Content/images/message_right.jpg" id="message_nexttrash" height="22"
+                title="Next" style="cursor: pointer;" /></li>
+    </ul>
+</div>
+<div class="grid" style="padding: 35px 0px 0px 0px;">
+    <div class="wrapp">
+        <div id="TrashResult" style="padding-left: 15px; padding-bottom: 5px; color: red;">
+        </div>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" id="tblTrashMsg">
+        </table>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "RenewalBannerMembership";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<link href="~/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Content/datepicker/jquery-1.8.2.js"></script>
+
+<script src="~/Content/datepicker/jquery-ui.js"></script>
+
+<script>
+    var $d = jQuery.noConflict();
+    //$d(function () {
+    //    $d("#txtFromDt").datepicker();
+
+    //});
+
+    $d(document).ready(function () {
+        $d("#txtFromDt").datepicker({ dateFormat: 'dd/mm/yy' });
+        //$d("#txtToDt").datepicker({ dateFormat: 'dd/mm/yy' });
+
+        $d('#txtFromDt').change(function () {
+            var avbl = $d("#hdnDate").val();
+            var fDate = $d("#txtFromDt").val();
+            debugger;
+            avbl = avbl.split('/');
+            fDate = fDate.split('/');
+            avbl = avbl[1] + "/" + avbl[0] + "/" + avbl[2];
+            fDate = fDate[1] + "/" + fDate[0] + "/" + fDate[2];
+            var date1 = new Date(avbl);
+            var date2 = new Date(fDate);
+
+
+            //if (avbl > fDate) {
+            if (date1 > date2) {
+                alert('Banner Already engaged on selected Date, Please select another date')
+                $d("#txtFromDt").val('');
+
+            }
+            else {
+                var test = Add7Days();
+                $d("#lblmsg").text("Banner Validity ends on " + test);
+                $('#txtToDt').val(test);
+            }
+
+        });
+
+        function Add7Days() {
+            var date = $d('#txtFromDt').val();
+            var Validity = $d('#hdndays').val();
+            var ndate = DateFromString(date, Validity);
+            return ndate;
+        }
+        function DateFromString(str, Validity) {
+            str = str.split(/\D+/);
+            str = new Date(str[2], str[1] - 1, (parseInt(str[0]) + (parseInt(Validity) - 1)));
+            return MMDDYYYY(str);
+        }
+        function MMDDYYYY(str) {
+            var ndateArr = str.toString().split(' ');
+            var Months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec';
+            return ndateArr[2] + '/' + (parseInt(Months.indexOf(ndateArr[1]) / 4) + 1) + '/' + ndateArr[3];
+        }
+
+        $d("#btnRenew").click(function () {
+            var fDate = $d("#txtFromDt").val();
+            var eDate = $d("#txtToDt").val();
+            var amt = $("#hdnMoney").val();
+            if (fDate == "" || eDate == "") {
+                alert('Please select From Date');
+            }
+            else {
+                $.post("/Home/UpdradeBannerMembership", { amount: amt, sDate: fDate, eDate: eDate }, function (data) {
+                    if (data) {
+                        // alert('Membership has been upgraded');
+                        $('body').append(data);
+                    }
+                    else {
+                        alert('Sorry Error has occured, Please try later');
+                        window.location.href = '/Home/UsersProfile';
+                    }
+
+                });
+            }
+
+        });
+    });
+
+</script>
+
+@{
+    string date = ViewBag.Date.ToString("dd/MM/yyyy");
+                            //var date1 =date.Split(' ');
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <h2>Renew Banner Validity</h2>
+                    <form class="form-horizontal" role="form">
+                        <strong style="color:red; padding-left:33px;">Banner Available from this date @date </strong><br><br>
+                      <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Form</label>
+                        <div class="col-sm-4">
+                             <input class="form-control" type="text" id="txtFromDt" name="txtFromDt"/>  
+                            <input type="hidden" name="hdnDate" value="@date" id="hdnDate" />
+                        <input type="hidden" name="hdndays" value="@ViewBag.Validity" id="hdndays" />
+                        <input type="hidden" name="hdndays" value="@ViewBag.Money" id="hdnMoney" />                      
+                        </div>
+
+                      </div> 
+                      <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">To</label>
+                        <div class="col-sm-4">
+                              
+                            
+                            <input type="text" id="txtToDt" name="txtToDt" class="form-control" readonly="true"/>
+                         
+                        </div>
+                           <div class="form-group">
+                                
+                               <div class="col-sm-10 pull-right">
+                         <button type="button" id="btnRenew" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href = '../../Home/HomeBanner'">Cancel</button>
+                      </div></div></div>
+                     </form>
+
+                   @* <div class="form-group">
+                        <label style="color: red;">Banner Available from this date @date</label>
+                        <input type="hidden" name="hdnDate" value="@date" id="hdnDate" />
+                        <input type="hidden" name="hdndays" value="@ViewBag.Validity" id="hdndays" />
+                        <input type="hidden" name="hdndays" value="@ViewBag.Money" id="hdnMoney" />
+                    </div>
+                    <div class="form-group">
+                        <label>From</label>
+                        <input type="text" id="txtFromDt" name="txtFromDt" />
+                    </div>
+                    <div class="form-group">
+                        <label>To</label>
+                        <input type="text" id="txtToDt" name="txtToDt" readonly="true" />
+                    </div>
+                    <div class="form-group">
+                        <label id="lblmsg"></label>
+
+                    </div>
+                    <button type="button" id="btnRenew" class="btn btn-default btn-success">Save</button>
+                    <button type="button" class="btn btn-default btn-success" onclick="window.location.href = '../../Home/HomeBanner'">Cancel</button>*@
+
+                </div>
+
+                @*<div class="col-sm-4">
+                     <h3>Brands By</h3>
+                    <div class="tabs">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left">
+                               
+                            </li>
+                            <li class="active "><a href="#tabB" data-toggle="tab">City</a></li>
+                            <li class=""><a href="#tabA" data-toggle="tab">Industry</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabA">
+                                <ul class="list-group">
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="tabB">
+                                <div class="list-group">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 31px;">
+                        <h2>News <i class="icon-bullhorn"></i></h2>
+
+
+
+                    </div>
+
+                </div>*@
+            </div>
+        </div>
+    </section>
+}

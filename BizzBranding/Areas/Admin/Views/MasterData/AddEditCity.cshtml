@@ -1,0 +1,66 @@
+﻿@model BizzBranding.Areas.Admin.Models.CityWebModel
+@{
+    ViewBag.Title = "AddEditCity";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<div id="page-heading">
+    <h1>Add / Edit City</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.CityId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.CountryName)</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x=>x.CountryId, Model.CountryNames, "Select", new { @class = "styledselect_form_1" })
+                @Html.ValidationMessageFor(x => x.CountryId)
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">City Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CityName, new { @class = "inp-form", @placeholder = "City Name" })
+                @Html.ValidationMessageFor(x => x.CityName)
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="rowleft"><span>Course Detail</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.CourseDetails, new { @class = "form-textarea" })
+                 @Html.ValidationMessageFor(x => x.CourseName)
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("City","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

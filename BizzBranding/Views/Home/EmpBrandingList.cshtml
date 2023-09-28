@@ -1,0 +1,234 @@
+﻿<div class="brands">
+<div class="container">
+    @model BizzBranding.CommonUtility.EmpBrandingModel
+
+    @{
+        ViewBag.Title = "EmpBrandingList";
+        //Layout = "~/Views/Shared/_Layout.cshtml";
+       Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+    }
+    
+    <section class="co-branded-list">
+        <div class="container">
+            <h2>Employee Branding List</h2>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="hasScroll">
+                        <ul class="list-group emp-list-group">
+                            @foreach (var item in Model.EmpBrandingList)
+                            {
+                                 <li class="list-group-item">
+                                <div class="row co-brand">
+                                     <div class="col-xs-3 col-sm-3">
+                                        <a href="@Url.Action("VisitorPage", "Home", new { @id = item.EmployerId })"> <h4>@item.EmployerName</h4>
+                                            <img src="~/Content/Images/CoLogo/@item.EmployerCompanyLogo" alt="..." class="img-thumbnail">
+                                             
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1"></div>
+                                    <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+                                       
+                                        <img src="~/Images/EmployeeBrandingImages/@item.EmpImage" alt="..." class="img-thumbnail" style="">
+                                        <h4>@item.EmpName</h4>
+                                        <p>@item.Message</p>
+                                    </div>
+                                    </div>
+                                     </li>
+                            }
+                           <!--- <li class="list-group-item">
+                                <div class="row co-brand">
+
+                                    <div class="col-xs-3 col-sm-3">
+                                        <a href="#">
+                                            <h4>Lorem Ipsum dummy</h4>
+                                            <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_32100821.gif" alt="..." class="img-thumbnail">
+                                            <p>efrsadff</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1"></div>
+                                    <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+
+                                        <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_97029490.jpg" alt="..." class="img-thumbnail" style="">
+                                        <h4>Lorem Ipsum dummy</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row co-brand">
+
+                                    <div class="col-xs-3 col-sm-3">
+                                        <a href="#">
+                                            <h4>Lorem Ipsum dummy</h4>
+                                            <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_32100821.gif" alt="..." class="img-thumbnail">
+                                            <p>efrsadff</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1"></div>
+                                    <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+
+                                        <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_97029490.jpg" alt="..." class="img-thumbnail" style="">
+                                        <h4>Lorem Ipsum is simply dummy</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row co-brand">
+
+                                    <div class="col-xs-3 col-sm-3">
+                                        <a href="#">
+                                            <h4>Lorem Ipsum dummy</h4>
+                                            <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_32100821.gif" alt="..." class="img-thumbnail">
+                                            <p>efrsadff</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1"></div>
+                                    <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+
+                                        <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_97029490.jpg" alt="..." class="img-thumbnail" style="">
+                                        <h4>Lorem Ipsum is simply dummy</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row co-brand">
+
+                                    <div class="col-xs-3 col-sm-3">
+                                        <a href="#">
+                                            <h4>Lorem Ipsum dummy</h4>
+                                            <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_32100821.gif" alt="..." class="img-thumbnail">
+                                            <p>efrsadff</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1"></div>
+                                    <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+
+                                        <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_97029490.jpg" alt="..." class="img-thumbnail" style="">
+                                        <h4>Lorem Ipsum is simply dummy</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </p>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row co-brand">
+
+                                    <div class="col-xs-3 col-sm-3">
+                                        <a href="#">
+                                            <h4>Lorem Ipsum dummy</h4>
+                                            <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_32100821.gif" alt="..." class="img-thumbnail">
+                                            <p>efrsadff</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1"></div>
+                                    <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+
+                                        <img src="~/Images/EmployeeBrandingImages/EmployeeBrandingImg_97029490.jpg" alt="..." class="img-thumbnail" style="">
+                                        <h4>Lorem Ipsum is simply dummy</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </p>
+
+                                    </div>
+                                </div>
+                                @foreach (var item in Model.EmpBrandingList)
+                                     {
+                                        <div class="col-xs-3" style="">
+                                            <a href="@Url.Action("VisitorPage", "Home", new { @id = item.EmployerId })">   <h4>@item.EmployerName</h4>
+                                            <img src="~/Content/Images/CoLogo/@item.EmployerCompanyLogo" alt="..." class="img-thumbnail">
+                                            @* <p>@Html.Raw(strA)</p>*@</a>
+
+                                        </div>@*
+                                        <div class="col-xs-1 icon-company"><i class="icon-plus-sign"></i></div>*@
+                                        <div class="col-sm-4 co-brand-br" style="text-align: center" data-toggle="modal" data-target="#myModal">
+                                            <a href="#">
+                                                <h4>@item.EmpName</h4>
+                                                <img src="~/Images/EmployeeBrandingImages/@item.EmpImage" alt="..." class="img-thumbnail">
+                                            @*    <p>@item.ProductDetails</p>*@
+                                            </a>
+                                        </div>
+                                     }
+                                </div>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-------------------------------------------------------popup---------------------------------->
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-content-Block">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Medco Machines</h4>
+                            </div>
+                            <div class="modal-body">
+                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis Cum sociis natoque penatibus et magnis dis parturient montes, 
+          nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------------------------------------------popup-end--------------------------------->
+                <div class="col-sm-3">
+                    <h2>What is Employee Branding?</h2>
+                     <p>@Html.Raw(Model.Description)</p>
+                   @* <p class="text-right"><small>This line of text is meant to be treated as fine print.</small></p>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                    <p class="lead">Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                *@</div>
+            </div>
+        </div>
+    </section></div>
+
+@* <table border="" width="80%" cellpadding="5" cellspacing="5" id="product-table">
+        <tbody>
+            <tr>
+                <th class="table-header-repeat line-left minwidth-1"><a href="#">Employer Name</th>
+                <th class="table-header-repeat line-left minwidth-1">Employee Name</th>
+                <th class="table-header-repeat line-left"><a href="#">Employee Image</a></th>
+                <th class="table-header-repeat line-left minwidth-1">Message</th>
+            </tr>
+            @foreach (var item in Model.EmpBrandingList)
+            {
+                <tr>*@
+
+@*<td>@item.BusinessNameA</td>*@
+@* <td><a href="@Url.Action("VisitorPage", "Home", new { @id = item.EmployerId })" class="list-group-item">@item.EmployerName</a></td>
+                    <td>@item.EmpName</td>
+                    <td>
+                        <img class="img-thumbnail"   height="50px" width="50px" src="~/Images/EmployeeBrandingImages/@item.EmpImage"  alt=""/></td>
+                    <td>@item.Message</td>*@
+
+@* <td>@item.BusinessNameB</td>*@
+@*   <td><a href="@Url.Action("VisitorPage", "Home", new { @id = item.PartnerB })" class="list-group-item">@item.BusinessNameB</a></td>
+            <td><img class="img-thumbnail" height="50px" width="50px"  src="~/Content/Images/CoLogo/@item.CompanyLogo"  alt=""/></td>*@
+
+@* </tr>
+            }
+        </tbody>
+    </table>*@
+@*</div>*@
+
+@* <div class="col-xs-3" style="">
+                            <h4>Software</h4>
+                            <img src="images/i3.jpg" alt="..." class="img-thumbnail">
+                            <p>Description ...........</p>
+                        </div>*@
+    </div>
+

@@ -1,0 +1,159 @@
+﻿@model BizzBranding.CommonUtility.CoBrandModel
+
+@{
+    ViewBag.Title = "CoBranded";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AllCoBrandUsers";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+@Html.HiddenFor(x => x.CoBrandId)
+<div id="page-heading">
+    <h1>All Co-BrandUsers</h1>
+    @if (Session["Success"] != null)
+    {
+        <div class="successmsg">
+            @Session["Success"].ToString()
+        </div>
+        Session["Success"] = null;
+    }
+    else if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+
+
+</div>
+<div id="tableouterdiv">
+    @if (Convert.ToBoolean(Session["Add"]))
+    {
+        <div style="margin: 15px 0 0 0;">
+            @Html.ActionLink("Create New", "AddEditCoBrand", "MasterData", new { @class = "mybtncreate" })
+        </div>
+    }
+
+    <div id="content-table-inner">
+        <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="#">Business User A / Business User B</a></th>
+                    @*<th class="table-header-repeat line-left"><a href="#">Business User B</a></th>*@
+                    @*<th class="table-header-repeat line-left"><a href="#">Role</a></th>*@
+                    @* @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {*@
+                    <th class="table-header-repeat line-left"><a href="#">Activated On</a></th>
+                    <th class="table-header-repeat line-left"><a href="#">Expires On</a></th>
+                    <th class="table-header-repeat line-left"><a href="#">Options</a></th>
+                    <th class="table-header-repeat line-left"><a href="#">Approval</a></th>
+
+                    @*}*@
+                </tr>
+                @foreach (var item in Model.CoBrandList)
+                {
+                    <tr>
+
+                        <td>@item.CoBrandedName</td>
+                        <td>@item.ActivatedOn</td>
+                        <td>@item.ExpiresOn</td>
+                        @* <td>@item.BusinessNameA</td>
+                         <td>@item.BusinessNameB</td>*@
+                        @*<td><a href="#">@item.Email</a></td>*@
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditCoBrand", "MasterData", new { @id = item.CoBrandId })" title="Edit" class="icon-1 info-tooltip"></a>
+                                }
+                                @if (Convert.ToBoolean(Session["Delete"]))
+                                {
+                                    <a href="@Url.Action("RemoveCoBrand", "MasterData", new { @id = item.CoBrandId })" title="Delete" class="icon-2 info-tooltip"></a>
+                                    
+                                }
+                                @if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.CoBrandId" class="icon-5"></a>
+
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.CoBrandId" class="inactive"></a>
+                                    
+                                }
+
+
+                                @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewCoBrand", "MasterData", new { @id = item.CoBrandId })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+                        <td>@if (item.IsApproved == true)
+                            {
+                            <a href="#" title="Approved"  data-uip ="@item.CoBrandId" class="icon-6"></a>
+
+                            }
+                            else if (item.IsApproved == false)
+                            {
+                            <a href="#" title="Approval Pending"  data-uip="@item.CoBrandId" class="inactive"></a>
+                                    
+                            }</td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+            <tbody>
+                <tr>
+                    <td>
+                        @{
+                            
+                            if (Model.PageID > 0)
+                            {
+                            <a href="@Url.Action("CoBranded", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                            }
+                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                            if (Model.PageID + 1 < Model.Pagecount)
+                            {
+                            <a href="@Url.Action("CoBranded", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                            }
+                          
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            $("a.icon-5,a.inactive").click(function (e) {
+                e.preventDefault();
+                var userid = $(this).attr("data-uid");
+
+                $.post("/Admin/MasterData/ChangeCoBrandStatus", { id: userid });
+
+                $(this).toggleClass('icon-5');
+                $(this).toggleClass('inactive');
+
+            });
+            $("a.icon-5,a.inactive").click(function (e) {
+                e.preventDefault();
+                var userid = $(this).attr("data-uip");
+
+                $.post("/Admin/MasterData/ChangeCoBrandApprovalStatus", { id: userid });
+
+                $(this).toggleClass('a.iconAppro-5');
+                $(this).toggleClass('a.inactiveAppro');
+
+            });
+
+        </script>
+        <div class="clear"></div>
+    </div>
+</div>
+

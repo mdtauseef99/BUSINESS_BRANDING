@@ -1,0 +1,60 @@
+﻿@model BizzBranding.CommonUtility.BusinessNewsModel
+
+@{
+    ViewBag.Title = "AddEditBusinessUserNews";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditBusinessUserNews";
+}
+
+<div id="page-heading">
+    <h1>Add / Edit BusinessUserNews</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.BusinessNewsId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div><span class="rowleft">BusinessUserNews Title</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.NewsTitle, new { @class = "inp-form", @placeholder = "News Title" })
+                @Html.ValidationMessageFor(x => x.NewsTitle)
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Description</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.Description, new { @class = "ckeditor" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("BusinessUserNews", "MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

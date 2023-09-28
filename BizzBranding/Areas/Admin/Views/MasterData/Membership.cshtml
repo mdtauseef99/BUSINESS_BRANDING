@@ -1,0 +1,187 @@
+﻿@model BizzBranding.Areas.Admin.Models.MembershipWebModel
+@{
+    ViewBag.Title = "Membership";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "Membership";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+
+ <script type="text/javascript">
+     $ = jQuery.noConflict();
+     $(document).ready(function () {
+
+         $('#formMainsearch1').submit(function (e) {
+             e.preventDefault();
+             debugger;
+             var txt = $('#txtSearch1').val();
+             if (txt != "") {
+                 var txtVal = $('.inp-formsearch').val();
+                 window.location.href = '../MasterData/SearchMember?searchValue=' + txtVal;
+             }
+             else { alert('Search Business'); $('#txtSearch1').focus(); }
+             //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+             // if (data != null)
+             // {
+             // }
+             //});
+         });
+
+         $('#formMainsearch1').submit(function (e) {
+             e.preventDefault();
+             debugger;
+             var txt = $('#search').val();
+             if (txt != "") {
+                 var txtVal = $('.inp-formsearch').val();
+                 window.location.href = '../MasterData/SearchMember?searchValue=' + txtVal;
+             }
+             // else { alert('Search Business'); }
+             //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+             // if (data != null)
+             // {
+             // }
+             //});
+         });
+     });
+    </script>
+
+
+<div id="page-heading">
+    <h1>All Memberships</h1>
+    @if (Session["Success"] != null)
+    {
+        <div class="successmsg">
+            @Session["Success"].ToString()
+        </div>
+        Session["Success"] = null;
+    }
+    else if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+
+
+</div>
+<div id="tableouterdiv">
+    @if (Convert.ToBoolean(Session["Add"]))
+    {
+        <div style="margin: 15px 0 0 0;">
+            @Html.ActionLink("Create New", "AddEditMembership", "MasterData", new { @class = "mybtncreate" })
+        </div>
+    }
+    <div style="margin: 15px 0 0 0;">
+        <form class="form-inline" id="formMainsearch1" role="form">
+            <div class="rowleft">
+                <input type="text" class="inp-formsearch" id="txtSearch1" placeholder="Search Business by AccessPlan / Business Name / EmailID">
+            </div>
+                <div class="rowright">
+                    <button type="submit" value="Search" class="mybtncreate1" id="search">Search</button>
+                </div>
+        </form>
+    </div>
+
+    @*<div style="float: right; margin: -20px 54px 0 0;">
+        Sort By:
+                @Html.DropDownListFor(x => x.ParentCourseID, Model.ParentCourses, "Select", new { @id = "institute" })
+        @Html.DropDownListFor(x => x.CourseID, Model.Course, "Select", new { @id = "course" })
+        <a href="@Url.Action("Courses", "MasterData", new { @cid = Model.CourseID })" class = "mybtncreate" >Go</a>
+    </div>*@
+    <div id="content-table-inner">
+        <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">Business Name</a></th>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">Access Plan</a></th>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">ActivatedOn</a></th>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="">ExpiresOn</a></th>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="#">Created Date</a></th>
+                    @* <th class="table-header-repeat line-left minwidth-1"><a href="#">IsActive</a></th>*@
+                    @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {
+                        <th class="table-header-options line-left"><a href="#">Options</a></th>
+                        
+                    }
+                </tr>
+                @foreach (var item in Model.Memberships)
+                {
+                    <tr>
+
+                        <td>@item.BusinessName</td>
+                        <td>@item.AccessPlanName</td>
+                        <td>@item.ActivatedOn</td>
+                        <td>@item.ExpiresOn</td>
+                        <td>@item.CreatedDate</td>
+                        @*<td>@item.IsActive</td>*@
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditMembership", "MasterData", new { @id = item.MembershipID })" title="Edit" class="icon-1 info-tooltip"></a>
+                            
+                           
+                                }
+                                @if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.MembershipID" class="icon-5"></a>
+
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.MembershipID" class="inactive"></a>
+                                    
+                                }
+                                @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewMembership", "MasterData", new { @id = item.MembershipID })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+            <tbody>
+                <tr>
+                    <td>
+                        @{
+                            
+                            if (Model.PageID > 0)
+                            {
+                            <a href="@Url.Action("Membership", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                            }
+                            
+                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                            if (Model.PageID + 1 < Model.Pagecount)
+                            {
+                            <a href="@Url.Action("Membership", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                            }
+                           
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+
+            $("a.icon-5,a.inactive").click(function (e) {
+                e.preventDefault();
+                var userid = $(this).attr("data-uid");
+
+                $.post("/Admin/MasterData/ChangeMembershipStatus", { id: userid });
+
+                $(this).toggleClass('icon-5');
+                $(this).toggleClass('inactive');
+
+            });
+
+        </script>
+        <div class="clear"></div>
+    </div>
+</div>

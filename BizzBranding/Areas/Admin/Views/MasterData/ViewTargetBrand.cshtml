@@ -1,0 +1,105 @@
+﻿@model BizzBranding.CommonUtility.TargetBrandingModel
+@{
+    ViewBag.Title = "ViewTargetBrand";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@Html.DisplayFor(x => x.BusinessName)</h2>
+@Html.HiddenFor(x => x.TargetBrandingId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+             <div class="row">
+        <div ><span class="rowleft">Business Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.BusinessName)
+        </div>
+    </div>
+
+         <div class="row">
+        <div ><span class="rowleft">Industry Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.IndustryName)
+        </div>
+    </div>
+
+    <div class="row">
+        <div ><span class="rowleft">City Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CityName)
+        </div>
+    </div>
+        <div class="row">
+        <div ><span class="rowleft">Created Date</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CreatedDate)
+        </div>
+    </div>
+
+        <div class="row">
+        <div ><span class="rowleft">Expires On</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.ExpiresOn)
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">Phone</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Phone)
+        </div>
+    </div>
+        <div class="row">
+        <div ><span class="rowleft">Trade Email ID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.TradeEmaiIId)
+        </div>
+    </div>
+     <div class="row">
+        <div ><span class="rowleft">Email ID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.EmailId)
+        </div>
+    </div>
+     <div class="row">
+        <div ><span class="rowleft">Co-Address</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CoAddress)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Fax</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Fax)
+        </div>
+    </div>
+
+     <div class="row">
+        <div><span class="rowleft">Product Images</span></div>
+        <div class="rowright">
+           @foreach (var item in Model.TargetImageList)
+            {
+                <img width="50px" height="50px" src="~/Images/TargetBrandingImages/@item.Image"/>
+            }
+        </div>
+    </div>
+
+  
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("TargetBranding","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

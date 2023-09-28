@@ -1,0 +1,108 @@
+﻿@model BizzBranding.CommonUtility.FranchiseModel
+
+@{
+    ViewBag.Title = "AddEditFranchise";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>
+<div id="page-heading">
+    <h1>Add / Edit Franchise</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditFranchise", "MasterData"))
+{
+    @Html.HiddenFor(x=>x.FranchiseId)
+    @Html.HiddenFor(x=>x.BusinessId)
+    @Html.HiddenFor(x=>x.Details)
+    @Html.HiddenFor(x=>x.ApprovedBy)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+
+         <div class="row">
+            <div class="rowleft"><span>Franchisee Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.BusinessName, new { @class = "inp-form"})
+            </div>
+        </div>
+
+        @*<div class="row">
+            <div><span class="rowleft">Product Image</span></div>
+            <div class="rowright">
+                <input type="file" name="file"  id="file" multiple="multiple" onchange="fileChange()"/>
+            </div>
+        </div>*@
+
+         <div class="row">
+            <div class="rowleft"><span>Franchise Details</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.Details)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft"><span>Approved By</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.Admin)
+            </div>
+        </div>
+
+         <div class="row">
+            <div><span class="rowleft">Created On</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.CreatedOn)
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Validity in Months</span></div>
+            <div class="rowright">
+                 @Html.DropDownListFor(x => x.No_Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Month")
+               @* @Html.TextBoxFor(x => x.ExpiresOn, new { @class = "inp-form", @placeholder = "Valid To", @id = "date1" })
+                @Html.ValidationMessageFor(x => x.ExpiresOn)*@
+            </div>
+        </div>
+       @* <div class="row">
+            <div ><span class="rowleft">City Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.CityName, new { @class = "inp-form", @placeholder = "City Name" })
+                @Html.ValidationMessageFor(x => x.CityName)
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("FranchiseeList","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

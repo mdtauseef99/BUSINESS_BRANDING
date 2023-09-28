@@ -1,0 +1,43 @@
+﻿@model BizzBranding.Areas.Admin.Models.CityWebModel
+@{
+    ViewBag.Title = "ViewCity";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@Html.DisplayFor(x => x.CityName)</h2>
+@Html.HiddenFor(x => x.CityId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+   <div class="row">
+        <div ><span class="rowleft">Country Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CountryName)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">City Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CityName)
+        </div>
+    </div>
+      
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("City","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

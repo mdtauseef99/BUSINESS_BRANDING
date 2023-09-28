@@ -1,0 +1,48 @@
+﻿@model BizzBranding.Areas.Admin.Models.EmailTemplateWebModel
+@{
+    ViewBag.Title = "ViewEmailTemplate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewEmailTemplate";
+
+}
+
+<h2>@Html.DisplayFor(x => x.EmailTempTitle)</h2>
+@Html.HiddenFor(x => x.EmailTempId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+  
+    <div class="row">
+        <div ><span class="rowleft">Email Template Title</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.EmailTempTitle)
+        </div>
+    </div>
+     <div class="row">
+        <div ><span class="rowleft">Description</span></div>
+        <div class="rowright">
+           @{
+        string data = Model.Description.ToString();
+                  
+    }
+
+    @Html.Raw(data)
+        </div>
+    </div>
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("EmailTemplate","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,211 @@
+﻿<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Reset();
+        PostCountMethods('inbox');
+        LoadInBox(s, t);
+
+        $('#message_previous').click(function () {
+            Previous_Inbox();
+        });
+
+        $('#message_next').click(function () {
+            Next_Inbox();
+        });
+
+    });
+
+
+    function Previous_Inbox() {
+        var previousvalue = parseInt($('#inbox_first').html());
+
+        if (previousvalue != 1) {
+            currentPageIndex = parseInt(currentPageIndex, 10) - 1;
+            var current = parseInt($('#message_paging').val());
+            var t = 10;
+            var s = current - t;
+            Paging('#inbox_first', '#inbox_length');
+            LoadInBox(s, t);
+            $('#message_paging').val(s);
+        }
+        else {
+        }
+    }
+
+    function Next_Inbox() {
+        var nextvalue = parseInt($('#inbox_length').html());
+        var totalvalue = parseInt($('#totalinbox').html());
+
+        if (nextvalue >= totalvalue) {
+        }
+        else {
+            currentPageIndex = parseInt(currentPageIndex, 10) + 1;
+            var current = parseInt($('#message_paging').val());
+            var t = 10;
+            var s = current + t;
+            Paging('#inbox_first', '#inbox_length');
+            LoadInBox(s, t);
+            $('#message_paging').val(s);
+        }
+    }
+
+    function LoadInBox(s, t) {
+        
+        $("#tblInBox").html('');
+        $.post("/Messages/PopulateInbox", { skip: s, take: t },
+                function (data) {
+                    var rowInBox = "";
+                    var Inbox = '"Inbox"';
+                    
+                    $.each(data, function () {
+                        var Subject = this.MessageTitle;
+                        var attachment = this.Messagefile;
+                        var dateinbox = new Date(parseInt(this.CreatedOn.substr(6)));
+                        if (attachment != null) {
+                            attachment = "<a href='#'><img alt='' style='height: 18px;width: 19px;padding-left: 5px;' src='../../Content/Images/attachment.png'/></a>";
+                        }
+                        else {
+                            attachment = "";
+                        }
+                        if (Subject == "") {
+                            Subject = "No Subject";
+                        }
+                        if (this.IsReadTo == false) {
+                            rowInBox = rowInBox + "<tr id=trinbox_" + this.MessageId + " style='font-weight: bold;'><td><input type='checkbox' id='" + this.MessageId + "' class='chkInbox'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Inbox + ")'>" + this.MessageFromName + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Inbox + ")'>" + Subject.substring(0,30) + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Inbox + ")'>" +
+                            dateinbox.toDateString() +
+                            "</td><td>" +
+                            attachment + "</td></tr>";
+                        }
+                        else {
+                            rowInBox = rowInBox + "<tr id=trinbox_" + this.MessageId + "><td><input type='checkbox' id='" + this.MessageId + "' class='chkInbox' style='margin-right:10px;'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Inbox + ")'>" + this.MessageFromName + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Inbox + ")'>" + Subject.substring(0, 30) + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Inbox + ")'>" +
+                         dateinbox.toDateString() + "</td><td>" + attachment + "</td></tr>";
+                        }
+                    });
+                    $("#tblInBox").html('');
+                    var tBody = " <tr><th width='2%'><input type='checkbox' name='chkAllInbox' id='chkAllInbox' onclick='CheckAllInbox()' class='chkHeaderInbox' /></th><th class='th' style='width: 180px'>From</th><th class='th'>Subject</th><th class='th' style='width: 180px;'>Date</th><th class='th' style='width: 50px'>File</th></tr>";
+                    $("#tblInBox").append(tBody);
+                    $("#tblInBox").append(rowInBox);
+                    Paging('#inbox_first', '#inbox_length');
+                });
+    }
+
+    function CheckAllInbox() {
+        if ($('input[name=chkAllInbox]').is(":checked")) {
+            document.getElementById("InBoxResult").innerHTML = " ";
+            $('.chkInbox').each(function () {
+                $(this).attr('checked', true);
+            });
+        }
+        else {
+            $('.chkInbox').each(function () {
+                $(this).attr('checked', false);
+            });
+        }
+    }   
+
+    function Block() {
+        if ($('input[class=chkInbox]').is(":checked")) {
+            if (confirm('Are you sure you want to Block Messages ?')) {
+                $('.chkInbox').each(function () {
+                    var id = $(this).attr("id");
+                    if ($('#' + id).is(":checked")) {
+                        $.post("/Messages/BlockMessages", { id: id },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        $('#trinbox_' + id).remove();
+                        LoadInBox(0, 10);
+                        document.getElementById("InBoxResult").innerHTML = "Messages Blocked !";
+                    }
+                    else {
+                        document.getElementById("InBoxResult").innerHTML = "Messages can not be Blocked !";
+                    }
+                });
+                    }
+                });
+            }
+        }
+        else {
+            document.getElementById("InBoxResult").innerHTML = "Please Select Messages.";
+        }
+    }
+
+    function DeleteAllInbox() {
+        if ($('input[class=chkInbox]').is(":checked")) {
+            if (confirm('Are you sure you want to delete Inbox Messages ?')) {
+                $('.chkInbox').each(function () {
+                    var id = $(this).attr("id");
+                    if ($('#' + id).is(":checked")) {
+                        $.post("/Messages/DeleteMessage", { MessageID: id },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        $('#trinbox_' + id).remove();
+                        LoadInBox(0, 10);
+                        document.getElementById("InBoxResult").innerHTML = "Message Deleted !";
+                    }
+                    else {
+                        document.getElementById("InBoxResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+                    }
+                });
+            }
+        }
+        else {
+            document.getElementById("InBoxResult").innerHTML = "Please Select Messages.";
+        }
+    }
+
+    function DeleteMessage(e) {
+        if (confirm('Are you sure you want to delete ?')) {
+            $.post("/MyMessage/DeleteMessage", { MessageID: e },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        document.getElementById("InBoxResult").innerHTML = "Message Deleted !";
+                        LoadInBox(0, 10);
+                        $('#trinbox_' + e).remove();
+                    }
+                    else {
+                        document.getElementById("InBoxResult").innerHTML = "Message can not be Deleted !";
+                    }
+                });
+        }
+    }
+
+</script>
+<div id="pager" class="pager" style="list-style: none; float: right; padding-right: 10px;
+    margin: 0px;">
+    <br />
+    <ul>
+        <li id="inbox_first"></li>
+        -
+        <li id="inbox_length"></li>
+        of
+        <li id="totalinbox"></li>
+        <li>&nbsp;&nbsp;
+            <img src="../../Content/images/message_left.jpg" id="message_previous" height="22"
+                title="Previous" style="cursor: pointer;" /></li>
+        <li>
+            <img src="../../Content/images/message_right.jpg" id="message_next" height="22" title="Next"
+                style="cursor: pointer;" /></li>
+    </ul>
+</div>
+<div class="grid" style="padding: 35px 0px 0px 0px;">
+    <div class="wrapp" id="sortMsg">
+        <div id="InBoxResult" style="padding-left: 15px; padding-bottom: 5px; color: red;">
+        </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" id="tblInBox">
+        </table>
+    </div>
+</div>

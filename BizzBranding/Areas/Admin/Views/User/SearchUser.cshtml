@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BizzBranding.CommonUtility.BussinessUserModel>
+
+@{
+    ViewBag.Title = "SearchUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+ <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left minwidth-1"><a href="#">Bussiness Name</a></th>
+                    <th class="table-header-repeat line-left"><a href="#">Email</a></th>
+                    @*<th class="table-header-repeat line-left"><a href="#">User Type</a></th>*@
+                    <th class="table-header-repeat line-left"><a href="#">Created Date</a></th>
+                    @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {
+                        <th class="table-header-options line-left"><a href="#">Options</a></th>
+                    }
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.BusinessName</td>
+                        <td><a href="#">@item.EmailId</a></td>
+                        @*<td>@item.UserType</td>*@
+                        <td><a href="#">@item.CreatedDate</a></td>
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditUser", "User", new { @id = item.UserId })" title="Edit" class="icon-1 info-tooltip"></a>
+                                }
+                                @if (Convert.ToBoolean(Session["Delete"]))
+                                {
+                                    <a href="#" title="Delete" class="icon-2 info-tooltip"></a>
+                                }
+                                @if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.UserId" class="icon-5"></a>
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.UserId" class="inactive"></a>
+                                }
+                                @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewUser", "User", new { @id = item.UserId })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+
+            </table>
+        </div>

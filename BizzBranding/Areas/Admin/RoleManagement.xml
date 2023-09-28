@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pages>
+  <Page Id="1" Name="User"></Page>
+  <Page Id="2" Name="SubCategory"></Page>
+  <Page Id="3" Name="Category" ></Page>
+  <Page Id="4" Name="AccessPlan"></Page>
+  <Page Id="5" Name="Currency"></Page>
+  <Page Id="6" Name="EmailTemplate"></Page>
+  <Page Id="7" Name="CMS"></Page>
+  <Page Id="8" Name="Role"></Page>
+  <Page Id="9" Name="Administrator"></Page>
+  <Page Id="10" Name="Membership"></Page>
+  <Page Id="11" Name="Industry"></Page>
+  <Page Id="12" Name="Country"></Page>
+  <Page Id="13" Name="City"></Page>
+  <Page Id="14" Name="Product"></Page>
+  <Page Id="15" Name="ProductImages"></Page>
+  <Page Id="16" Name="CoBranded"></Page>
+  <Page Id="17" Name="News"></Page>
+  <Page Id="18" Name="PaymentTransactionDetails"></Page>
+  <Page Id="19" Name="NewsLetter"></Page>
+  <Page Id="20" Name="BusinessUserNews"></Page>
+  <Page Id="21" Name="EmpBranding"></Page>
+  <Page Id="22" Name="Franchise"></Page>
+  <Page Id="23" Name="InvestorPartnering"></Page>
+  <Page Id="24" Name="CustomerEnquiry"></Page>
+  <Page Id="25" Name="CorporateBranding"></Page>
+  <Page Id="26" Name="GlobalBranding"></Page>
+  <Page Id="27" Name="BigHoardingBanner"></Page>
+  <Page Id="28" Name="TargetBranding"></Page>
+</Pages>

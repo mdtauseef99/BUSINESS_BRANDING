@@ -1,0 +1,77 @@
+﻿@model BizzBranding.Models.LandingPageModel
+@{
+    ViewBag.Title = "ViewMoreFrndNotList";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+
+
+
+<section class="brands">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-12">
+                <h2>Suggested Connection</h2>
+                <div class="related-connections">
+                    <div class="list-group">
+
+                        @foreach (var req in Model.SuggestedConn)
+                        {
+                            string str;
+                            if(req.BusinessDetails!="")
+                            {
+                               str= System.Text.RegularExpressions.Regex.Replace(req.BusinessDetails, @"<[^>]+>|&nbsp;|&quot;", String.Empty);
+                            }
+                            else
+                            {
+                                str = req.BusinessDetails;
+                            }
+
+                            if (str.Length > 48)
+                            {
+                                str = str.Substring(0, 48);
+                            }
+                            <a href="@Url.Action("VisitorPage", "Home", new { @id = req.PartnerId })" class="list-group-item">
+                                <img src="~/Content/Images/CoLogo/@req.CompanyLogo" class="img-thumbnail" alt="" />
+                                <h4 class="list-group-item-heading">@req.BusinessName</h4>
+                                <p class="list-group-item-text">@str</p>
+                            </a>
+                            
+                        }
+                        @*<a href="#">View More...</a> *@
+                    </div>
+                    <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @{
+                            
+                                        if (Model.PageID > 0)
+                                        {
+                                        <a href="@Url.Action("ViewMoreFrndNotList", "Home", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                                        }
+                            
+                                        <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                                        if (Model.PageID + 1 < Model.Pagecount)
+                                        {
+                                        <a href="@Url.Action("ViewMoreFrndNotList", "Home", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                                        }
+                           
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,48 @@
+﻿@model BizzBranding.CommonUtility.ProductModel
+@{
+    ViewBag.Title = "AddProduct";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+
+@using (Html.BeginForm("AddProduct", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container brands">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h2>Add Products</h2>
+                <form role="form" action="AddProduct" method="post" enctype="multipart/form-data">
+                    <div class="form-margin">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Product Name</label>
+                             @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control", @placeholder = "Enter Product Name"})
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.ProductName)</b>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Product Details</label>
+                             @Html.TextBoxFor(x => x.ProdDetails, new { @class = "form-control", @placeholder = "Enter Product Details"})
+                          <b style="color: red">@Html.ValidationMessageFor(x => x.ProdDetails)</b>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Product Image</label>
+                            <input type="file" id="imgFile" name="imgFile" multiple="multiple">
+                           @* <p class="help-block">Example block-level help text here.</p>*@
+                        </div>
+
+                        <input type="submit" class="btn btn-success" />
+                        <button type="button" class="btn btn-warning" onclick="window.location.href = '../../Home/UsersProfile'">Cancel</button>
+                        </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+}

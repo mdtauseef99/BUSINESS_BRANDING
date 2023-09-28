@@ -1,0 +1,267 @@
+﻿@model BizzBranding.Areas.Admin.Models.UserWebModel
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "UserRegistration";
+    ViewData["Message"] = TempData["AlertMessage"];
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<div id="msg"><p style="color:green; padding-left:8%"><strong> @ViewData["Message"]</strong></p></div>
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+<script type="text/javascript">
+
+    jQuery.validator.unobtrusive.adapters.add("dropdown", function (options) {
+        if (options.element.tagName.toUpperCase() == "SELECT" && options.element.type.toUpperCase() == "SELECT-ONE") {
+            options.rules["required"] = true;
+            if (options.message) {
+                options.messages["required"] = options.message;
+            }
+        }
+    });
+
+    jQuery.validator.unobtrusive.adapters.add("checkbox", function (options) {
+        if (options.element.tagName.toUpperCase() == "INPUT" && options.element.type.toUpperCase() == "CHECKBOX") {
+            options.rules["required"] = true;
+            if (options.message) {
+                options.messages["required"] = options.message;
+            }
+        }
+    });
+    $(document).ready(function () {
+        debugger;
+        // $("#cid").hide();
+        //$("#eid").hide();
+        $('#ddlCountryid').change(function () {
+            debugger;
+            var ID = document.getElementById('ddlCountryid').value;
+
+            $.post("/Home/GetCity", { id: ID },
+                function (data) {
+                    debugger;
+                    var elements = data;
+                    $.each(data, function () {
+                        elements = elements + '<option value="' + this.CityId + '">' + this.CityName + '</option>'
+                    })
+                    $('#ddlCityid').empty().attr('disabled', false).append("<option value='0'>--Select--</option>")
+                    $('#ddlCityid').append(elements);
+                });
+
+        });
+
+        $('#txtEmailId').focusout(function () {
+            debugger;
+            var email = $(this).val();
+
+            var emailPattern = /^\w+([-+.']\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+            if (!emailPattern.test(email)) {
+                $('#txtEmailId').css("border", "1px solid red");
+                $('#txtEmailId').val('');
+            }
+            else {
+                $('#divStatus').css("color", "blue");
+                $('#divStatus').html("Checking.......");
+
+                setTimeout(function () {
+                    debugger;
+                    $.post("/Home/CheckDuplicate", { EmailId: email }, function (data) {
+                        var myObject = eval('(' + data + ')');
+                        var res = myObject;
+                        if (res == true) {
+                            $('#divStatus').css("color", "red");
+                            $('#divStatus').html("Email ID Already Exists");
+                            checkEmail = true;
+                            $('#txtEmailId').val('');
+                            return checkEmail;
+                        }
+                        else {
+                            $('#divStatus').css("color", "green");
+                            $('#divStatus').html("Available");
+                            checkEmail = false;
+                            return checkEmail;
+                        }
+                    });
+                }, 500);
+            }
+
+        });
+
+        $('#txtEmailId').focusin(function () {
+            $(this).css("border", "");
+            $(this).val('');
+            $('#divStatus').html('');
+        });
+    });
+</script>
+
+
+@using (Html.BeginForm("UserRegistration", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                
+                <div id="page-heading" style="color:red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                      
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Registration</h2>
+
+                    <form role="form"  method="post">
+                    
+                        <div class="form-margin">
+                        <div class="form-group ">
+                            <label>Business Name</label>
+                            <b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.BusinessName, new { @class = "form-control", @placeholder = "Business Name" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.BusinessName)</b>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Id</label>
+                            <b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control", @placeholder = "Email Id" , @id = "txtEmailId" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.EmailId)</b>
+                            <div id="divStatus"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <b style="color: red">*</b>
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Password" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.Password) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <b style="color: red">*</b>
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.ConfirmPassword) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Logo</label>
+                            <b style="color: red">*</b>
+                            <input type="file" id="CoLogo" name="file">
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.CompanyLogo) </b>
+                            @*<p class="help-block">Example block-level help text here.</p>*@
+                        </div>
+                        <div class="form-group">
+                            <label>Company Reg.No</label>
+                            @Html.TextBoxFor(x => x.CoRegNo, new { @class = "form-control", @placeholder = "Company Reg.No" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.CoRegNo) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Industry Type</label>
+                            <b style="color: red">*</b>
+                            @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "form-control", @id = "ddlIndustryId" })@*@class=styledselect_form_1*@
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.IndustryNames) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Suggest Us Your Targeted Industries</label>
+                           @* <b style="color: red">*</b>*@
+                             @Html.ListBoxFor(x => x.SelectItems, Model.IndustryNames, new { size = 6 ,@class="form-control",@id="ddl", Multiple = "multiple"})
+                           @* @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "form-control", @id = "ddlIndustryId" })*@@*@class=styledselect_form_1*@
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.IndustryNames) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Country Name</label>
+                            <b style="color: red">*</b>
+                            @Html.DropDownListFor(x => x.CountryId, Model.CountryNames, "Select", new { @class = "form-control", @id = "ddlCountryid" })@*@class=styledselect_form_1*@
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.CountryId) </b>
+                        </div>
+                        <div class="form-group">
+                            @* @Html.LabelFor( x=> x.CityName)*@
+                            <label>City Name</label>
+                            <b style="color: red">*</b>
+                            @Html.DropDownListFor(x => x.CityId, Model.CityNames, "Select", new { @class = "form-control", @id = "ddlCityid" })@*@class=styledselect_form_1*@
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.CityId) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Address</label>
+                            @Html.TextBoxFor(model => model.CoAddress, new { @class = "form-control", @placeholder = "Address" })
+                        </div>
+                         <div class="form-group">
+                            <label>Company URL</label>
+                            @Html.TextBoxFor(model => model.CompanyURL, new { @class = "form-control", @placeholder = "Company URL" })
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                             <b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @placeholder = "Enter Phone" })
+                             <b style="color: red">@Html.ValidationMessageFor(x => x.Phone) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Fax</label>
+                            @Html.TextBoxFor(x => x.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Person</label><b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.ContactPerson, new { @class = "form-control", @placeholder = "Contact Person Name" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.ContactPerson) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Designation</label>
+                            @Html.TextBoxFor(x => x.Designation, new { @class = "form-control", @placeholder = "Designation" })
+                        </div>
+                        <div class="form-group">
+                            <label>Trade Email Id</label> <b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.TradeEmaiIId, new { @class = "form-control", @placeholder = "Trade Email Id" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.TradeEmaiIId) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>Business Details</label><b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.BusinessDetails, new { @class = "form-control", @maxlength=250, @placeholder = "Enter Your Business Description", @id = "BizzDetails" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.BusinessDetails) </b>
+                        </div>
+                        <div>
+                             <label>Rules and Conditions</label><b style="color: red">*</b>
+                            <div class="hasScroll  hasScroll1">
+                             @Html.TextAreaFor(x=>x.TermsConditions, new { size = 10, @class = "form-control", @readonly="true",@placeholder = "Welcome to our website. If you continue to browse and use this website you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern relationship with you in relation to this website.The use of this website is subject to the following terms of use:The content of the pages of this website is for your general information and use only. It is subject to change without notice."
+                            +"Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable."
+                            +" It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.Unauthorized use of this website may give rise to a claim for damages and/or be a criminal offence Payment Terms & Conditions:"
+                            + "We ensure that every transaction you conduct online is in a safe and secure environment. We do not take or store any credit card details or other card details on our servers. User will be directed to Payment Gateway website to enter his/her card details. This site is Master Secure & VBV compliant.We reserve the right to refuse or cancel any order placed for a product that is listed at an incorrect price. This shall be regardless of whether the order has been confirmed and/or payment been levied via credit card. In the event the payment has been processed,"
+                            +" the same shall be credited to your account and duly notified to you by email.We shall not be liable for any credit card fraud. The liability to use a card fraudulently will be on the user and the onus to 'prove otherwise' shall be exclusively on the user.If you have any additional queries or concerns, please contact us on the details provided in 'Contact Us' page of the website.While compiling this information, we have endeavored to ensure that all information is correct. However, no guarantee or representation is made to the accuracy or completeness of the information contained here. This information is subject to changes without notice."})
+                            @Html.CheckBoxFor(m => m.TermsAccepted)</div>
+                             <b style="color: red">@Html.ValidationMessageFor(m => m.TermsAccepted)</b>
+                        </div>
+                       @* <div class="radio">
+                            <label>
+                                @Html.RadioButtonFor(x => x.IsGlobal, "false", new { @id = "local" })
+                                IsLocal
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>s
+                                @Html.RadioButtonFor(x => x.IsGlobal, "true", new { @id = "global" })
+                                IsGlobal
+                            </label>
+                        </div>*@
+                        <input type="submit" class="btn btn-success" />
+                        <input type="button" value="Cancel" class="btn btn-warning" onclick="window.location.href = '/Home/Index'" />
+                        @* <button type="submit" class="btn btn-default btn-success">Submit</button>
+                            <button type="submit" class="btn btn-default btn-success">Reset</button>*@
+                    </form>
+
+                    @*  </div>
+                            <input type="submit" class="btn btn-default btn-success">Submit</>
+                             <input type="button" value="Cancel" style="width: auto !important;" onclick="window.location.href = '/Home/Index'"  class="btn btn-default btn-success"/>
+                        </form>*@
+                </div>
+            </div>
+        </div>
+    </section>  
+}

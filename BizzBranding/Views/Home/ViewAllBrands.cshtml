@@ -1,0 +1,248 @@
+﻿@model BizzBranding.Models.LandingPageModel
+@{
+    ViewBag.Title = "ViewAllBrands";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+<link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+
+@*<link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link href="~/Content/style/custom.css" rel="stylesheet" media="screen">*@
+
+
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function () {
+        $('#frmsearch').submit(function (e) {
+            e.preventDefault();
+            debugger;
+            var txtVal = $('#txtSearching').val();
+            if (txtVal != "") {
+                var txt = $('.form-control').val();
+
+                window.location.href = '/Home/Searching?searchValue=' + txt;
+
+            }
+            else { alert('Enter text to search'); $('#txtSearch').focus(); }
+
+        });
+    });
+</script>
+<section class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="alert alert-info">Search Results for "@ViewBag.SearchKey" </div>
+                <hr />
+                <div class="list-group">
+                    @if (Model.MostConnected.Count > 0)
+                    {
+                        foreach (var MostConnected in Model.MostConnected)
+                        {
+                        <a href="@Url.Action("VisitorPage", "Home", new { @id = MostConnected.UserId })" class="list-group-item">
+                            <h4 class="list-group-item-heading">@MostConnected.BusinessName</h4>
+                            <p class="list-group-item-text">@Html.Raw(MostConnected.BusinessDetails)</p>
+                        </a>
+                        }
+@*<table border="0" cellpadding="0" cellspacing="0" id="paging-table1">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @{
+                            
+                        if (Model.PageID > 0)
+                        {
+                                            <a href="@Url.Action("ViewAllBrands", "Home", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                        }
+                            
+                                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                        if (Model.PageID + 1 < Model.Pagecount)
+                        {
+                                            <a href="@Url.Action("ViewAllBrands", "Home", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                        }
+                           
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>*@
+                    }
+                    else if (Model.PremiunBrand.Count > 0)
+                    {
+                        foreach (var premium in Model.PremiunBrand)
+                        {
+                        <a href="@Url.Action("VisitorPage", "Home", new { @id = premium.UserId })" class="list-group-item">
+                            <h4 class="list-group-item-heading">@premium.BusinessName</h4>
+                            <p class="list-group-item-text">@Html.Raw(premium.BusinessDetails)</p>
+                        </a>
+                        }
+@*<table border="0" cellpadding="0" cellspacing="0" id="paging-table2">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @{
+                            
+                        if (Model.PageID > 0)
+                        {
+                                            <a href="@Url.Action("Category", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                        }
+                            
+                                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                        if (Model.PageID + 1 < Model.Pagecount)
+                        {
+                                            <a href="@Url.Action("Category", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                        }
+                           
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>*@
+                    }
+                    else if (Model.RecentJoinee.Count > 0)
+                    {
+                        foreach (var recent in Model.RecentJoinee)
+                        {
+                        <a href="@Url.Action("VisitorPage", "Home", new { @id = recent.UserId })" class="list-group-item">
+                            <h4 class="list-group-item-heading">@recent.BusinessName</h4>
+                            <p class="list-group-item-text">@Html.Raw(recent.BusinessDetails)</p>
+                        </a>
+                        }
+                        @*<table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @{
+                            
+                        if (Model.PageID > 0)
+                        {
+                                            <a href="@Url.Action("Category", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                        }
+                            
+                                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                        if (Model.PageID + 1 < Model.Pagecount)
+                        {
+                                            <a href="@Url.Action("Category", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                        }
+                           
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>*@
+                    }
+
+                    <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @{
+                            
+                                        if (Model.PageID > 0)
+                                        {
+                                        <a href="@Url.Action("Category", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                                        }
+                            
+                                        <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                                        if (Model.PageID + 1 < Model.Pagecount)
+                                        {
+                                        <a href="@Url.Action("Category", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                                        }
+                           
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+
+                <div class="form search">
+                    <form class="form-inline" role="form" id="frmsearch">
+                        <div class="form-group">
+                            <label class="sr-only" for="located">Located In</label>
+                            <input type="text" class="form-control input-sm" id="txtSearching" placeholder="Search with keyword">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm" id="btnSearch">Search</button>
+                    </form>
+                </div>
+                <br />
+                <div class="tabs">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left">
+                            <h3>Brands By</h3>
+                        </li>
+                        <li class="pull-right"><a href="#tabB" data-toggle="tab">City</a></li>
+                        <li class="active pull-right"><a href="#tabA" data-toggle="tab">Industry</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabA">
+                            <ul class="list-group">
+                                @foreach (var Ind in Model.IndustryList)
+                                {
+                                    <li class="list-group-item"><a href="@Url.Action("SearchbyIndustry", "Home", new { @id = Ind.IndustryId })">@Ind.IndustryName</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tabB">
+                            <div class="list-group">
+                                @foreach (var ct in Model.CityList)
+                                {
+                                    <a href="@Url.Action("SearchByCity", "Home", new { @CityId = ct.CityId })" class="list-group-item">
+                                        <h4 class="list-group-item-heading">@ct.CityName</h4>
+                                        @*<p class="list-group-item-text">Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product</p>*@
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="margin-top: 31px;">
+                    @if (Session["UserId"] != null)
+                      {
+                           <h2>News <i class="icon-bullhorn"></i></h2>
+                          foreach (var item in Model.NewsUpdates)
+                          {
+                              string str = item.Description;
+                              if (str.Length > 100)
+                              {
+                                  str = str.Substring(0, 100);
+                              }
+                              else
+                              {
+                                  str = item.Description;
+                              }
+    
+                        <h3>@item.NewsTitle</h3>
+                        <p>@str</p>
+                          }
+                   
+                      }
+                      else
+                      {
+                          @Html.Action("News", "Home")
+                      }
+                </div>
+                     @*<p>Know more about it.. <span class="label label-primary">New</span></p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

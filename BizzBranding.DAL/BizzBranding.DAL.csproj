@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{91325BC2-7F28-43B8-882B-A601760EF9D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BizzBranding.DAL</RootNamespace>
+    <AssemblyName>BizzBranding.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\BizzBranding\bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\TempDlls\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessPlan.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccessPlanDAL.cs" />
+    <Compile Include="Administrator.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorDAL.cs" />
+    <Compile Include="BizzBranding.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BizzBranding.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BizzBranding.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BizzBranding.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BizzBranding.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessConnection.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessEnquiry.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessJob.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessJobDAL.cs" />
+    <Compile Include="BusinessNew.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessNewsDAL.cs" />
+    <Compile Include="BussinessUser.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryDAL.cs" />
+    <Compile Include="City.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityDAL.cs" />
+    <Compile Include="CM.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMSDAL.cs" />
+    <Compile Include="CoBrandDAL.cs" />
+    <Compile Include="CoBranding.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CoBrandingImage.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CoBrandingProImgDAL.cs" />
+    <Compile Include="CorporateBranding.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CorporateBrandingDAL.cs" />
+    <Compile Include="Country.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryDAL.cs" />
+    <Compile Include="Currency.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyDAL.cs" />
+    <Compile Include="CustomerEnquiry.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerEnquiryDAL.cs" />
+    <Compile Include="EmailTemplate.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplateDAL.cs" />
+    <Compile Include="EmpBrandingDAL.cs" />
+    <Compile Include="EmployeeBranding.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Franchise.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FranchiseDAL.cs" />
+    <Compile Include="GlobalBrandigDAL.cs" />
+    <Compile Include="GlobalBranding.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HomeBanner.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HomeBannerDAL.cs" />
+    <Compile Include="HomeBannerMapping.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Industry.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IndustryDAL.cs" />
+    <Compile Include="InvestorPartnerDAL.cs" />
+    <Compile Include="InvestorPartnering.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Membership.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MembershipDAL.cs" />
+    <Compile Include="Message.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MessagesBlock.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MessagesFile.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="News.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsDAL.cs" />
+    <Compile Include="NewsLetter.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsLetterDAL.cs" />
+    <Compile Include="NewsMapping.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTransationDAL.cs" />
+    <Compile Include="PaymentTransationDetail.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDAL.cs" />
+    <Compile Include="ProductImage.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductImageDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleAssignment.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RolesDAL.cs" />
+    <Compile Include="SearcbyKeywordDAL.cs" />
+    <Compile Include="SubCategory.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubCategoryDAL.cs" />
+    <Compile Include="BussinessUserDAL.cs" />
+    <Compile Include="Subscribe.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TargetBrandDAL.cs" />
+    <Compile Include="TargetBranding.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TargetedImage.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TargetImageDAL.cs" />
+    <Compile Include="UserFriendMapping.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserIndustryMapping.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisitorCount.cs">
+      <DependentUpon>BizzBranding.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="BizzBranding.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BizzBranding.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BizzBranding.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BizzBranding.edmx</DependentUpon>
+      <LastGenOutput>BizzBranding.Context.cs</LastGenOutput>
+    </None>
+    <None Include="BizzBranding.edmx.diagram">
+      <DependentUpon>BizzBranding.edmx</DependentUpon>
+    </None>
+    <None Include="BizzBranding.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BizzBranding.edmx</DependentUpon>
+      <LastGenOutput>BizzBranding.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BizzBranding.CommonUtility\BizzBranding.CommonUtility.csproj">
+      <Project>{71d2230b-e76d-498e-b48d-0947e0716e45}</Project>
+      <Name>BizzBranding.CommonUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

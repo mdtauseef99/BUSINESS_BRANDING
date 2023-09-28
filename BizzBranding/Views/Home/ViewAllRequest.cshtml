@@ -1,0 +1,33 @@
+﻿@model BizzBranding.Models.LandingPageModel
+
+@{
+    ViewBag.Title = "ViewAllRequest";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<div class="brands">
+<div class="container related-connections">
+    <h2>Business Connection Request List</h2>
+    <div class="list-group list-group-bottom">
+        @foreach (var BList in Model.PendingRequests)
+        {
+            <div class="list-group-item">
+                <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.UserId })">
+                    <img class="img-thumbnail" src="~/Content/Images/CoLogo/@BList.CompanyLogo" alt="" />
+                    <h4 class="list-group-item-heading">@BList.BusinessName</h4>
+                </a>
+                <a href="@Url.Action("AcceptRequest", "Home", new { @id = BList.UserId })" >
+                    <input type="button" value="Accept" class="btn btn-success btn-xs btn-xs-height" />
+                </a>
+                <a href="@Url.Action("RejectRequest", "Home", new { @id = BList.UserId })" >
+                    <input type="button" value="Reject" class="btn btn-primary btn-xs" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
+</div>

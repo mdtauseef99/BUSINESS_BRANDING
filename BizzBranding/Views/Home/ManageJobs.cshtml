@@ -1,0 +1,104 @@
+﻿@model BizzBranding.CommonUtility.BusinessJobModel
+
+@{
+    ViewBag.Title = "CreateBusinessJob";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+    ViewData["Message"] = TempData["AlertMessage"];
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<div id="msg">
+    <p style="color: green; padding-left: 8%"><strong>@ViewData["Message"]</strong></p>
+</div>
+
+<section class="brands">
+    <div class="container">
+        <div class="col-sm-2 business-new" style="">
+            @Html.ActionLink("Add Job", "AddJob", "Home", new { @class = "btn btn-warning" })
+        </div>
+
+        <div id="tableouterdiv" class="grids-wrap" style="">
+            <div id="content-table-inner">
+                <div id="table-content">
+                    <div class="bs-example">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="success">Job Title</th>
+                                    <th class="success">Job Description</th>
+                                    @*  <th class="success"></th>*@
+                                    <th class="success">Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.BusinessJobList)
+                                {
+                                    //string str = item.Description;
+                                    //if (str.Length > 100)
+                                    //{
+                                    //    str = str.Substring(0, 200);
+                                    //} 
+                                    <tr>
+                                        <td><b>@item.JobTitle</b></td>
+                                        <td>@Html.Raw(item.Description)</td>
+                                        @*<td></td>*@
+                                        <td class="options-width" style="width:8%;">
+                                            <a href="@Url.Action("RemoveBusinessJobs", "Home", new { @id = item.BusinessJobId })" title="Delete" class="icon-2 info-tooltip"></a>
+                                            <a href="@Url.Action("UpdateJob", "Home", new { @id = item.BusinessJobId })" title="Edit" class="icon-1 info-tooltip"></a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @{
+                            
+                                    if (Model.PageID > 0)
+                                    {
+                                    <a href="@Url.Action("ManageJobs", "Home", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                                    }
+                                    <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                                    if (Model.PageID + 1 < Model.Pagecount)
+                                    {
+                                    <a href="@Url.Action("ManageJobs", "Home", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                                    }
+                          
+                                }
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <script>
+                    $("a.icon-5,a.inactive").click(function (e) {
+                        e.preventDefault();
+                        var userid = $(this).attr("data-uid");
+
+                        $.post("/Admin/MasterData/ChangeNewsStatus", { id: userid });
+
+                        $(this).toggleClass('icon-5');
+                        $(this).toggleClass('inactive');
+
+                    });
+
+                </script>
+                <div class="clear"></div>
+                <div class="clear"></div>
+
+            </div>
+        </div>
+    </div>
+</section>

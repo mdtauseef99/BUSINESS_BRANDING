@@ -1,0 +1,152 @@
+﻿@model BizzBranding.CommonUtility.GlobalBrandingModel
+
+@{
+    ViewBag.Title = "GlobalBranding";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Global Branding List</h2>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+@Html.HiddenFor(x => x.GlobalBrandingId)
+<div id="page-heading">
+    @if (Session["Success"] != null)
+    {
+        <div class="successmsg">
+            @Session["Success"].ToString()
+        </div>
+        Session["Success"] = null;
+    }
+    else if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+
+
+</div>
+<div id="tableouterdiv">
+    @* @if (Convert.ToBoolean(Session["Add"]))
+    {
+        <div style="margin: 15px 0 0 0;">
+            @Html.ActionLink("Create New", "AddEditCoBrand", "MasterData", new { @class = "mybtncreate" })
+        </div>
+    }*@
+
+    <div id="content-table-inner">
+        <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-options line-left"><a href="#">Global Branding Business</a></th>
+                    <th class="table-header-options line-left"><a href="#">Global Branding Details</a></th>
+                    @*<th class="table-header-repeat line-left"><a href="#">Role</a></th>*@
+                    @* @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                    {*@
+                    <th class="table-header-options line-left" style="width: 109px";><a href="#">Approved On</a></th>
+                    <th class="table-header-options line-left" style="width: 111px";><a href="#">Approved By</a></th>
+                    <th class="table-header-options line-left" style="width: 109px";><a href="#">Created On</a></th>
+                    <th class="table-header-options line-left"><a href="#">Options</a></th>
+                   @* <th class="table-header-options line-left"><a href="#">Approval</a></th>*@
+
+                    @*}*@
+                </tr>
+                @foreach (var item in Model.GlobalBrandingList)
+                {
+                    string str = item.GlobalBrandDetails;
+                    if (str.Length > 100)
+                    {
+                        str = str.Substring(0, 100);
+                    }
+                    else
+                    {
+                        str = item.GlobalBrandDetails;
+                    }
+                    <tr>
+                        <td>@item.BusinessName</td>
+                        <td>@str</td>
+                        <td>@item.ApprovedOn</td>
+                        <td>@item.Admin</td>
+                        <td>@item.CreatedOn</td>
+                        @* <td>@item.BusinessNameA</td>
+                         <td>@item.BusinessNameB</td>*@
+                        @*<td><a href="#">@item.Email</a></td>*@
+                        @if (Convert.ToBoolean(Session["Edit"]) || Convert.ToBoolean(Session["Delete"]) || Convert.ToBoolean(Session["Read"]))
+                        {
+                            <td class="options-width">
+
+                                @if (Convert.ToBoolean(Session["Edit"]))
+                                {
+                                    <a href="@Url.Action("AddEditGlobalBranding", "MasterData", new { @id = item.GlobalBrandingId })" title="Edit" class="icon-1 info-tooltip"></a>
+                                }
+                                @if (Convert.ToBoolean(Session["Delete"]))
+                                {
+                                    <a href="@Url.Action("RemoveGlobalBranding", "MasterData", new { @id = item.GlobalBrandingId })" title="Delete" class="icon-2 info-tooltip"></a>
+                                    
+                                }
+                                @if (item.IsActive == true)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.GlobalBrandingId" class="icon-5"></a>
+
+                                }
+                                else if (item.IsActive == false)
+                                {
+                                    <a href="#" title="Status"  data-uid="@item.GlobalBrandingId" class="inactive"></a>
+                                    
+                                }
+
+
+                                @if (Convert.ToBoolean(Session["View"]))
+                                {
+                                    <a href="@Url.Action("ViewGlobalBrandingDetails", "MasterData", new { @id = item.GlobalBrandingId })" title="View" class="view-icon"></a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+            <tbody>
+                <tr>
+                    <td>
+                        @{
+                            
+                            if (Model.PageID > 0)
+                            {
+                            <a href="@Url.Action("GlobalBranding", "MasterData", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                            }
+                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                            if (Model.PageID + 1 < Model.Pagecount)
+                            {
+                            <a href="@Url.Action("GlobalBranding", "MasterData", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                            }
+                          
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            $("a.icon-5,a.inactive").click(function (e) {
+                e.preventDefault();
+                var userid = $(this).attr("data-uid");
+
+                $.post("/Admin/MasterData/ChangeGlobalBrandingStatus", { id: userid });
+
+                $(this).toggleClass('icon-5');
+                $(this).toggleClass('inactive');
+
+            });
+           
+
+        </script>
+        <div class="clear"></div>
+    </div>
+</div>
+
+

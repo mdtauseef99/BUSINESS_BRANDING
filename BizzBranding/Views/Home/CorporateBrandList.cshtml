@@ -1,0 +1,166 @@
+﻿<div class="brands">
+    <div class="container">
+        @model BizzBranding.CommonUtility.CorporateBrandingModel
+        @{
+            ViewBag.Title = "CorporateBrandList";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+        }
+
+        <section class="co-branded-list">
+            <div class="container">
+                @*<h2 class="">Corporate Brand List</h2>*@
+                <div class="form-margin">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="hasScroll">
+                                <ul class="list-group">
+
+                                    @foreach (var item in Model.CorporateBrandingList)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="row co-brand">
+                                                <div class="col-xs-4 col-sm-4">
+                                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = item.BusinessUserId })">
+                                                        <h4>@item.BusinessName</h4>
+                                                        <img src="~/Content/Images/CoLogo/@item.CompanyLogo" alt="..." class="img-thumbnail">
+                                                    </a>
+
+                                                </div>
+                                                
+                                                <div class="col-xs-8 col-sm-8 emp-brand-list-cont pull-left">
+                                                    <p>@Html.Raw(item.CorporateBrandDetails)</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-------------------------------------------------------popup---------------------------------->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content modal-content-Block">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Medco Machines</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis Cum sociis natoque penatibus et magnis dis parturient montes, 
+          nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-------------------------------------------------------popup-end--------------------------------->
+                        <div class="col-sm-3 brand-list-right">
+                            @*<h2 style="font-size: 17px;">@Model.CMSTitle</h2>*@
+                            <p>@Html.Raw(Model.Description)</p>
+                          
+               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*<section class="co-branded-list">
+        <div class="container">
+           <h2>Corporate Brands List</h2>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="hasScroll">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row co-brand">
+                                    @foreach (var item in Model.PremiunBrand)
+                                    {
+                                        <div class="col-sm-3" >
+                                           <a href="@Url.Action("VisitorPage", "Home", new { @id = item.UserId })">
+                                            <img src="~/Content/Images/CoLogo/@item.CompanyLogo" alt="..." class="img-thumbnail">
+                                                <h4>@item.BusinessName</h4></a>
+                                             @*<p>@Html.Raw(item.BusinessDetails)</p></a>
+
+                                        </div>
+                                    }
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>*@
+
+        <!-------------------------------------------------------popup---------------------------------->
+
+        <!-- Modal -->
+        @* <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-content-Block">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Medco Machines</h4>
+                            </div>
+                            <div class="modal-body">
+                                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+          Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis Cum sociis natoque penatibus et magnis dis parturient montes, 
+          nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------------------------------------------popup-end--------------------------------->
+                <div class="col-sm-3">
+                    <h2>What is Corporate Branding?</h2>
+                    <p>@Html.Raw(Model.Description)</p>
+                    @*<p class="text-right"><small>This line of text is meant to be treated as fine print.</small></p>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                    <p class="lead">Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                    <p>Cum sociis natoque penatibu
+                        s et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+                </div>
+            </div>
+        </div>
+    </section>*@
+    </div>
+</div>

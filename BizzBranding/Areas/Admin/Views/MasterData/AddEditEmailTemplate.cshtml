@@ -1,0 +1,152 @@
+﻿@model BizzBranding.Areas.Admin.Models.EmailTemplateWebModel
+@{
+    ViewBag.Title = "AddEditEmailTemplate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditEmailTemplate";
+}
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.blockUI.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/MicrosoftAjax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/MicrosoftMvcAjax.js")" type="text/javascript"></script>
+<script src="../../../../Scripts/textinputs_jquery.js" type="text/javascript"></script>
+<script src="../../../../Scripts/textinputs_jquery_src.js" type="text/javascript"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/config.js")"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+
+        $('select#SelectedTemplateTypeID').change(function (e) {
+            var typeid = $(this).val();
+            $.ajax({
+                url: '@Url.Action("PopulateData","EmailTemplate")',
+                data: { typeid: typeid },
+                datatype: "json",
+                success: function (data) {
+                    $("#TemplateName").val(data.tname);
+                    $("#EmailSubject").val(data.esub);
+                    var setdata = data.ebody;
+                    if (data.ebody == null) { setdata = ""; }
+                    CKEDITOR.instances.EmailBody.setData(setdata);
+                    //                    $("#EmailBody").val(data.ebody);
+                    $("#IsSystemTemplate").attr('checked', data.ist);
+                    $("#CreatedBy").val(data.cby);
+                    $("#IsActive").attr('checked', data.ia);
+
+                }
+            });
+        });
+    });
+
+
+</script>
+
+<div id="page-heading">
+    <h1>Add / Edit EmailTemplates</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.EmailTempId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        
+        <div class="row">
+            <div ><span class="rowleft">Email Template Title</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.EmailTempTitle, new { @class = "inp-form", @placeholder = "Email Template Title" })
+                @Html.ValidationMessageFor(x => x.EmailTempTitle)
+            </div>
+        </div>
+       @* <div class="row">
+            <div ><span class="rowleft">Subject</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.Subject, new { @class = "inp-form", @placeholder = "Subject" })
+                @Html.ValidationMessageFor(x => x.Subject)
+            </div>
+        </div>*@
+                <div class="row">
+            <div ><span class="rowleft">Description</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.Description, new { @class = "ckeditor",@id="EmailBody" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div><div class="clear"></div>
+                    <div style="margin-left:250px;">
+                    <strong>Keys</strong>
+                            <select name="drop1" id="Select1" size="4" multiple="multiple" onclick="javascript:Copytobody()" style="height:100px;">
+                                    <option value="Username">Username</option>
+                                    <option value="Email">EmailId</option>
+                                    <option value="Password">Password</option>
+                                    <option value="Birthdate">Birthdate</option>
+                                     <option value="BusinessName">Business Name</option>
+                                     <option value="FromBusinessName">FromBusinessName</option>
+                                    <option value="LastName">Last Name</option>
+                                    <option value="Balance">Balance</option>
+                                </select>
+                            
+                            <script type="text/javascript">
+                                var testBox;
+                                $(document).ready(function () {
+
+                                    textBox = $("#EmailBody");
+
+                                    function saveSelection() {
+                                        textBox.data("lastSelection", textBox.getSelection());
+                                    }
+
+                                    textBox.focusout(saveSelection);
+
+                                    textBox.bind("beforedeactivate", function () {
+                                        saveSelection();
+                                        textBox.unbind("focusout");
+                                    });
+                                });
+                                function Copytobody() {
+                                    debugger;
+                                    var sel = new CKEDITOR.dom.selection(CKEDITOR.document);
+
+                                    //                                    var selection = textBox.data("lastSelection");
+                                    //                                    textBox.focus();
+                                    //                                    textBox.setSelection(selection.start, selection.end);
+                                    //                                    textBox.replaceSelectedText("[" + $("#Select1").val() + "]");
+                                    CKEDITOR.instances.EmailBody.setData(CKEDITOR.instances.EmailBody.getData() + "[" + $("#Select1").val() + "]");
+
+                                    // $("#EmailBody").val($("#EmailBody").val()+($("#Select1").val()));
+                                }
+                            </script>
+
+                </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("EmailTemplate","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

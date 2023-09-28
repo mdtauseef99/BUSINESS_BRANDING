@@ -1,0 +1,157 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#search_next").click(function () {
+            var current = parseInt($('#searchval').val());
+            var t = 20;
+            var s = current + t;
+            Search(s, t);
+            $('#searchval').val(s);
+        });
+
+        $('#search_previous').click(function () {
+            var current = parseInt($('#searchval').val());
+            var t = 20;
+            var s = current - t;
+            Search(s, t);
+            $('#searchval').val(s);
+        });
+
+    });
+
+    function Search(s, t) {
+        $("#PartialEnquiry").css("display", "none");
+        $("#PartialInbox").css("display", "none");
+        $("#PartialOutbox").css("display", "none");
+        $("#PartialTrash").css("display", "none");
+        $("#PartialCompose").css("display", "none");
+        $("#PartialViewMessage").css("display", "none");
+        $("#PartialSearch").css("display", "block");
+        $("#MessageSearch").css("display", "block");
+
+        var search_txt = $("#txtsearch").val();
+        var option = $("#advanceoption option:selected").text();
+        $("#tblSearch").html('');
+
+        $.post("/Messages/MessagesSearch", { searchtxt: search_txt, options: option, skip: s, take: t },
+                function (data) {
+                    var rowsearch = "";
+                    debugger;
+                    if (data.length > 0) {
+                        $.each(data, function () {
+                            var From = this.MessageFrom;
+                            var dateSearch = new Date(parseInt(this.CreatedOn.substr(6)));
+                            var attachment = this.Messagefile;
+                            var Subject = this.MessageTitle;
+                            var Search = '"Inbox"';
+
+                            if (From == null) {
+                                From = "Enquiry";
+                            }
+
+                            if (attachment != 'NoFile' && attachment != null) {
+                                attachment = "<a href='#'><img alt='' style='height: 18px;width: 19px;padding-left: 5px;' src='../../Content/images/attachment.png'/></a>";
+                            }
+                            else {
+                                attachment = "";
+                            }
+
+                            if (Subject == "") {
+                                Subject = "No Subject";
+                            }
+
+                            if (this.IsReadTo == false) {
+                                rowsearch = rowsearch + "<tr id=trsearch_" + this.MessageId + " style='background-color: #E9E9E9;'><td><input id=" +
+                            this.MessageId + " type='checkbox' class='chkSearch'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + From + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + this.MessageTo + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + Subject + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + dateSearch.toDateString() + "</td><td>" + attachment + "</td></tr>";
+                            }
+                            else {
+                                rowsearch = rowsearch + "<tr id=trsearch_" + this.MessageId + "><td><input type='checkbox' id=" +
+                            this.MessageId + " class='chkSearch'/></td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + From + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + this.MessageTo + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + Subject + "</td><td style='cursor:pointer;' onclick='ReadMessage(" +
+                            this.MessageId + "," + Search + ")'>" + dateSearch.toDateString() + "</td><td>" + attachment + "</td></tr>";
+                            }
+                        });
+
+                        var tBody = " <tr><th width='2%'><input type='checkbox' name='chkAllSearch' id='chkAllSearch' class='chkHeaderInbox' onclick='chkAllSearch()' /></th><th class='th' style='width: 80px'>From</th><th class='th' style='width: 80px'>To</th><th class='th'>Subject</th><th class='th' style='width: 90px;'>Date</th><th class='th' style='width: 30px'>Action&nbsp;</th></tr>";
+                    }
+                    else {
+                        rowsearch = rowsearch + "<tr><td>No Records Found.</td></tr>";
+
+                        var tBody = "";
+                    }
+
+                    
+                    $("#tblSearch").append(tBody);
+                    $("#tblSearch").append(rowsearch);
+
+                });
+    }
+
+    function chkAllSearch() {
+        if ($('input[name=chkAllSearch]').is(":checked")) {
+            $('.chkSearch').each(function () {
+                $(this).attr('checked', true);
+            });
+        }
+        else {
+            $('.chkSearch').each(function () {
+                $(this).attr('checked', false);
+            });
+        }
+    }
+
+    function DeleteAllSearchMessage() {
+        if ($('input[class=chkSearch]').is(":checked")) {
+            if (confirm('Are you sure you want to delete Messages ?')) {
+                $('.chkSearch').each(function () {
+                    var id = $(this).attr("id");
+                    if ($('#' + id).is(":checked")) {
+                        $.post("/Messages/DeleteMessage", { MessageID: id },
+                function (data) {
+                    var myObject = eval('(' + data + ')');
+                    var newid = myObject;
+                    if (newid == 1) {
+                        $('#trsearch_' + id).remove();
+                        Search(0, 10);
+                    }
+                    else {
+                    }
+                });
+                    }
+                });
+            }
+        }
+        else {
+            document.getElementById("InBoxResult").innerHTML = "Please Select Messages.";
+        }
+
+    }
+
+</script>
+<div id="pager" class="pager" style="list-style: none; float: right; padding-right: 10px;
+    margin: 0px;">
+    <br />
+    <ul>
+        <li>
+            <img src="../../Content/images/message_left.jpg" id="search_previous" height="22"
+                title="Previous" style="cursor: pointer;" /></li>
+        <li>
+            <img src="../../Content/images/message_right.jpg" id="search_next" height="22" title="Next"
+                style="cursor: pointer;" /></li>
+    </ul>
+</div>
+<div class="grid">
+    <div class="wrapp">
+        <div id="SearchResult" style="padding-left: 15px; padding-bottom: 5px; color: red;">
+        </div>
+        <input type="hidden" name="searchval" id="searchval" value="0" />
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" id="tblSearch">
+        </table>
+    </div>
+</div>

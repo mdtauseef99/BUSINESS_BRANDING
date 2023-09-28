@@ -1,0 +1,162 @@
+﻿@model BizzBranding.Models.LandingPageModel
+
+@{
+    ViewBag.Title = "Global Branding: Best Global Brands All At One Place For You";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+           Layout = "~/Views/Shared/_MasterLayout.cshtml";
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+ @section metatags 
+        {
+            <meta name='keywords' content='@ViewBag.MetaKeywords'/>
+            <meta name='description' content='@ViewBag.MetaDescription'/>
+        }
+
+
+<script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+<link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
+
+<link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link href="~/Content/style/custom.css" rel="stylesheet" media="screen">
+
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function () {
+        $('#frmsearch').submit(function (e) {
+            e.preventDefault();
+            debugger;
+            var txtVal = $('#txtSearching').val();
+            if (txtVal != "") {
+                var txt = $('.form-control').val();
+                $('#Displaytext').text(txtVal);
+                window.location.href = '/Home/Searching?searchValue=' + txt;
+
+            }
+            else { alert('Enter text to search'); $('#txtSearch').focus(); }
+
+        });
+    });
+</script>
+<section class="brands">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+
+                <h2>@Model.CMSTitle</h2>
+
+
+                <div class="list-group">
+                    <h4 class="list-group-item-heading"><strong></strong></h4>
+                    <p class="list-group-item-text">
+                       @Html.Raw(Model.Description)
+                    </p>
+
+
+                   @* <h4 class="list-group-item-heading">List group item heading</h4>
+                    <p class="list-group-item-text">Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product</p>*@
+                </div>
+
+                @*  <div class="list-group">
+                    @foreach (var BList in Model.searchkeywords)
+                    {
+                        <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.Id })" class="list-group-item">
+                            <h4 class="list-group-item-heading">@BList.BusinessName</h4>
+                            <p class="list-group-item-text">Brand is the "name, term, design, symbol, or any other feature that identifies one seller's product</p>
+                        </a>
+                    }
+
+                </div>*@
+            </div>
+            <div class="col-sm-4">
+               @* <div class="form search">
+                    <form class="form-inline" role="form" id="frmsearch">
+                        <div class="form-group">
+                            <label class="sr-only" for="located">Located In</label>
+                            <input type="text" class="form-control input-sm" id="txtSearching" placeholder="Search with keyword">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm" id="btnSearch">Search</button>
+                    </form>
+                </div>*@
+                 @*<div class="tabs">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="pull-left">
+                            <h3>Brands By</h3>
+                        </li>
+                        <li class="pull-right"><a href="#tabB" data-toggle="tab">City</a></li>
+                        <li class="active pull-right"><a href="#tabA" data-toggle="tab">Industry</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabA">
+                            <ul class="list-group">
+                                @foreach (var Ind in Model.IndustryList)
+                                {
+                                    <li class="list-group-item"><a href="@Url.Action("SearchbyIndustry", "Home", new { @id = Ind.IndustryId })">@Ind.IndustryName</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tabB">
+                            <div class="list-group">
+                                @foreach (var ct in Model.CityList)
+                                {
+                                    <a href="@Url.Action("SearchByCity", "Home", new { @CityId = ct.CityId })" class="list-group-item">
+                                        <h4 class="list-group-item-heading">@ct.CityName</h4>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <div>
+                    <h3 class="firstH3">Latest News </h3>
+                <div class="news-blog news">
+                    @foreach (var item in Model.NewsUpdates)
+                    {
+                        string str = item.Description;
+                        if (str.Length > 100)
+                        {
+                            str = str.Substring(0, 100);
+                        }
+    
+                        <h4>@item.NewsTitle</h4>
+                        <p>@str
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal-@item.BusinessNewsId" style="padding: 0 5px; font-size: 14px;">More</button>
+                        </p>
+                   
+            
+                        <!-- Modal -->
+                        <div class="modal fade homepop" id="myModal-@item.BusinessNewsId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">"@item.NewsTitle"</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @item.Description
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
+                    }
+
+                </div>
+                   @* <p>Know more about it.. <span class="label label-primary">New</span></p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

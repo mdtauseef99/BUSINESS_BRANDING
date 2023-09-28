@@ -1,0 +1,42 @@
+﻿@model BizzBranding.Areas.Admin.Models.IndustryWebModel
+@{
+    ViewBag.Title = "ViewIndustry";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>@Html.DisplayFor(x => x.IndustryName)</h2>
+@Html.HiddenFor(x => x.IndustryId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+  
+    <div class="row">
+        <div ><span class="rowleft">Industry Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.IndustryName)
+        </div>
+    </div>
+     <div class="row">
+        <div ><span class="rowleft">Description</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("Industry","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>

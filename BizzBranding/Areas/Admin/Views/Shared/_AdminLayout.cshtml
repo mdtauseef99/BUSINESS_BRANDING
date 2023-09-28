@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/Admin/css/screen.css" rel="stylesheet" />
+   
+    <script src="~/Areas/Admin/js/jquery-1.9.1.js"></script>
+    <link href="~/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Content/datepicker/jquery-ui.js"></script>
+    @*<script src="~/Areas/Admin/js/jquery.selectbox-0.5_style_2.js"></script>*@
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('.styledselect_form_1').selectbox({ inputClass: "styledselect_form_1" });
+
+            $('#date').datepicker({
+                dateFormat: 'yy-mm-dd', showAnim: "slideDown"
+            });
+
+            $('#date1').datepicker({
+                dateFormat: 'yy-mm-dd', showAnim: "slideDown"
+            });
+
+            $('#ui-datepicker-div').css({ 'font-size': '15px', 'line-height': '15px' });
+
+            var page = "@ViewBag.mainmenu";
+
+            var element;
+            $('.sub li').each(function () {
+                var t = $(this).find('a').text();
+                if (t.toLowerCase() == page.toLowerCase()) {
+                    element = $(this);
+                }
+
+            });
+
+            var div = element.parent().parent();
+            var ul = div.parent().parent();
+            element.addClass('sub_show').siblings().removeClass('sub_show');
+            div.addClass('show')
+            ul.removeClass('select').addClass('current').siblings().removeClass('current').addClass('select');
+
+
+            $('.table ul').click(function () {
+                var ele = $(this);
+                ele.removeClass('select').addClass('current').siblings().removeClass('current').addClass('select');
+                ele.find('div').addClass('show');
+            });
+
+
+        });
+
+
+
+    </script>
+
+
+</head>
+<body>
+
+    <div id="page-top-outer">
+
+        <!-- Start: page-top -->
+        <div id="page-top">
+
+            <!-- start logo -->
+            <div id="logo">
+                <a href="">
+
+                    @*<img src="~/Areas/Admin/images/shared/logo.png" width="156" height="40" alt="" />*@
+
+                   Bizz Branding Panel
+                </a>
+            </div>
+            <!-- end logo -->
+            <div class="clear"></div>
+
+        </div>
+        <!-- End: page-top -->
+
+    </div>
+
+    @Html.Action("Header", "Logon")
+
+    <div class="clear"></div>
+    <div id="content-outer">
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+
+

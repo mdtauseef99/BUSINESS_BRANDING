@@ -1,0 +1,123 @@
+﻿@model BizzBranding.CommonUtility.BusinessNewsModel
+@{
+    ViewBag.Title = "UpdateBusinessNews";
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+
+@using (Html.BeginForm("UpdateBusinessNews", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.BusinessNewsId)
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Update your Business News</h2>
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-margin">
+                            <div class="form-group">
+                                <label>News Title</label>
+                                @Html.TextBoxFor(model => model.NewsTitle, new { @class = "form-control", @placeholder = "News Title Here" })
+                                <b style="color: red">@Html.ValidationMessageFor(model => model.NewsTitle)</b>
+                            </div>
+                            <div class="form-group">
+                                <label>News Description</label>
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Enter Brief News" })
+                                <b style="color: red">@Html.ValidationMessageFor(model => model.Description)</b>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-warning" onclick="window.location.href = '../../Home/BusinessNewsList'">Cancel</button>
+                        </div>
+                    </form>
+
+                    <!-- <form role="form">
+                        <div class="form-group">
+                            <label>News Title</label>
+                            @Html.TextBoxFor(model => model.NewsTitle, new { @class = "inp-form", @placeholder = "News Title Here" })
+                            @Html.ValidationMessageFor(model => model.BusinessNewsId)
+                            @* <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">*@
+                        </div>
+                        <div class="form-group">
+                            <label>News Description</label>
+                            @Html.TextAreaFor(model => model.Description, new { @class = "ckeditor", @placeholder = "Enter Brief News" })
+                            @Html.ValidationMessageFor(model => model.Description)
+                            @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">*@
+                        </div>
+
+                        
+                    </form>-->
+                </div>
+
+                @*   <div class="col-sm-4">
+                    <div class="tabs">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs pull-right">
+                            <li class="pull-left">
+                                <h3>Brands By</h3>
+                            </li>
+                            <li class="pull-right"><a href="#tabB" data-toggle="tab">City</a></li>
+                            <li class="active pull-right"><a href="#tabA" data-toggle="tab">Industry</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabA">
+                                <ul class="list-group">
+                                    @foreach (var Ind in Model.IndustryList)
+                                    {
+                                        <li class="list-group-item"><a href="@Url.Action("SearchbyIndustry", "Home", new { @id = Ind.IndustryId })">@Ind.IndustryName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="tabB">
+                                <div class="list-group">
+                                    @foreach (var ct in Model.CityList)
+                                    {
+                                        <a href="@Url.Action("SearchByCity", "Home", new { @CityId = ct.CityId })" class="list-group-item">
+                                            <h4 class="list-group-item-heading">@ct.CityName</h4>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                         <div style="margin-top: 31px;">
+                    <h2>News <i class="icon-bullhorn"></i></h2>
+                    @foreach (var item in Model.BusinessNewsList)
+                    {
+                        string str = item.Description;
+                        if (str.Length > 100)
+                        {
+                            str = str.Substring(0, 100);
+                        }
+    
+                        <h3>@item.NewsTitle</h3>
+                        <p>@str</p>
+                    }
+
+
+                </div>
+                        <p>Know more about it.. <span class="label label-primary">New</span></p>
+                    </div>
+
+                </div> *@
+            </div>
+        </div>
+    </section>
+}

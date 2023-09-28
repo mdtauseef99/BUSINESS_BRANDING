@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "MasterData";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .countuser {
+        float: right;
+        margin-right: 58px;
+        font-size: 16px;
+    }
+</style>
+
+
+<div id="page-heading">
+    <h1>MasterData</h1>
+    @if (Session["Success"] != null)
+    {
+        <div class="successmsg">
+            @Session["Success"].ToString()
+        </div>
+        Session["Success"] = null;
+    }
+    else if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+
+
+</div>
+
+<div id="tableouterdiv">
+    <div style="margin: 15px 0 0 0;">
+    </div>
+    @*<div style="float: right; margin: -20px 54px 0 0;">
+        Sort By:
+                @Html.DropDownListFor(x => x.TestID, Model.testname, "Select", new { @id = "institute" })
+    </div>*@
+     <strong class="countuser"></strong>
+    <div id="content-table-inner">
+       @* <div id="table-content">
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                <tr>
+                    <th class="table-header-repeat line-left minwidth-candidate"><a href="#">Candidate Name</a></th>
+                    <th class="table-header-repeat line-left minwidth-candidate"><a href="#">Test Name</a></th>
+                    <th class="table-header-repeat line-left minwidth-candidate"><a href="#">Start Time</a></th>
+                    <th class="table-header-repeat line-left minwidth-candidate"><a href="#">End Time</a></th>
+                  
+                    <th class="table-header-repeat line-left " title="Total Questions"><a href="#">TQ</a></th>
+                    <th  class="table-header-repeat line-left " title="Each Question Carry"><a href="#">EQC</a></th>
+                    <th class="table-header-repeat line-left " title="Marks Obtained"><a href="#">MO</a></th>
+                    <th class="table-header-repeat line-left " title="Total Marks"><a href="#">TM</a></th>
+                    <th class="table-header-repeat line-left " title="Correctans"><a href="#">Co</a></th>
+                    <th class="table-header-repeat line-left " title="InCorrectans"><a href="#">IC</a></th>
+                    <th class="table-header-repeat line-left " title="Attempted"><a href="#">Att</a></th>
+                    <th class="table-header-repeat line-left " title="Left"><a href="#">Left</a></th>
+                    <th class="table-header-repeat line-left" title="Result"><a href="#">Result</a></th>
+                    <th class="table-header-repeat line-left" title="Options"><a href="#">Opt</a></th>
+
+                </tr>
+              
+
+            </table>
+        </div>
+
+        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+            <tbody>
+                <tr>
+                    <td>
+                        @{
+                            
+                            if (Model.PageID > 0)
+                            {
+                            <a href="@Url.Action("Index", "Dashboard", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                            }
+                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                            if (Model.PageID + 1 < Model.Pagecount)
+                            {
+                            <a href="@Url.Action("Index", "Dashboard", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                            }
+                          
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>*@
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+

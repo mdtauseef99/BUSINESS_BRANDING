@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71D2230B-E76D-498E-B48D-0947E0716E45}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BizzBranding.CommonUtility</RootNamespace>
+    <AssemblyName>BizzBranding.CommonUtility</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Helpers">
+      <HintPath>\\SERVER\Users\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>I:\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessPlanModel.cs" />
+    <Compile Include="AdministratorModel.cs" />
+    <Compile Include="BusinessConnectionModel.cs" />
+    <Compile Include="BusinessJobModel.cs" />
+    <Compile Include="BusinessNewsModel.cs" />
+    <Compile Include="BussinessUserModel.cs" />
+    <Compile Include="CategoryModel.cs" />
+    <Compile Include="CityModel.cs" />
+    <Compile Include="CMSModel.cs" />
+    <Compile Include="CoBrandingProImgModel.cs" />
+    <Compile Include="CoBrandModel.cs" />
+    <Compile Include="CommonClassUtility.cs" />
+    <Compile Include="CorporateBrandingModel.cs" />
+    <Compile Include="CountryModel.cs" />
+    <Compile Include="CurrencyModel.cs" />
+    <Compile Include="CustomerEnquiriesModel.cs" />
+    <Compile Include="DataEncryption.cs" />
+    <Compile Include="EmailSettingsModel.cs" />
+    <Compile Include="EmailTemplateModel.cs" />
+    <Compile Include="EmpBrandingModel.cs" />
+    <Compile Include="FranchiseModel.cs" />
+    <Compile Include="GlobalBrandingModel.cs" />
+    <Compile Include="HomeBannerMappingModel.cs" />
+    <Compile Include="HomeBannerModel.cs" />
+    <Compile Include="IndustryModel.cs" />
+    <Compile Include="InvestorPartneringModel.cs" />
+    <Compile Include="MembershipModel.cs" />
+    <Compile Include="MembershipWithAccessPlanModel.cs" />
+    <Compile Include="MessageDataModel.cs" />
+    <Compile Include="NewsLetterModel.cs" />
+    <Compile Include="NewsMappingModel.cs" />
+    <Compile Include="NewsModel.cs" />
+    <Compile Include="PaymentTransactionModel.cs" />
+    <Compile Include="ProductModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleModal.cs" />
+    <Compile Include="SearchwordsModel.cs" />
+    <Compile Include="SubCategoryModel.cs" />
+    <Compile Include="SubscribeModel.cs" />
+    <Compile Include="TargetBrandingModel.cs" />
+    <Compile Include="TargetImageModel.cs" />
+    <Compile Include="UserIndustryMappingModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

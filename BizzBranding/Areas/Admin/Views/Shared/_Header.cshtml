@@ -1,0 +1,230 @@
+﻿@model IEnumerable<BizzBranding.Areas.Admin.Models.RolemanagementWebModel>
+<div class="nav-outer-repeat">
+    
+    <!--  start nav-outer -->
+    <div class="nav-outer">
+
+        <!-- start nav-right -->
+        <div id="nav-right">
+
+             @*<div class="nav-divider">&nbsp;</div>
+                <div class="nav-divider">&nbsp;</div>*@
+            <a href="@Url.Action("Logout", "Logon")" id="logout">
+                <img src="~/Areas/Admin/images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
+            <div class="clear">&nbsp;</div>
+
+        </div>
+        <!-- end nav-right -->
+
+
+        <!--  start nav -->
+        <div class="nav">
+            <div class="table">
+
+                <ul class="select">
+                    <li><a href="#nogo"><b>MasterData</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub show">
+                            <ul class="sub">
+                                @*<li>@Html.ActionLink("MasterData", "Index", "MasterData")</li>*@
+                                <li>@Html.ActionLink("Category", "Category", "MasterData")</li>
+                                <li>@Html.ActionLink("SubCategory", "SubCategory", "MasterData")</li>
+                                <li>@Html.ActionLink("Country", "Country", "MasterData")</li>
+                                <li>@Html.ActionLink("City", "City", "MasterData")</li>
+                                <li>@Html.ActionLink("EmailTemplate", "EmailTemplate", "MasterData")</li>
+                                <li>@Html.ActionLink("Industry", "Industry", "MasterData")</li>
+                                <li>@Html.ActionLink("Currency", "Currency", "MasterData")</li>
+                                <li>@Html.ActionLink("AccessPlan", "AccessPlan", "MasterData")</li>
+                                <li>@Html.ActionLink("Membership", "Membership", "MasterData")</li>
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>
+
+                @*<div class="nav-divider">&nbsp;</div>
+
+                <ul class="select">
+                    <li><a href="#nogo"><b>Master Data</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub">
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Course", "Courses", "MasterData")</li>
+                                <li>@Html.ActionLink("Subjects", "Subjects", "MasterData")</li>
+                                <li>@Html.ActionLink("Subject Material", "SubjectMaterial", "MasterData")</li>
+                                <li>@Html.ActionLink("Question Pattern", "QuestionPatterns", "MasterData")</li>
+                                <li>@Html.ActionLink("Test Instructions", "TestInstructions", "MasterData")</li>
+                                <li>@Html.ActionLink("User Types", "UserTypes", "MasterData")</li>
+                                <li>@Html.ActionLink("CMS", "CMS", "MasterData")</li>
+                                <li>@Html.ActionLink("Institute", "Institute", "MasterData")</li>
+                                <li>@Html.ActionLink("Exam Page", "Exam", "MasterData")</li>
+
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>*@
+
+
+                <div class="nav-divider">&nbsp;</div>
+
+                <ul class="select">
+                    <li><a href="#nogo"><b>Products</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub">
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Products", "Products", "Product")</li>
+                                @*<li>@Html.ActionLink("ProductImages", "ProductImages", "Product")</li>*@
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>
+
+
+                <div class="nav-divider">&nbsp;</div>
+
+                <ul class="select">
+                    @{
+                       
+                        foreach (var item in Model)
+                        {
+                            if (item.PageID == 1)
+                            {
+                                if (item.Add || item.Edit || item.Delete || item.View)
+                                {
+                        <li><a href="#nogo"><b>User</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                            <!--[if lte IE 6]><table><tr><td><![endif]-->
+                            <div class="select_sub">
+                                <ul class="sub">
+                                    <li></li>
+                                    <li>@Html.ActionLink("Administrators", "AllAdministrators", "MasterData")</li>
+                                    <li class="sub_show">@Html.ActionLink("Business Users", "Users", "User")</li>
+
+                                </ul>
+                            </div>
+                            <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                        </li>
+                                }
+
+                            }
+                        }
+                        
+                    }
+
+
+                </ul>
+
+                <div class="nav-divider">&nbsp;</div>
+                <ul class="select">
+                    @{
+                       
+                        foreach (var item in Model)
+                        {
+                            if (item.PageID == 1)
+                            {
+                                if (item.Add || item.Edit || item.Delete || item.View)
+                                {
+                        <li><a href="#nogo"><b>News</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                            <!--[if lte IE 6]><table><tr><td><![endif]-->
+                            <div class="select_sub">
+                                <ul class="sub">
+                                    <li></li>
+                                    <li>@Html.ActionLink("News", "News", "MasterData")</li>
+                                   @* <li class="sub_show">@Html.ActionLink("News", "News", "MasterData")</li>*@
+
+                                </ul>
+                            </div>
+                            <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                        </li>
+                                }
+
+                            }
+                        }
+                        
+                    }
+
+
+                </ul>
+
+                <div class="nav-divider">&nbsp;</div>
+
+                <ul class="select">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            if (item.PageID == 10)
+                            {
+                                if (item.Add || item.Edit || item.Delete || item.View)
+                                {
+
+                                }
+                            }
+                        }
+                    }
+                    <li><a href="#nogo"><b>Roles</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub">
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Roles", "Roles", "MasterData")</li>
+                                @*<li>@Html.ActionLink("Memberships", "Memberships", "MasterData")</li>*@
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>
+
+                <div class="nav-divider">&nbsp;</div>
+                <ul class="select">
+                    <li><a href="#nogo"><b>Business</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub show">
+                            <ul class="sub">
+                                @*<li>@Html.ActionLink("MasterData", "Index", "MasterData")</li>*@
+                                <li>@Html.ActionLink("Investor Partner List", "InvestorPartnerList", "MasterData")</li>
+                                <li>@Html.ActionLink("Co-Brand Businesses", "CoBranded", "MasterData")</li>
+                             @*   <li>@Html.ActionLink("Employee Branding", "EmpBranding", "MasterData")</li>*@
+                                <li>@Html.ActionLink("Franchise List", "FranchiseeList", "MasterData")/li>
+                                <li>@Html.ActionLink("Corporate Branding", "CorporateBranding", "MasterData")</li>
+                                <li>@Html.ActionLink("Global Branding", "GlobalBranding", "MasterData")/li>
+                                <li>@Html.ActionLink("Big Hoarding Banner", "BigHoarding", "MasterData")/li>
+                                <li>@Html.ActionLink("Target Branding", "TargetBranding", "MasterData")/li>
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>
+                <div class="nav-divider">&nbsp;</div>
+                <ul class="select">
+                    <li><a href="#nogo"><b>CMS</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub">
+                            <ul class="sub">
+                                <li>@Html.ActionLink("CMS", "CMS", "MasterData")</li>
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>
+                <div class="nav-divider">&nbsp;</div>
+                <ul class="select">
+                    <li><a href="#nogo"><b>Enquiries</b><!--[if IE 7]><!--></a><!--<![endif]-->
+                        <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <div class="select_sub">
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Customer Enquiries", "CustomerEnquiry", "MasterData")</li>
+                            </ul>
+                        </div>
+                        <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                </ul>
+           
+            <div class="clear"></div>
+                 </div>
+        </div>
+        <!--  start nav -->
+
+    </div>
+    <div class="clear"></div>
+    <!--  start nav-outer -->
+</div>

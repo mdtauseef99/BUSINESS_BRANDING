@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "CoBrandedUserList";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+<div class="brands">
+    <section class="co-branded-list">
+        <div class="container">
+            @*<h2>Target Brand Users</h2>*@
+            <div class="form-margin">
+                <div class="row">
+                    <div class="col-sm-9">
+                        @Html.Raw(Model.Description)
+                    </div>
+                    <!-------------------------------------------------------popup---------------------------------->
+
+                    <!-- Modal -->
+
+                    <!-------------------------------------------------------popup-end--------------------------------->
+                    <div class="col-sm-3 brand-list-right">
+                        @*<h2 style="font-size: 17px;">Target Branding?</h2>*@
+                        @* <p class="text-right"><small>This line of text is meant to be treated as fine print.</small></p>*@
+                        <p>
+                            Targeted Branding is a type of Brandinjg where by advertisements are placed so as to reach consumers based on various traits such as Cities, Categories, behavioral variables (such as product purchase history), and firmographics ... or other second-order activities which serve as a proxy for these traits
+                            Most targeted new media advertising currently uses second-order proxies for targeting, such as tracking online or mobile web activities of consumers, associating historical webpage consumer demographics with new consumer web page access, using a search word as the basis for implied interest, or contextual advertising.
+
+                            Addressable advertising systems serve ads directly based on demographic, psychographic, or behavioral attributes associated with the consumer(s) exposed to the ad. These systems are always digital and must be addressable in that the end point which serves the ad (set-top box, website, or digital sign) must be capable of rendering an ad independently of any other end points based on consumer attributes specific to that end point at the time the ad is served.
+                             Addressable advertising systems therefore must use consumer traits associated with the end points as the basis for selecting and serving ads.AdWords location targeting allows your ads to appear in the geographic locations that you choose: countries, areas within a country, a radius around a location, or location groups.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

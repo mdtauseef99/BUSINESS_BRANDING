@@ -1,0 +1,68 @@
+﻿@model BizzBranding.Areas.Admin.Models.NewsWebModel
+
+@{
+    ViewBag.Title = "AddEditNews";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditNews";
+}
+
+<div id="page-heading">
+    <h1>Add / Edit News</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@Html.HiddenFor(x=>x.NewsImage)
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditNews", "MasterData", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.NewsId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div><span class="rowleft">News Title</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.NewsTitle, new { @class = "inp-form", @placeholder = "News Title" })
+                @Html.ValidationMessageFor(x => x.NewsTitle)
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Description</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.NewsDescription, new { @class = "ckeditor" })
+                @Html.ValidationMessageFor(x => x.NewsDescription)
+            </div>
+        </div>
+         <div class="row">
+            <div ><span class="rowleft">HomePage News Image</span></div>
+            <div class="rowright">
+                 <input type="file" name="file" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("News", "MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,98 @@
+﻿@model BizzBranding.CommonUtility.CorporateBrandingModel
+
+@{
+    ViewBag.Title = "AddEditCorporateBranding";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function fileChange(e) {
+
+        var getFileName = e.value;
+        if (getFileName != '') {
+            var FileName = getFileName.split('fakepath');
+            var name = FileName[1].replace("\\", "");
+            document.getElementById('lblproductfile').innerHTML = name;
+        }
+    }
+</script>
+<div id="page-heading">
+    <h1>Add / Edit Corporate Branding</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditCorporateBranding", "MasterData"))
+{
+    @Html.HiddenFor(x=>x.CorporateBrandingId)
+    @Html.HiddenFor(x=>x.BusinessUserId)
+    @Html.HiddenFor(x=>x.CorporateBrandDetails)
+    @Html.HiddenFor(x=>x.ApprovedBy)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+
+         <div class="row">
+            <div class="rowleft"><span>Corporte Branding Business Name</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.BusinessName, new { @class = "inp-form"})
+            </div>
+        </div>
+
+
+
+         <div class="row">
+            <div class="rowleft"><span>Corporte Branding Details</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.CorporateBrandDetails)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft"><span>Approved By</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.Admin)
+            </div>
+        </div>
+
+         <div class="row">
+            <div><span class="rowleft">Created On</span></div>
+            <div class="rowright">
+                @Html.DisplayFor(x => x.CreatedOn)
+            </div>
+        </div>
+
+        <div class="row">
+            <div><span class="rowleft">Validity in Months</span></div>
+            <div class="rowright">
+                 @Html.DropDownListFor(x => x.No_Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Month")
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("CorporateBranding","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}
+
+

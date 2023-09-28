@@ -1,0 +1,92 @@
+﻿@model BizzBranding.CommonUtility.TargetBrandingModel
+@{
+    ViewBag.Title = "TargeBranding";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+
+
+@using (Html.BeginForm("TargetBranding", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                @*@Html.HiddenFor(x => x.EmployerId)*@
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                      
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>Target Branding</h2>
+                    <div class=" " style="margin:0 10px;">
+                    <form role="form" method="post">
+                        @*<div class="form-group">
+                            <label>Target Name</label>
+                            <b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.EmpName, new { @class = "form-control", @placeholder = "Business Name" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.EmpName)</b>
+                        </div>*@
+
+                        <div class="form-group" >
+                            <label>Select your Target Industry</label>
+                            <b style="color: red">*</b>
+                            @Html.DropDownListFor(x => x.IndustryId, Model.IndustryNames, "Select", new { @class = "form-control", @id = "ddlIndustryId" })@*@class=styledselect_form_1*@
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.IndustryNames) </b>
+                        </div>
+
+                        <div class="form-group">
+                            @* @Html.LabelFor( x=> x.CityName)*@
+                            <label>Select your Target City</label>
+                            <b style="color: red">*</b>
+                            @Html.DropDownListFor(x => x.CityId, Model.CityNames, "Select", new { @class = "form-control", @id = "ddlCityid" })@*@class=styledselect_form_1*@
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.CityId) </b>
+                        </div>
+                        <div class="form-group">
+                            <label>URL</label><b style="color: red">*</b>
+                            @Html.TextBoxFor(x => x.URL, new { @class = "form-control", @placeholder = "Enter your Business Url", @id = "BizzDetails" })
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.URL) </b>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ad Image</label>
+                            <b style="color: red">*</b>
+                            <input type="file" id="CoLogo" name="file">
+                            <b style="color: red">@Html.ValidationMessageFor(x => x.Image) </b>
+                               <p class="help-block">For Best Visibility Upload Image of 600px*100px</p>
+                        </div>
+
+                        <input type="submit" class="btn btn-success" />
+                        <input type="button" value="Cancel" class="btn btn-warning" onclick="window.location.href = '/Home/UsersProfile'" />
+                        @* <button type="submit" class="btn btn-default btn-success">Submit</button>
+                            <button type="submit" class="btn btn-default btn-success">Reset</button>*@
+                    </form>
+
+                    @*  </div>
+                            <input type="submit" class="btn btn-default btn-success">Submit</>
+                             <input type="button" value="Cancel" style="width: auto !important;" onclick="window.location.href = '/Home/Index'"  class="btn btn-default btn-success"/>
+                        </form>*@
+                </div></div>
+            </div>
+        </div>
+    </section>  
+}
+
+

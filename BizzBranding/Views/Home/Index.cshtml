@@ -1,0 +1,418 @@
+﻿@model BizzBranding.Models.LandingPageModel
+@{
+    ViewBag.Title = "Business to business Network, B2B network, B to B Marketing, Business branding";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    string itemDesc = string.Empty;
+}
+
+@section metatags
+{
+    <meta name='keywords' content='@ViewBag.MetaKeywords' />
+    <meta name='description' content='@ViewBag.MetaDescription' />
+}
+<div class="clearfix"></div>
+<section class="main">
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div id="carousel" class="carousel slide  " data-ride="carousel" data-interval="2000" style="padding: 0;">
+
+                    <div class="carousel-inner col-md-9">
+                        @{int m = 0;}
+                        @foreach (var item in Model.BannerList)
+                        {
+                            string url = item.CompanyURL;
+                            string suburl = url.Substring(0, 4);
+                            if (suburl == "http")
+                            {
+                                url = item.CompanyURL;
+                            }
+                            else
+                            {
+                                url = "http://" + item.CompanyURL;
+                            }
+
+
+                            if (m == 0)
+                            {
+
+                                <a href="@url" target="_blank" class="item active" style="background-image: url(/Scripts/jquery.bxslider/images/@item.BannerImage)">
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@url" target="_blank" class="item" style="background-image: url(/Scripts/jquery.bxslider/images/@item.BannerImage)">
+
+                                </a>
+                            }
+                            m++;
+
+                        }
+
+                    </div>
+                    <div class="col-md-3">
+                        <ol class="carousel-indicators">
+                            @{int n = 0;}
+                            @foreach (var item in Model.BannerList)
+                            {
+
+                                if (n == 0)
+                                {
+                                    <li data-target="#carousel" data-slide-to="@n" class="active">
+                                        <a href="#">
+                                            <span class="up"> <i class="fa fa-caret-left"></i></span> <span class="col-md-4"><img src="/Scripts/jquery.bxslider/images/@item.BannerImage" /></span> <span class="name col-md-8">
+                                                <h4>@item.BusinessName</h4>
+                                                <p>
+                                                    @if (item.BusinessDetails.Length > 40)
+                                                    {
+                                                        itemDesc = System.Text.RegularExpressions.Regex.Replace(@item.BusinessDetails, @"<[^>]+>|&nbsp;|&quot;", String.Empty);
+                                                        itemDesc = itemDesc.Substring(0, 40) + "...";
+                                                    }
+                                                    else
+                                                    {
+                                                        itemDesc = System.Text.RegularExpressions.Regex.Replace(@item.BusinessDetails, @"<[^>]+>|&nbsp;|&quot;", String.Empty);
+                                                        //itemDesc = item.BusinessDetails;
+                                                    }
+
+                                                    @itemDesc
+
+
+                                                    @*@if (item.BusinessDetails.Length>80)
+                                                        {
+                                                           @Html.Raw(item.BusinessDetails.Substring(0,80))
+                                                        }
+                                                        else
+                                                        {
+                                                             @Html.Raw(item.BusinessDetails)
+
+                                                        }*@
+                                                </p>
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+
+                                    <li data-target="#carousel" data-slide-to="@n">
+                                        <a href="#">
+                                            <span class="up"> <i class="fa fa-caret-left"></i></span> <span class="col-md-4"><img src="/Scripts/jquery.bxslider/images/@item.BannerImage" /></span> <span class="name col-md-8">
+                                                <h4>@item.BusinessName</h4>
+                                                <p>
+
+                                                    @if (item.BusinessDetails.Length > 40)
+                                                    {
+                                                        itemDesc = System.Text.RegularExpressions.Regex.Replace(@item.BusinessDetails, @"<[^>]+>|&nbsp;|&quot;", String.Empty);
+                                                        itemDesc = itemDesc.Substring(0, 40) + "...";
+                                                    }
+                                                    else
+                                                    {
+                                                        itemDesc = System.Text.RegularExpressions.Regex.Replace(@item.BusinessDetails, @"<[^>]+>|&nbsp;|&quot;", String.Empty);
+                                                        //itemDesc = item.BusinessDetails;
+                                                    }
+
+                                                    @itemDesc
+
+                                                    @*@if (item.BusinessDetails.Length > 80)
+                                                        {
+                                                            @Html.Raw(item.BusinessDetails.Substring(0, 80))
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.Raw(item.BusinessDetails)
+
+                                                        }*@
+                                                </p>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                }
+                                n++;
+
+                            }
+                        </ol>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section><!-- ---------------------------------hero-end--------------------------------- -->
+    <div class="clearfix"></div>
+    <article class="main-content">
+        <section class="section1">
+            <div class="container">
+                <div class="row">
+                    <div class="head">
+                        <h2>We are <span class="gold">providing This </span> Business services</h2>
+                        <img src="/Assets/img/border1.PNG" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <article>
+                        <div class="col-md-3">
+                            <a href="@Url.Action("CoBrandedUserList", "Home", new { id = "" })">
+                                <img src="/Assets/img/Branding1.png" /> <span><img src="/Assets/img/section1-style.PNG" /></span> <h4>Co-Branding</h4>
+                                <p>
+
+                                    @Html.Raw(Model.Description.Substring(0, 120))
+                                    @*Praesent quis ante dapibus tellus mollis dapibus ullamcorper sit amet erat,Praesent quis ante dapibus tellus mollis dapibus*@
+                                </p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="@Url.Action("GlobalBrandList", "Home")">
+                                <img src="/Assets/img/branding2.png" /> <span><img src="/Assets/img/section1-style.PNG" /></span> <h4>Global Branding</h4>
+                                <p>
+                                    @Html.Raw(Model.GlobalDescription.Substring(0, 120))
+                                    @*Praesent quis ante dapibus tellus mollis dapibus ullamcorper sit amet erat,Praesent quis ante dapibus tellus mollis dapibus*@
+                                </p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="@Url.Action("CorporateBrandList", "Home")">
+                                <img src="/Assets/img/branding3.png" /> <span><img src="/Assets/img/section1-style.PNG" /></span> <h4>Corporate-Branding</h4>
+                                <p>
+                                    @Html.Raw(Model.CorpDescription.Substring(0, 120))
+                                    @* Praesent quis ante dapibus tellus mollis dapibus ullamcorper sit amet erat,Praesent quis ante dapibus tellus mollis dapibus*@
+                                </p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="@Url.Action("TargetBrandingCMS", "Home", new { id = "3" })">
+                                <img src="/Assets/img/brand4.jpg" /> <span><img src="/Assets/img/section1-style.PNG" /></span> <h4>Target-Branding</h4>
+                                <p>
+                                    Targeted Branding is a type of Brandinjg where by advertisements are placed so as to reach consumers based on various
+                                    @*@Html.Raw(Model.TargDescription.Substring(0, 100))*@
+                                    @*Praesent quis ante dapibus tellus mollis dapibus ullamcorper sit amet erat,Praesent quis ante dapibus tellus mollis dapibus*@
+                                </p>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </section><!-- section-1-end -->
+        <div class="clearfix"></div>
+        <section class="section2">
+            <span class="border-2"><img src="/Assets/img/border2.PNG" /></span>
+            <span class="clearfix"></span>
+            <div class="container">
+                <div class="gallery js-flickity" data-flickity-options='{ "autoPlay": true }'>
+                    <div class="hero-gallery__cell hero-gallery__">
+                        <div class="hero-gallery__cell__content">
+                            @foreach (var item in Model.PremiumRight)
+                            {
+                                <div class="col-md-6">
+
+                                    <div class="head">
+                                        @*<h2>Welcome to our <span class="gold"> Business Branding </span></h2>*@
+                                        <h2>Welcome to our <span class="gold"> @item.BusinessName</span></h2>
+                                    </div>
+                                    <p>
+                                        @Html.Raw(item.BusinessDetails)
+                                        @*Lorem ipsum dolor sit amet, dolor graece constituam vix ex. Tantas abhorreant voluptatibus ad quo, vel legimus pertinacia ut. Choro labitur suscipiantur sit eu. Ius ut exerci viderer.
+
+                                            An autem inimicus salutandi eum, natum fabellas rationibus at per. Mei petentium definitiones delicatissimi id, quo sonet prodesset disputationi ad, ut civibus insolens vituperatoribus eum. Ex per stet copiosae dissentiunt, ea probo dicat tacimates mei, id probo dolor duo. Admodum maluisset ei qui, at integre ocurreret comprehensam usu. Omnium luptatum laboramus cu his.*@
+
+                                    </p>
+
+                                </div>
+                                <div class="col-md-4" style="margin-left:40px">
+                                    <a href="@item.CompanyURL"><img width="400px" height="250px" src="~/Content/Images/CoLogo/@item.CompanyLogo" /></a>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section><!-- section-2-end -->
+        <section class="section3">
+            <div class="container">
+                <div class="col-md-8">
+                    <div class="head">
+                        <span class="col-md-6">
+                            <ul class="inline">
+                                <li class="col-md-1">
+                                    <img src="/Assets/img/csc.PNG" />
+                                </li>
+                                <li class="col-md-11">
+                                    <h2>Business Brands</h2>
+                                </li>
+                            </ul>
+                        </span>
+                        <span class="col-md-6">
+                            <hr align="center" width="100%">
+                        </span>
+
+                    </div>
+                    <div id="carousel" class="carousel slide  " data-ride="carousel" data-interval="3000" style="padding: 0;">
+
+                        <div class="carousel-inner ">
+
+                            <div class="item active">
+                                <div class="client-grid">
+                                    @{int b = 0;}
+                                    @foreach (var item in Model.PremiumBottom)
+                                    {
+                                        if (b <= 5)
+                                        {
+                                            <div class="col-md-4">
+                                                <a href="@Url.Action("VisitorPage", "Home", new { @id = item.UserId }) ">
+                                                    <img height="100px" width="133px" src="~/Content/Images/CoLogo/@item.CompanyLogo" alt="" />
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+
+                                            break;
+                                        }
+                                        b++;
+                                        @*<div class="col-md-4">
+                                                <a href="#"><img src="/Assets/img/client1.png" /></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="#"><img src="/Assets/img/client2.png" /></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="#"><img src="/Assets/img/client3.png" /></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="#"><img src="/Assets/img/client4.png" /></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="#"><img src="/Assets/img/client5.png" /></a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="#"><img src="/Assets/img/client6.png" /></a>
+                                            </div>*@
+                                    }
+                                </div>
+                            </div>
+
+
+                            <div class="item">
+
+                                <div class="client-grid">
+                                    @{int bb = 0;}
+                                    @foreach (var item in Model.PremiumBottom)
+                                    {
+                                        if (bb > 5)
+                                        {
+                                            <div class="col-md-4">
+                                                <a href="@Url.Action("VisitorPage", "Home", new { @id = item.UserId }) ">
+                                                    <img height="100px" width="133px" src="~/Content/Images/CoLogo/@item.CompanyLogo" alt="" />
+                                                </a>
+                                            </div>
+                                        }
+                                        if (bb == 11)
+                                        {
+                                            break;
+                                        }
+                                        bb++;
+
+                                    }
+                                    @*<div class="col-md-4">
+                                            <a href="#"><img src="/Assets/img/client1.png" /></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><img src="/Assets/img/client2.png" /></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><img src="/Assets/img/client3.png" /></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><img src="/Assets/img/client4.png" /></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><img src="/Assets/img/client5.png" /></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><img src="/Assets/img/client6.png" /></a>
+                                        </div>*@
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+
+
+                </div>
+                <div class="col-md-4 news">
+                    <div class="head">
+                        <span class="col-md-9">
+                            <ul class="inline">
+                                <li class="col-md-1">
+                                    <img src="/Assets/img/news.PNG" />
+                                </li>
+                                <li class="col-md-11">
+                                    <h4 style="margin-top:7px; margin-left:7px">BUSINESS HEADLINES</h4>
+                                </li>
+                            </ul>
+                        </span>
+                        <span class="col-md-3">
+                            <hr align="center" width="100%">
+                        </span>
+
+                    </div>
+                    <span class="clearfix"></span>
+                    <div class='iosSlider1Container'>
+
+                        <div class='iosSlider1'>
+
+                            <div class='slider'>
+                                @foreach (var item in Model.AdminHomeNews)
+                                {
+                                    string str = item.NewsDesc;
+
+                                    DateTime Date = Convert.ToDateTime(item.CreateOn);
+
+                                    string strdate = Date.ToString("dd MMM yyyy");
+
+                                    if (str.Length > 100)
+                                    {
+                                        str = str.Substring(0, 100);
+                                    }
+                                    <div class='item item1'>
+                                        <img src="~/Areas/Admin/ProjectImages/HomepageNews/@item.NewsImage" />
+                                        @* <span class="date"> Aug 23, 2011 </span>*@
+                                        <span class="date">@strdate</span>
+                                        <a href="@Url.Action("NewsDetails", "Home", new { @id = item.NewsId })">@item.NewsTitle</a>
+                                        <p>
+                                            @str
+                                            @*Praesent quis ante dapibus tellus mollis dapibus ullamcorper sit amet erat,Praesent quis ante dapibus tellus mollis dapibus
+                                                Praesent quis ante dapibus tellus mollis dapibus ullamcorper sit amet erat,Praesent quis ante dapibus tellus mollis dapibus*@
+                                        </p>
+                                    </div>
+                                }
+
+
+                            </div>
+                            <div class='prev'>
+                                <i class="fa fa-angle-left"></i>
+                            </div>
+                            <div class='next'>
+                                <i class="fa fa-angle-right"></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div><!-- container -->
+        </section><!-- section3-end -->
+        <span class="clearfix"></span>
+
+        <!-- section4 -->
+    </article>
+</section>
+<!-- ---------------------------------main-end--------------------------------- -->

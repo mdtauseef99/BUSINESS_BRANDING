@@ -1,0 +1,58 @@
+﻿@model BizzBranding.CommonUtility.NewsModel
+
+@{
+    ViewBag.Title = "CreateHomePageNews";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+@using (Html.BeginForm("CreateHomePageNews", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.NewsId)
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                <div id="page-heading" style="color: red">
+                    @if (ViewBag.Msg != null)
+                    {
+                        <div class="errormsg">
+                            @ViewBag.Msg
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h2>CreateHomePageNews</h2>
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-margin">
+                            <div class="form-group">
+                                <label>News Title</label>
+                                @Html.TextBoxFor(model => model.NewsTitle, new { @class = "form-control", @placeholder = "News Title Here" })
+                                @Html.ValidationMessageFor(model => model.NewsTitle)
+                            </div>
+                            <div class="form-group">
+                                <label>News Description</label>
+                                @Html.TextAreaFor(model => model.NewsDesc, new { @class = "form-control", @placeholder = "Enter Brief News" })
+                                @Html.ValidationMessageFor(model => model.NewsDesc)
+                            </div>
+
+                            <div class="form-group">
+                                <label>News Image</label>
+                                <b style="color: red">*</b>
+                                <input type="file" id="CoLogo" name="file">
+                                <b style="color: red">@Html.ValidationMessageFor(x => x.NewsImage) </b>
+                                @*<p class="help-block">Example block-level help text here.</p>*@
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-warning" onclick="window.location.href = '../../Home/BusinessNewsList'">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,112 @@
+﻿@model BizzBranding.CommonUtility.CorporateBrandingModel
+
+@{
+    ViewBag.Title = "ViewCorporateBrandingDetails";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>View Corporate Branding Details</h2>
+@Html.HiddenFor(x => x.CorporateBrandingId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+   <div class="row">
+        <div ><span class="rowleft">Corporate Branding Business</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.BusinessName)
+        </div>
+    </div>
+
+    <div class="row">
+        <div ><span class="rowleft">Email ID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.EmailId)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Trade EmailID</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.TradeEmailId)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Address</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Address)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Phone</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Phone)
+        </div>
+    </div>
+    <div class="row">
+        <div ><span class="rowleft">Corporate Branding Details</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CorporateBrandDetails)
+        </div>
+    </div>
+      
+    <div class="row">
+        <div ><span class="rowleft">Approved By</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.Admin)
+        </div>
+    </div>
+
+     <div class="row">
+        <div><span class="rowleft">Corporate Branding Business Logo</span></div>
+        <div class="rowright">
+                <img width="70px" height="70px" src="~/Content/Images/CoLogo/@Html.DisplayFor(x=>x.CompanyLogo)"/>
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">Activated On</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.ApprovedOn)
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">Expires On</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.ExpiresOn)
+        </div>
+    </div>
+
+     <div class="row">
+        <div ><span class="rowleft">Validity in Months</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.No_Month)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.CreatedOn)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.CreatedOn)
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("CorporateBranding","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>
+
+

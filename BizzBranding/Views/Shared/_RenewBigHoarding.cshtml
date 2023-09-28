@@ -1,0 +1,135 @@
+﻿
+<link href="~/Content/datepicker/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Content/datepicker/jquery-1.8.2.js"></script>
+
+<script src="~/Content/datepicker/jquery-ui.js"></script>
+
+ <script>
+     var $d = jQuery.noConflict();
+     //$d(function () {
+     //    $d("#txtFromDt").datepicker();
+
+     //});
+
+     $d(document).ready(function () {
+         $d("#txtFromDt").datepicker({ dateFormat: 'dd/mm/yy' });
+         //$d("#txtToDt").datepicker({ dateFormat: 'dd/mm/yy' });
+        
+         $d('#txtFromDt').change(function () {
+             var avbl = $d("#hdnDate").val();
+             var fDate = $d("#txtFromDt").val();
+             debugger;
+             avbl = avbl.split('/');
+             fDate = fDate.split('/');
+             avbl = avbl[1] + "/" + avbl[0] + "/" + avbl[2];
+             fDate = fDate[1] + "/" + fDate[0] + "/" + fDate[2];
+             var date1 = new Date(avbl);
+             var date2 = new Date(fDate);
+              
+            
+             //if (avbl > fDate) {
+             if (date1 > date2) {
+                 alert('Banner Already engaged on selected Date, Please select another date')
+                 $d("#txtFromDt").val('');
+
+             }
+             else {
+                 var test = Add7Days();
+                 $d("#lblmsg").text("Banner Validity ends on " + test);
+                 $('#txtToDt').val(test);
+             }
+             
+         });
+
+         function Add7Days() {
+             var date = $d('#txtFromDt').val();
+             var Validity = $d('#hdndays').val();
+             var ndate = DateFromString(date,Validity);
+             return ndate;
+         }
+         function DateFromString(str, Validity) {
+             str = str.split(/\D+/);
+             str = new Date(str[2], str[1] - 1, (parseInt(str[0]) + (parseInt(Validity)-1)));
+             return MMDDYYYY(str);
+         }
+         function MMDDYYYY(str) {
+             var ndateArr = str.toString().split(' ');
+             var Months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec';
+             return ndateArr[2] + '/' + (parseInt(Months.indexOf(ndateArr[1]) / 4) + 1) + '/' + ndateArr[3];
+         }
+
+         $d("#btnRenew").click(function () {
+             var fDate = $d("#txtFromDt").val();
+             var eDate = $d("#txtToDt").val();
+             var amt = $("#hdnMoney").val();
+             if (fDate=="" || eDate=="") {
+                 alert('Please select From Date');
+             }
+             else {
+                 $.post("/Home/UpdradeBannerMembership", { amount: amt, sDate: fDate, eDate: eDate }, function (data) {
+                     if (data) {
+                         // alert('Membership has been upgraded');
+                         $('body').append(data);
+                     }
+                     else {
+                         alert('Sorry Error has occured, Please try later');
+                         window.location.href = '/Home/UsersProfile';
+                     }
+
+                 });
+             }
+                 
+         });
+     });
+
+     $('#btnCancel').click(function myfunction() {
+         debugger;
+         $('#mask , .login-popup').fadeOut(300, function () {
+             $('#mask').remove();
+             $("input[type='text']").val('');
+         });
+         return false;
+     });
+
+  </script>
+
+@{
+    string date = ViewBag.Date.ToString("dd/MM/yyyy");
+    //var date1 =date.Split(' ');
+    <section class="brands">
+        <div class="container">
+            <div class="row">
+                 <div class="col-sm-12">
+                    <h2 class="popHead">Renew Big Hoarding Membership</h2>
+
+                     <div class="form-group">
+                            <label style="color:red;">Big Hoarding Available from this date @date</label>
+                     <label style="color:green;">Amount : @ViewBag.Money</label>
+                     <input type="hidden" name="hdnDate" value="@date" id="hdnDate" />
+                     <input type="hidden" name="hdndays" value="@ViewBag.Validity" id="hdndays" />
+                      <input type="hidden" name="hdndays" value="@ViewBag.Money" id="hdnMoney" />
+                        </div>
+                        <div class="form-group">
+                            <label>From</label>
+                           <input type="text" id="txtFromDt" name="txtFromDt"/>
+                        </div>
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" id="txtToDt" name="txtToDt" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label id="lblmsg"></label>
+                            
+                        </div>
+                        <button type="button" id="btnRenew" class="btn btn-default btn-success">Save</button>
+                        @*<button type="button" class="btn btn-default btn-success" onclick="window.location.href = '../../Home/HomeBanner'">Cancel</button>*@
+                    <button type="button" class="btn btn-default btn-success" id="btnCancel">Cancel</button>
+                    
+                </div>
+
+              
+            </div>
+        </div>
+    </section>
+}

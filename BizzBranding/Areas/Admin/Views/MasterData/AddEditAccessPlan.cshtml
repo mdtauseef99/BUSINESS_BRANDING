@@ -1,0 +1,129 @@
+﻿@model BizzBranding.Areas.Admin.Models.AccessPlanWebModel
+@{
+    ViewBag.Title = "AddEditAccessPlan";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditAccessPlan";
+}
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+<div id="page-heading">
+    <h1>Add / Edit AccessPlans</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm("AddEditAccessPlan", "MasterData", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    
+    @Html.HiddenFor(x => x.AccessPlanId)
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        
+        <div class="row">
+            <div ><span class="rowleft">Access Plan Name</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.AccessPlanName, new { @class = "inp-form", @placeholder = "Access Plan Name" })
+                @Html.ValidationMessageFor(x => x.AccessPlanName)
+            </div>
+        </div>
+          <div class="row">
+            <div ><span class="rowleft">Access Plan Image</span></div>
+            <div class="rowright">
+                 <input type="file" name="file" />
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">Description</span></div>
+            <div class="rowright">
+                @Html.TextAreaFor(x => x.Description, new { @class = "form-textarea" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+        @*<div class="row">
+            <div ><span class="rowleft">Max No.Of Deals</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.MaxNoDeals, new { @class = "inp-form", @placeholder = "Max No.Of Deals" })
+                @Html.ValidationMessageFor(x => x.MaxNoDeals)
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">Products Per Month</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.ProdPerMonth, new { @class = "inp-form", @placeholder = "Products Per Month" })
+                @Html.ValidationMessageFor(x => x.ProdPerMonth)
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">Updates Per Month</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.UpdatesPerMonth, new { @class = "inp-form", @placeholder = "Updates Per Month" })
+                @Html.ValidationMessageFor(x => x.UpdatesPerMonth)
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">Add Post Charge</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.AddPostCharge, new { @class = "inp-form", @placeholder = "Add Post Charge" })
+                @Html.ValidationMessageFor(x => x.AddPostCharge)
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">Add Update Charge</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.AddUpdCharge, new { @class = "inp-form", @placeholder = "Add Update Charge" })
+                @Html.ValidationMessageFor(x => x.AddUpdCharge)
+            </div>
+        </div>
+        <div class="row">
+            <div ><span class="rowleft">News Charge</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.NewsCharge, new { @class = "inp-form", @placeholder = "News Charge" })
+                @Html.ValidationMessageFor(x => x.NewsCharge)
+            </div>
+        </div>*@
+          <div class="row">
+            <div ><span class="rowleft">Membership Fee</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.MembershipFee, new { @class = "inp-form", @placeholder = "Membership Fee" })
+                @Html.ValidationMessageFor(x => x.MembershipFee)
+            </div>
+        </div>
+         <div class="row">
+            <div class="rowleft">Currency</div>
+            <div class="rowright">
+                @Html.DropDownListFor(x=>x.CurrencyId, Model.CurrencyNames, "Select", new { @class = "styledselect_form_1" })
+                @Html.ValidationMessageFor(x => x.CurrencyId)
+            </div>
+        </div>
+         <div class="row">
+            <div ><span class="rowleft">Validity</span></div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.Validity, new { @class = "inp-form", @placeholder = "Validity" })
+                @Html.ValidationMessageFor(x => x.Validity)
+            </div>Days
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="rowleft">
+                
+            </div>
+            <div class="rowright">
+                <input type="submit" value="Submit" class="form-submit left" />
+                <a href="@Url.Action("AccessPlan","MasterData")" class="form-reset">Cancel</a>
+            </div>
+
+        </div>
+    </div>
+}

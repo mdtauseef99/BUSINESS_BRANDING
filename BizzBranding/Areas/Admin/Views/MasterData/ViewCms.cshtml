@@ -1,0 +1,49 @@
+﻿@model BizzBranding.Areas.Admin.Models.CmsWebModel
+@{
+    ViewBag.Title = "ViewCms";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewCms";
+}
+
+<h2>@Html.DisplayFor(x => x.CMSTitle)</h2>
+@Html.HiddenFor(x => x.CMSId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+     @{
+                string data = Model.Description.ToString();
+                  
+            }
+
+            @Html.Raw(data)
+   @* <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.CmsName)</div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CmsName)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.CmsData)</div>
+        <div class="rowright">
+           
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>*@
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("CMS","MasterData")" class="form-reset">Back</a>
+        </div>
+
+    </div>
+</div>

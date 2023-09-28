@@ -1,0 +1,624 @@
+﻿@model BizzBranding.Models.LandingPageModel
+
+@{
+    ViewBag.Title = "UsersProfile";
+    //Layout = null;
+    //Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+    ViewData["Message"] = TempData["AlertMessage"];
+    
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    
+    
+     <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+    
+}
+<div id="msg">
+    <p style="color: green; padding-left: 8%"><strong>@ViewData["Message"]</strong></p>
+</div>
+
+
+
+@*<link href='http://fonts.googleapis.com/css?family=Puritan:400,400italic|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+
+<link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+<link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />*@
+
+
+<script type="text/javascript">
+    $ = jQuery.noConflict();
+    $(document).ready(function () {
+        debugger;
+        $('#popupEdit').hide();
+        $('#popupTab').hide();
+        $('.btn-popup-edit').click(function () {
+            debugger;
+            var val = $('.btn-popup-edit').attr('id');
+            $('#popupEdit').load('/Home/Editcompany?userId=' + val);
+            $('#popupEdit').toggle();
+        });
+        $('.btn-popup-editTabs').click(function () {
+            debugger;
+            var val = $('.btn-popup-editTabs').attr('id');
+            $('#popupTab').load('/Home/EditTabs?userId=' + val);
+            $('#popupTab').toggle();
+        });
+        setTimeout(function () {
+            debugger;
+            $('#msg').hide();
+        }, 4000);
+
+
+
+        //$('#frmsearch').submit(function (e) {
+        //    e.preventDefault();
+        //    debugger;
+        //    var txt = $('#txtSearch').val();
+        //    if (txt != "") {
+        //        var txtVal = $('.form-control').val();
+        //        window.location.href = '/Home/Searching?searchValue=' + txtVal;
+        //    }
+        //    else { alert('Enter text to search'); $('#txtSearch').focus(); }
+        //    //$.post('/Home/Search', { searchValue: txtVal }, function (data) {
+        //    // if (data != null)
+        //    // {
+        //    // }
+        //    //});
+        //});
+
+        $('.btn_close').click(function myfunction() {
+            $('#mask , .login-popup').fadeOut(300, function () {
+                $('#mask').remove();
+                $("input[type='text']").val('');
+            });
+            return false;
+        });
+    });
+
+</script>
+@*@Html.HiddenFor(model => model.UserId)*@
+
+@*<div>
+    @if (Session["ReturnMsg"] != null)
+    {
+        <div class="errormsgs">
+            @Session["ReturnMsg"].ToString()
+        </div>
+        Session["ReturnMsg"] = null;
+    }
+</div>*@
+<section class="container">
+    <div class="row brand" style="margin-top: 30px; margin-left: -53px;">
+        <div class="col-sm-3 ">
+            <ul class="related-connections ">
+                <li><a href="@Url.Action("VisitorPage", "Home", new { @id = Model.UserId })">My Profile Look To Others</a></li>
+                <li><a href="@Url.Action("ChangeLogoandBanner", "Home", new { @id = Model.UserId })">Change Logo & Banner</a></li>
+                <li><a href="@Url.Action("EditProfile", "Home")">Edit Profile</a></li>
+                <li><a href="@Url.Action("MyMessage", "Messages")">Communication/Emails</a></li>
+                <li><a href="@Url.Action("TargetBranding", "Home")">Target Branding</a></li>
+                <li><a href="@Url.Action("FranchiseRequest", "Home")">Franchise My Business</a></li>
+                <li><a href="@Url.Action("InvestorPartneringRequest", "Home")">Make My Business Investors Partnering</a></li>
+                <li><a href="@Url.Action("CorporateBrandingRequest", "Home")">Make My Business Corporate Brand</a></li>
+                <li><a href="@Url.Action("GlobalBrandingRequest", "Home")">Make My Business Global Brand</a></li>
+                <li><a href="@Url.Action("BusinessNewsList", "Home")">Business NewsList</a></li>
+                <li><a href="@Url.Action("AddProduct", "Home")">Add Products</a></li>
+                @*#divAddProduct" onclick="PopUpDiv() *@
+                <li><a href="@Url.Action("AddJob", "Home")">Add Job</a></li>
+                @*#divAddProduct" onclick="PopupAddJob()*@
+                <li><a href="@Url.Action("HomeBanner", "Home")">Big Hoarding</a></li>
+                <li><a href="@Url.Action("ProductList", "Home")">Your Product List</a></li>
+                <li><a href="@Url.Action("ChangePassword", "Home")">Change Password</a></li>
+                @* <li><a href="@Url.Action("EmployeeBrandStatus", "Home")" >Employee Branding List</a></li>
+                <li><a href="@Url.Action("FranchiseRequestStatus", "Home")">Franchise Request Status List</a></li>
+                <li><a href="@Url.Action("InvestorPartnerRequestStatus", "Home")">Investor Partner Status</a></li>
+                <li><a href="@Url.Action("CorporateBrandRequestStatus", "Home")">Corporate Brand Request Status</a></li>
+                <li><a href="@Url.Action("GlobalBrandRequestStatus", "Home")">Global Brand Request Status</a></li>*@
+
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div class="profile-banner">
+                <img class="" data-src="holder.js/140x140" alt="140x140" src="~/Content/Images/CoBanner/@Model.CompanyBanner">
+                <div class="profile-logo profile-logo-user">
+                    <a href="#" style="width: 181px; margin-left: 1px; margin-top: -11px;">
+                        <img src="~/Content/Images/CoLogo/@Model.CompanyLogo" />
+                    </a>
+                    <div class="btn btn-warning">@Model.BusinessName</div>
+                </div>
+
+            </div>
+        </div>
+        <!--------------------------------------------collapse-------------------------------------------------------------------->
+        <div class="col-sm-3">
+            <div class="">
+                <a href="@Url.Action("EnquiriesUnread", "Messages")" class="btn btn-warning btn-enquir" style="border-radius: 4px; margin-bottom: 10px; width: 99%; font-size:16px; text-align:left;">Business  Enquires <span class="label label-default" style="margin-left: 30px;">@Model.EnquiryCount</span></a>
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Business Connection Request
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            @foreach (var BList in Model.PendingRequests)
+                            {
+                                <div class="list-group-item">
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.UserId })">
+                                        <div class="news-img">
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                                src="~/Content/Images/CoLogo/@BList.CompanyLogo " style="">
+                                        </div>
+                                        <div class="news-content content-blog co-brands">
+                                            <h5>@BList.BusinessName</h5>
+                                        </div>
+                                    </a>
+                                    <a href="@Url.Action("AcceptRequest", "Home", new { @id = BList.UserId })" >
+                                        <input type="button" value="Accept" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    <a href="@Url.Action("RejectRequest", "Home", new { @id = BList.UserId })" >
+                                        <input type="button" value="Reject" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    @*<input type="button" value="Accept" class="btn btn-success btn-xs btn-xs-height">
+                                        <input type="button" value="Reject" class="btn btn-success btn-xs btn-xs-height">*@
+                                    <div class="clearfix"></div>
+                                </div>
+                            }
+                        <div><a href="@Url.Action("ViewAllRequest", "Home")" class="pull-right more-news">View More...</a> </div>
+                            @* </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Business Contacts
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <!------------------------------------------>
+
+                            @foreach (var BList in Model.ConnectedBizList)
+                            {
+                                <div class="list-group-item">
+                                    @* @string str = BList.BusinessDetails;
+                                    @if (str.Length > 48)
+                                    {
+                                        @str = str.Substring(0, 48);
+                                    }*@
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.PartnerId })" style="">
+                                        <div class="news-img">
+
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                            src="~/Content/Images/CoLogo/@BList.CompanyLogo" style="">
+                                        </div>
+                                        <div class="news-content content-blog">
+                                            <h5>@BList.BusinessName</h5>
+                                            @*<p>@str</p>*@
+                                        </div>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div> 
+                            }
+
+                            <div><a href="@Url.Action("ViewAllConnList", "Home")" class="pull-right more-news">View More...</a> </div>
+                            <!----------------------------------------------->
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Co - Brand Request
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            @* <div class="news-blog connection-blog news">*@
+                            @foreach (var BList in Model.CoBrandRequest)
+                            {
+                                <div class="list-group-item">
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.PartnerId })">
+                                        <div class="news-img">
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                                src="~/Content/Images/CoLogo/@BList.CompanyLogo " style="">
+                                        </div>
+                                        <div class="news-content content-blog co-brands">
+                                            <h5>@BList.BusinessName</h5>
+                                        </div>
+                                    </a>
+                                    <a href="@Url.Action("AcceptCoBrandRequest", "Home", new { @id = BList.PartnerId })" >
+                                        <input type="button" value="Accept" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    <a href="@Url.Action("RejectCoBrandRequest", "Home", new { @id = BList.PartnerId })" >
+                                        <input type="button" value="Reject" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            }
+                     <div><a href="@Url.Action("ViewAllCoBrandRequest", "Home")" class="pull-right more-news">View More...</a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Suggested Connections
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            @foreach (var req in Model.SuggestedConn)
+                            {
+                                <div class="list-group-item">
+                                    @*@string str = req.BusinessDetails;
+                                    if (str.Length > 48)
+                                    {
+                                        str = str.Substring(0, 48);
+                                    }*@
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = req.PartnerId })" style="">
+                                        <div class="news-img">
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                                    src="~/Content/Images/CoLogo/@req.CompanyLogo" style="">
+                                        </div>
+                                        <div class="news-content content-blog">
+                                            <h5>@req.BusinessName</h5>
+                                        </div>
+                                    </a>
+                                    <a href="@Url.Action("SendRequest", "Home", new { @id = req.UserId })" >
+                                        <input type="button" value="Connect" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    <div class="clearfix">
+                                    </div>
+                                    @*}*@
+                                </div>
+                            }
+                            <div><a href="@Url.Action("ViewMoreFrndNotList", "Home")" class="pull-right more-news">View More...</a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--------------------------------------------collapse-end------------------------------------------------------------------->
+        </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- <section class="container">
+    <div class="row brand" style="margin-top: 30px; margin-left: -53px;">
+        <div class="col-sm-3">
+            <ul class="related-connections ">
+                <li><a href="@Url.Action("UsersProfile", "Home")">Profile</a></li>
+                <li><a href="@Url.Action("ChangeLogoandBanner", "Home")" id="@Model.UserId">Change Logo & Banner</a></li>
+                <li><a href="@Url.Action("EditProfile", "Home")" id="@Model.UserId">Edit Profile</a></li>
+                <li><a href="@Url.Action("MyMessage", "Messages")">Communication/Emails</a></li>
+                <li><a href="@Url.Action("TargetBranding", "Home")">Target Branding</a></li>
+                <li><a href="@Url.Action("FranchiseRequest", "Home")">Franchise My Business</a></li>
+                <li><a href="@Url.Action("InvestorPartneringRequest", "Home")">Make My Business Investors Partnering</a></li>
+                <li><a href="@Url.Action("CorporateBrandingRequest", "Home")">Make My Business Corporate Brand</a></li>
+                <li><a href="@Url.Action("GlobalBrandingRequest", "Home")">Make My Business Global Brand</a></li>
+                <li><a href="@Url.Action("BusinessNewsList", "Home")">Business NewsList</a></li>
+                <li><a href="#divAddProduct" onclick="PopUpDiv()">Add Products</a></li>
+                <li><a href="#divAddProduct" onclick="PopupAddJob()">Add Job</a></li>
+                <li><a href="@Url.Action("HomeBanner", "Home")">Big Hoarding</a></li>
+                <li><a href="@Url.Action("ProductList", "Home")">Your Product List</a></li>
+                <li><a href="@Url.Action("ChangePassword", "Home")">Change Password</a></li>
+                @* <li><a href="@Url.Action("EmployeeBrandStatus", "Home")" >Employee Branding List</a></li>
+                <li><a href="@Url.Action("FranchiseRequestStatus", "Home")">Franchise Request Status List</a></li>
+                <li><a href="@Url.Action("InvestorPartnerRequestStatus", "Home")">Investor Partner Status</a></li>
+                <li><a href="@Url.Action("CorporateBrandRequestStatus", "Home")">Corporate Brand Request Status</a></li>
+                <li><a href="@Url.Action("GlobalBrandRequestStatus", "Home")">Global Brand Request Status</a></li>*@
+
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div class="profile-banner">
+                <img class="" data-src="holder.js/140x140" alt="140x140" src="../Images/EmployeeBrandingImages/listIMG1.jpg ">
+                <div class="profile-logo">
+                    <a class="navbar-brand navbar-brand" href="../index.html" style="width: 140px; margin-left: 25px; margin-top: 30px;"></a>
+                </div>
+            </div>
+        </div>
+        <!--------------------------------------------collapse-------------------------------------------------------------------->
+<!--  <div class="col-sm-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Business Connection
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <!------------------------------------------>
+<!--  <div class="news-blog connection-blog news">
+                                @foreach (var BList in Model.ConnectedBizList)
+                                {
+                                    string str = BList.BusinessDetails;
+                                    if (str.Length > 48)
+                                    {
+                                        str = str.Substring(0, 48);
+                                    }
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.PartnerId })" style="">
+                                        <div class="news-img">
+
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                            src="~/Content/Images/CoLogo/@BList.CompanyLogo" style="">
+                                        </div>
+                                        <div class="news-content content-blog">
+                                            <h5>@BList.BusinessName</h5>
+                                            <p>@str</p>
+                                        </div>
+                                    </a>
+                                }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Co - Brand Request
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="news-blog connection-blog news">
+                                @foreach (var BList in Model.CoBrandRequest)
+                                {
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = BList.PartnerId })" style="">
+                                        <div class="news-img">
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                                src="~/Content/Images/CoLogo/@BList.CompanyLogo " style="">
+                                        </div>
+                                        <div class="news-content content-blog">
+                                            <h5>@BList.BusinessName</h5>
+                                            <p>Lorem Ipsum is simply dummy text of the and printing text .</p>
+                                        </div>
+                                    </a>
+                                    <a href="@Url.Action("AcceptCoBrandRequest", "Home", new { @id = BList.PartnerId })" >
+                                        <input type="button" value="Accept" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    <a href="@Url.Action("RejectCoBrandRequest", "Home", new { @id = BList.PartnerId })" >
+                                        <input type="button" value="Reject" class="btn btn-success btn-xs btn-xs-height" />
+                                    </a>
+                                    <div class="clearfix"></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Suggested Connection
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="news-blog connection-blog news">
+                                @foreach (var req in Model.SuggestedConn)
+                                {
+                                    string str = req.BusinessDetails;
+                                    if (str.Length > 48)
+                                    {
+                                        str = str.Substring(0, 48);
+                                    }
+                                    <a href="@Url.Action("VisitorPage", "Home", new { @id = req.PartnerId })" style="">
+                                        <div class="news-img">
+                                            <img class="" data-src="holder.js/140x140" alt="140x140"
+                                                    src="~/Content/Images/CoLogo/@req.CompanyLogo" style="">
+                                        </div>
+                                        <div class="news-content content-blog">
+                                            <h5>@req.BusinessName</h5>
+                                            <p>@str</p>
+                                        </div>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!------------------------------------------------------------------------popup-----------  Brand My Employees--------------------------------------->
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h2 class="modal-title" id="myModalLabel">Target Branding</h2>
+                            <form enctype="multipart/form-data" role="form" style="margin: 20px 20px;" action="EmpBranding" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Employee Name</label>
+                                    @Html.TextBoxFor(x => x.EmployeeName, new { @class = "form-control", @placeholder = "Employee Name" })
+                                    <b style="color: red">@Html.ValidationMessageFor(x => x.EmployeeName)</b>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Ad Image</label>
+                                    <input type="file" id="EmployeeLogo" name="file">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Message </label>
+                                    @Html.TextAreaFor(x => x.EmpBrandMessage, new { @class = "form-control", @placeholder = "Enter Branding Details" })
+                                    <b style="color: red">@Html.ValidationMessageFor(x => x.EmpBrandMessage)</b>
+                                </div>
+                                <input type="submit" class="btn btn-default" value="Submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+<!--------------------------------------------------------------------popup 2 -------------------Franchise My Business--------------->
+
+@*<div class="modal fade" id="myModal-popup2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h2 class="modal-title" id="myModalLabel">Franchise Request</h2>
+                            <form role="form" style="margin: 20px 20px;" action="FranchiseRequest" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Franchise Details</label>
+                                    @Html.TextAreaFor(x => x.FranchiseDetails, new { @class = "form-control", @placeholder = "Details" })
+                                    <b style="color: red">@Html.ValidationMessageFor(x => x.FranchiseDetails)</b>
+                                </div>
+                                <input type="submit" class="btn btn-default" value="Submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+<!-----------------------------------popup end------------------------------------------------------------------------>
+
+<script type="text/javascript">
+
+    function PopUpDiv(val) {
+        debugger
+        $('#LoadProduct').load('/Home/AddProduct');
+
+        // Getting the variable's value from a link 
+        var loginBox = $('a.Requestlink').attr('href');
+
+        //Fade in the Popup and add close button
+        $(loginBox).fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = ($(loginBox).height() + 24) / 2;
+        var popMargLeft = ($(loginBox).width() + 24) / 2;
+
+        $(loginBox).css({
+            'margin-top': -popMargTop,
+            'margin-left': -popMargLeft
+        });
+
+        // Add the mask to body
+        $('body').append('<div id="mask"></div>');
+        $('#mask').fadeIn(300);
+        $("input[type='text']").val('');
+        return false;
+
+
+    }
+
+    function PopupAddJob(val) {
+        debugger
+        $('#LoadProduct').load('/Home/AddJob');
+
+        // Getting the variable's value from a link 
+        var loginBox = $('a.Requestlink').attr('href');
+
+        //Fade in the Popup and add close button
+        $(loginBox).fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = ($(loginBox).height() + 24) / 2;
+        var popMargLeft = ($(loginBox).width() + 24) / 2;
+
+        $(loginBox).css({
+            'margin-top': -popMargTop,
+            'margin-left': -popMargLeft
+        });
+
+        // Add the mask to body
+        $('body').append('<div id="mask"></div>');
+        $('#mask').fadeIn(300);
+        $("input[type='text']").val('');
+        return false;
+
+
+    }
+
+
+    function PopUpBanner(val) {
+        debugger
+        $('#LoadProduct').load('/Home/RenewalBannerPopup');
+
+        // Getting the variable's value from a link 
+        var loginBox = $('a.Requestlink').attr('href');
+
+        //Fade in the Popup and add close button
+        $(loginBox).fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = ($(loginBox).height() + 24) / 2;
+        var popMargLeft = ($(loginBox).width() + 24) / 2;
+
+        $(loginBox).css({
+            'margin-top': -popMargTop,
+            'margin-left': -popMargLeft
+        });
+
+        // Add the mask to body
+        $('body').append('<div id="mask"></div>');
+        $('#mask').fadeIn(300);
+        $("input[type='text']").val('');
+        return false;
+
+
+    }
+
+    function PopDetail(val) {
+        debugger
+        $('#LoadProduct').load('/Home/VisitProDetail?id=' + val);
+
+        // Getting the variable's value from a link 
+        var loginBox = $('a.Requestlink').attr('href');
+
+        //Fade in the Popup and add close button
+        $(loginBox).fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = ($(loginBox).height() + 24) / 2;
+        var popMargLeft = ($(loginBox).width() + 24) / 2;
+
+        $(loginBox).css({
+            'margin-top': -popMargTop,
+            'margin-left': -popMargLeft
+        });
+
+        // Add the mask to body
+        $('body').append('<div id="mask"></div>');
+        $('#mask').fadeIn(300);
+        $("input[type='text']").val('');
+        return false;
+
+
+    }
+
+</script>
+<script type="text/ecmascript">
+    //$(document).ready(function () {
+
+    //});
+</script>

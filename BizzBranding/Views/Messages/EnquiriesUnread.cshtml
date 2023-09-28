@@ -1,0 +1,372 @@
+﻿@{
+    ViewBag.Title = "Messages";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+}
+
+
+<div class="brands" style="padding-bottom:30px;">
+    <div id="MsgCenter" class="container">
+        <div class="">
+
+            <h3 class="firstH3" style="margin-left: 17px; margin-top: 20px;">Communication</h3>
+        </div>
+        <div>
+            <!-- Main Content -->
+            <div id="resultMessage">
+                <div>
+                     <input name="Enquiry" type="button" id="btnEnquiry" class="btn btn-warning" value="Enquiry" style="color: #FFF;" />
+                   @* <input name="Inbox" type="button" id="btnInbox" class="btn btn-success" value="Inbox" style="border: none; color: #FFF;" />*@
+                    <input name="Outbox" type="button" id="btnOutbox" class="btn btn-warning" value="Outbox" style="border: none; color: #FFF;" />
+                    <input name="Trash" type="button" id="btnTrash" class="btn btn-warning" value="Trash" style="border: none; color: #FFF;" />
+                    <input name="Compose" type="button" id="btnCompose" class="btn btn-warning" value="Compose" style="border: none; color: #FFF;" />
+                   @* <input name="Enquiry" type="button" id="btnEnquiry" class="btn btn-success" value="Enquiry" style="color: #FFF;" />*@
+                     <input name="Inbox" type="button" id="btnInbox" class="btn btn-warning" value="Inbox" style="border: none; color: #FFF;" />
+                </div>
+                <br />
+                <div id="MessageSearch">
+                    <table width="100%" cellspacing="10">
+                        <tbody>
+                            <tr>
+                                <td width="50%">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Type & Search Here " onfocus="if(this.style.border!=''){this.style.border='';}">
+                                    @*<input type="text" id="txtsearch" style="width: 100%" class="mystyle" onfocus="if(this.style.border!=''){this.style.border='';}" />*@
+                                </td>
+                                <td>
+                                    <input type="button" id="btnsearch" value="Search" class="btn btn-success" style="margin-left: 10px;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0);" id="btnadvancesearch">Advance search</a>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="AdvanceSearch" style="display: none;">
+                        <select id="advanceoption" style="margin-top: 8px;">
+                            <option value="From">From</option>
+                            <option value="Subject">Subject</option>
+                            <option value="To">To</option>
+                            <option value="HasAttachments">Has Attachments</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="IMessage" style="color: red">
+                </div>
+                <div style="float: left; width: 60%; display: block" id="PartialEnquiry">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="DeleteAllEnquiry()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_Enquiry")
+                </div>
+               @* <div style="float: left; width: 60%; display: block" id="PartialInbox">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="Block()"><strong>Block</strong></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0);" onclick="DeleteAllInbox()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_Inbox")
+                </div>*@
+                <div style="float: left; width: 60%; display: none" id="PartialOutbox">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="DeleteAllOutbox()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_OutBox")
+                </div>
+                <div style="float: left; width: 60%; display: none" id="PartialTrash">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="RestoreMessage()"><strong>Restore</strong></a>
+                        | <a href="javascript:void(0);" onclick="DeleteAllTrash()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_Trash")
+                </div>
+                <div style="float: left; width: 60%; display: none" id="PartialCompose">
+                    <br />
+                    <input type="hidden" name="autofill" id="autofill" value="" />
+                    @Html.Partial("_Compose")
+                </div>
+                <div style="float: left; width: 60%; display: none" id="PartialInbox">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="Block()"><strong>Block</strong></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <a href="javascript:void(0);" onclick="DeleteAllInbox()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_Inbox")
+                </div>
+               @* <div style="float: left; width: 60%; display: none" id="PartialEnquiry">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="DeleteAllEnquiry()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_Enquiry")
+                </div>*@
+                <div style="float: left; width: 60%; display: none" id="PartialSearch">
+                    <div style="float: left; margin-top: 10px; margin-bottom: 10px; margin-left: 10px;">
+                        <a href="javascript:void(0);" onclick="DeleteAllSearchMessage()"><strong>Delete</strong></a>
+                    </div>
+                    @Html.Partial("_SearchMessagesResult")
+                </div>
+                <div style="float: left; width: 60%; display: none" id="PartialViewMessage">
+                    @Html.Partial("_ViewMessage")
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>
+    @*<script src="~/Scripts/jquery-1.8.2.min.js"></script>*@
+    <script type="text/javascript">
+        $ = jQuery.noConflict();
+    </script>
+    <script type="text/javascript">
+        var s = 0;
+        var t = 10;
+        var intPazeSize = parseInt(10, 10);
+        var intResultPageCount;
+        var rowCount;
+        var intTotalPage;
+        var currentPageIndex = parseInt(0, 10);
+
+        function Paging(fromlabel, tolabel) {
+            intTotalPage = parseInt(rowCount, 10) / parseInt(intPazeSize, 10);
+            if ((parseInt(rowCount, 10) % parseInt(intPazeSize, 10)) != 0) {
+                intTotalPage = intTotalPage + 1;
+            }
+            var from = (currentPageIndex * intPazeSize) + 1;
+            var to = (currentPageIndex + 1) * intPazeSize;
+            if (to > intResultPageCount) {
+                to = intResultPageCount;
+            }
+            $(fromlabel).html(from);
+            $(tolabel).html(to);
+        }
+
+        function PostCountMethods(type) {
+            $.post("/Messages/GetTotalCount", { type: type }, function (data) {
+                var count = data;
+                intResultPageCount = count;
+                rowCount = count;
+                $('#total' + type).html(count);
+
+            });
+        }
+
+        function Reset() {
+            currentPageIndex = parseInt(0, 10);
+            $("#EnquiryResult").html('');
+            $("#OutBoxResult").html('');
+            $("#TrashResult").html('');
+            $("#InBoxResult").html('');
+
+        }
+
+
+        $(document).ready(function () {
+            $("#btnInbox").css("color", "black");
+
+            $("#btnEnquiry").click(function () {
+                var s = 0;
+                var t = 10;
+                PostCountMethods('enquiry');
+                Reset();
+                LoadEnquiry(s, t);
+
+                $("#PartialViewMessage").css("display", "none");
+                $("#btnEnquiry").css("color", "black");
+                $("#btnInbox").css("color", "white");
+                $("#btnOutbox").css("color", "white");
+                $("#btnTrash").css("color", "white");
+                $("#btnCompose").css("color", "white");
+
+                $("#PartialEnquiry").css("display", "block");
+                $("#PartialInbox").css("display", "none");
+                $("#PartialOutbox").css("display", "none");
+                $("#PartialTrash").css("display", "none");
+                $("#PartialCompose").css("display", "none");
+                $("#PartialSearch").css("display", "none");
+                $("#MessageSearch").css("display", "block");
+            });
+
+            //$("#btnInbox").click(function () {
+            //    debugger;
+            //    var s = 0;
+            //    var t = 10;
+            //    PostCountMethods('inbox');
+            //    Reset();
+            //    LoadInBox(s, t);
+
+            //    $("#PartialViewMessage").css("display", "none");
+            //    $("#btnInbox").css("color", "black");
+            //    $("#btnOutbox").css("color", "white");
+            //    $("#btnTrash").css("color", "white");
+            //    $("#btnCompose").css("color", "white");
+            //    $("#btnEnquiry").css("color", "white");
+
+            //    $("#PartialInbox").css("display", "block");
+            //    $("#PartialOutbox").css("display", "none");
+            //    $("#PartialTrash").css("display", "none");
+            //    $("#PartialCompose").css("display", "none");
+            //    $("#PartialEnquiry").css("display", "none");
+            //    $("#PartialSearch").css("display", "none");
+            //    $("#MessageSearch").css("display", "block");
+            //});
+
+            $("#btnOutbox").click(function () {
+                var s = 0;
+                var t = 10;
+                PostCountMethods('outbox');
+                Reset();
+                LoadOutBox(s, t);
+
+                $("#PartialViewMessage").css("display", "none");
+                $("#btnOutbox").css("color", "black");
+                $("#btnInbox").css("color", "white");
+                $("#btnTrash").css("color", "white");
+                $("#btnCompose").css("color", "white");
+                $("#btnEnquiry").css("color", "white");
+
+                $("#PartialOutbox").css("display", "block");
+                $("#PartialInbox").css("display", "none");
+                $("#PartialTrash").css("display", "none");
+                $("#PartialCompose").css("display", "none");
+                $("#PartialEnquiry").css("display", "none");
+                $("#PartialSearch").css("display", "none");
+                $("#MessageSearch").css("display", "block");
+            });
+
+            $("#btnTrash").click(function () {
+                var s = 0;
+                var t = 10;
+                PostCountMethods('trash');
+                Reset();
+                LoadTrashBox(s, t);
+
+                $("#PartialViewMessage").css("display", "none");
+                $("#btnTrash").css("color", "black");
+                $("#btnInbox").css("color", "white");
+                $("#btnOutbox").css("color", "white");
+                $("#btnCompose").css("color", "white");
+                $("#btnEnquiry").css("color", "white");
+
+                $("#PartialTrash").css("display", "block");
+                $("#PartialOutbox").css("display", "none");
+                $("#PartialInbox").css("display", "none");
+                $("#PartialCompose").css("display", "none");
+                $("#PartialEnquiry").css("display", "none");
+                $("#PartialSearch").css("display", "none");
+                $("#MessageSearch").css("display", "block");
+            });
+
+            $("#btnCompose").click(function () {
+                debugger;
+                Reset();
+
+                $("#PartialViewMessage").css("display", "none");
+                $("#btnCompose").css("color", "black");
+                $("#btnInbox").css("color", "white");
+                $("#btnOutbox").css("color", "white");
+                $("#btnTrash").css("color", "white");
+                $("#btnEnquiry").css("color", "white");
+
+                $("#PartialCompose").css("display", "block");
+                $("#PartialEnquiry").css("display", "none");
+                $("#PartialTrash").css("display", "none");
+                $("#PartialOutbox").css("display", "none");
+                $("#PartialInbox").css("display", "none");
+                $("#PartialSearch").css("display", "none");
+                $("#MessageSearch").css("display", "none");
+                $('#ComposeMail')[0].reset();
+                $("#msgattachfile").css("display", "block");
+                $("#lblfilename").css("display", "none");
+            });
+
+            $("#btnInbox").click(function () {
+                debugger;
+                var s = 0;
+                var t = 10;
+                PostCountMethods('inbox');
+                Reset();
+                LoadInBox(s, t);
+
+                $("#PartialViewMessage").css("display", "none");
+                $("#btnInbox").css("color", "black");
+                $("#btnOutbox").css("color", "white");
+                $("#btnTrash").css("color", "white");
+                $("#btnCompose").css("color", "white");
+                $("#btnEnquiry").css("color", "white");
+
+                $("#PartialInbox").css("display", "block");
+                $("#PartialOutbox").css("display", "none");
+                $("#PartialTrash").css("display", "none");
+                $("#PartialCompose").css("display", "none");
+                $("#PartialEnquiry").css("display", "none");
+                $("#PartialSearch").css("display", "none");
+                $("#MessageSearch").css("display", "block");
+            });
+
+            //$("#btnEnquiry").click(function () {
+            //    var s = 0;
+            //    var t = 10;
+            //    PostCountMethods('enquiry');
+            //    Reset();
+            //    LoadEnquiry(s, t);
+
+            //    $("#PartialViewMessage").css("display", "none");
+            //    $("#btnEnquiry").css("color", "black");
+            //    $("#btnInbox").css("color", "white");
+            //    $("#btnOutbox").css("color", "white");
+            //    $("#btnTrash").css("color", "white");
+            //    $("#btnCompose").css("color", "white");
+
+            //    $("#PartialEnquiry").css("display", "block");
+            //    $("#PartialInbox").css("display", "none");
+            //    $("#PartialOutbox").css("display", "none");
+            //    $("#PartialTrash").css("display", "none");
+            //    $("#PartialCompose").css("display", "none");
+            //    $("#PartialSearch").css("display", "none");
+            //    $("#MessageSearch").css("display", "block");
+            //});
+
+            $('#btnadvancesearch').click(function () {
+                $('#AdvanceSearch').toggle();
+                $('#AdvanceSearch').find('option:first').attr('selected', 'selected');
+            });
+
+            //Search Messages Result
+            $('#btnsearch').click(function () {
+                Reset();
+                debugger;
+                var text = $("#txtsearch").val();
+                if (text == "") {
+                    $("#txtsearch").css("border", "1px solid red");
+                    return false;
+                }
+                else {
+                    Search(0, 20);
+                }
+            });
+
+            $("input#txtsearch").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    Reset();
+                    var text = $("#txtsearch").val();
+                    if (text == "") {
+                        $("#txtsearch").css("border", "1px solid red");
+                        return false;
+                    }
+                    else {
+                        Search(0, 20);
+                    }
+                }
+            });
+
+
+        });
+
+    </script>

@@ -1,0 +1,154 @@
+﻿@model BizzBranding.CommonUtility.HomeBannerModel
+
+@{
+    ViewBag.Title = "HomeBanner";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_MasterLayout.cshtml";
+         <link href="~/Content/lib/fontawesome/font-awesome.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/fontawesome/font-awesome-ie7.min.css" rel="stylesheet" />
+     <link href="~/Content/lib/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link href="~/Content/style/custom.css" rel="stylesheet" />
+    
+    var message = TempData["AlertMessage"] ?? string.Empty;
+    ViewData["Message"] = TempData["AlertMessage"];
+}
+
+<section class="brands">
+    <div class="container">
+        <div class="row">
+           <div class="btn btn-warning" style="margin-right:50px" >
+               @* @if (Model.HomeBannerImgList.Count == 0)
+                {*@
+                    @Html.ActionLink("Create New Home Banner Image", "UpdateHomeBanner", "Home", new { @class = "btn btn-success" })
+               @* }*@
+          </div>
+           @* <div  class="col-sm-4 business-new" >
+                 @Html.ActionLink("Upgrade to HomepageBanner Membership", "RenewalBannerMembership", "Home", new { @class = "btn btn-warning" })
+            </div>*@
+           @* <div class="col-sm-8">*@
+                <div id="tableouterdiv" class="grids-wrap">
+                    <div id="content-table-inner">
+                        <div id="table-content">
+                            <div class="bs-example">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="success">Home Banner Image</th>
+                                            <th class="success">Home Banner URL</th>
+                                            <th class="success"></th>
+                                            <th class="success">Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.HomeBannerImgList)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img width="50px" height="50px" src="~/Scripts/jquery.bxslider/images/@item.BannerImage"/>
+                                                </td>
+                                                <td>
+                                                    @item.CompanyURL
+                                                </td>
+                                                <td></td>
+                                                <td class="options-width">
+                                                    <a href="@Url.Action("UpdateHomeBanner", "Home", new { @id = item.HomeBannerID })" title="Edit" class="icon-1 info-tooltip"></a>
+                                                    @*@if (item.IsActive == true)
+                                                    {
+                                                        <a href="#" title="Status"  data-uid="@item.HomeBannerID" class="icon-5"></a>
+                                                    }
+                                                    else if (item.IsActive == false)
+                                                    {
+                                                        <a href="#" title="Status"  data-uid="@item.HomeBannerID" class="inactive"></a>
+                                    
+                                                    }*@
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @{
+                            
+                                            if (Model.PageID > 0)
+                                            {
+                                            <a href="@Url.Action("HomeBanner", "Home", new { @pid = Model.PageID - 1 })" class="page-left"></a>
+                                            }
+                                            <div id="page-info">Page <strong>@Model.Current</strong>/ @Model.Pagecount</div>
+                                            if (Model.PageID + 1 < Model.Pagecount)
+                                            {
+                                            <a href="@Url.Action("HomeBanner", "Home", new { @pid = Model.PageID + 1 })" class="page-right"></a>
+                                            }
+                          
+                                        }
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script>
+                            $("a.icon-5,a.inactive").click(function (e) {
+                                e.preventDefault();
+                                var userid = $(this).attr("data-uid");
+
+                                $.post("../../Home/ChangeHomeBannerStatus", { id: userid });
+
+                                $(this).toggleClass('icon-5');
+                                $(this).toggleClass('inactive');
+
+                            });
+
+                        </script>
+                        <div class="clear"></div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+           @* </div>*@
+           @* <div class="col-sm-4">
+                    <h2>News <i class="icon-bullhorn"></i></h2>
+                <div class="news-blog news">
+                    @foreach (var item in Model.NewsList)
+                    {
+                        string str = item.Description;
+                        if (str.Length > 100)
+                        {
+                            str = str.Substring(0, 100);
+                        }
+    
+                        <h4>@item.NewsTitle</h4>
+                        <p>@str
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal-@item.BusinessNewsId" style="padding: 0 5px; font-size: 14px;">More</button>
+                        </p>
+                        <!-- Modal -->
+                        <div class="modal fade homepop" id="myModal-@item.BusinessNewsId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">"@item.NewsTitle"</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @item.Description
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div><a href="@Url.Action("ViewallAdminNews", "Home")" class="pull-right more-news">View More...</a> </div>
+                    <div class="tabs">
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>*@
+        </div>
+    </div>
+</section>

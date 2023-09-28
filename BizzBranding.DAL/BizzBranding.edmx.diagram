@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fdc33896d21543f685b1f49411c2c290" Name="Diagram1">
+        <EntityTypeShape EntityType="BizzBrandingModel.AccessPlan" Width="1.5" PointX="9" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Administrator" Width="1.5" PointX="3" PointY="50.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.BusinessConnection" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.BusinessEnquiry" Width="1.5" PointX="5.25" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.BusinessJob" Width="1.5" PointX="5.25" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.BusinessNew" Width="1.5" PointX="5.25" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.BussinessUser" Width="1.5" PointX="3" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Category" Width="1.5" PointX="12" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.City" Width="1.5" PointX="0.75" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.CM" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.CoBranding" Width="1.5" PointX="5.25" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.CoBrandingImage" Width="1.5" PointX="7.5" PointY="54.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.CorporateBranding" Width="1.5" PointX="8.25" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Country" Width="1.5" PointX="1.5" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Currency" Width="1.5" PointX="6.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.CustomerEnquiry" Width="1.5" PointX="5.25" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.EmailTemplate" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.EmployeeBranding" Width="1.5" PointX="8.25" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Franchise" Width="1.5" PointX="8.25" PointY="46.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.GlobalBranding" Width="1.5" PointX="11.25" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.HomeBanner" Width="1.5" PointX="5.25" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.HomeBannerMapping" Width="1.5" PointX="11.25" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Industry" Width="1.5" PointX="0.75" PointY="42.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.InvestorPartnering" Width="1.5" PointX="11.25" PointY="46.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Membership" Width="1.5" PointX="8.25" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Message" Width="1.5" PointX="5.25" PointY="78.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.MessagesBlock" Width="1.5" PointX="5.25" PointY="83.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.MessagesFile" Width="1.5" PointX="7.5" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.NewsLetter" Width="1.5" PointX="5.25" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.NewsMapping" Width="1.5" PointX="11.25" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.PaymentTransationDetail" Width="1.5" PointX="5.25" PointY="89.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Product" Width="1.5" PointX="14.25" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.ProductImage" Width="1.5" PointX="16.5" PointY="42.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Role" Width="1.5" PointX="0.75" PointY="51.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.RoleAssignment" Width="1.5" PointX="3" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.SubCategory" Width="1.5" PointX="12" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Subscribe" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.TargetBranding" Width="1.5" PointX="11.25" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.TargetedImage" Width="1.5" PointX="13.5" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.UserFriendMapping" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.UserIndustryMapping" Width="1.5" PointX="8.25" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BizzBrandingModel.VisitorCount" Width="1.5" PointX="5.25" PointY="104.625" IsExpanded="true" />
+        <AssociationConnector Association="BizzBrandingModel.FK_AccessPlan_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_HomeBannerMapping_AccessPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Membership_AccessPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_NewsMapping_AccessPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Administrator_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CoBranding_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CorporateBranding_Administrator" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Franchise_ApprovedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_GlobalBranding_Administrator" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.fk_InvestorPartner_ApprovedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.fk_NewsLetter_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.fk_NewsLetter_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BusinessJob_BusinessUserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BusinessNews_CreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BusinessNews_UpdatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BlockedMessages_BusinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BlockedMessages_BusinessUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BussinessUser_City" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BussinessUser_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_BussinessUser_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CoBranding_PartnerA" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CoBranding_PartnerB" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CorporateBranding_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CustomerEnquiries_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_EmployeeBranding_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Franchise_BusinessId" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_GlobalBranding_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_HomeBanner_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_HomeBannerMapping_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_InvestorPartnering_BusinessId" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Membership_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Message_BusinessUser_MsgFrom" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Message_BusinessUser_MsgTo" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_MessagesFile_BusinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_MessagesFile_BusinessUser1" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_NewsMapping_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_PaymentTransationDetail_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Product_BusinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_TargetBranding_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_UserIndustryMapping_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_VisitorCount_BussinessUser" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_EmployeeBranding_City" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_TargetBranding_City" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_CoBrandingImage_CoBrandingId" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_EmployeeBranding_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_TargetBranding_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_UserIndustryMapping_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_MessagesFile_Message" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Product_SubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_ProductImage_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_RoleAssignment_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="BizzBrandingModel.FK_TargetedImage_TargetBranding" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BizzBrandingModel.News" Width="2.5" PointX="4.5" PointY="20.5" />
+        <AssociationConnector Association="BizzBrandingModel.fk_News_CreatedBy" />
+        <AssociationConnector Association="BizzBrandingModel.fk_News_UpdatedBy" />
+        <AssociationConnector Association="BizzBrandingModel.FK_News_BussinessUser" />
+        <EntityTypeShape EntityType="BizzBrandingModel.Module" Width="1.5" PointX="5.6258751627178283" PointY="30.767771288178754" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Table_1_CreatedBy" />
+        <AssociationConnector Association="BizzBrandingModel.FK_Table_1_UpdatedBy" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

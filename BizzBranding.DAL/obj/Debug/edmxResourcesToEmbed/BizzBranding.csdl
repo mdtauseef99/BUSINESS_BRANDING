@@ -1,0 +1,1709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BizzBrandingModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BizzBrandingEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="AccessPlans" EntityType="BizzBrandingModel.AccessPlan" />
+    <EntitySet Name="Administrators" EntityType="BizzBrandingModel.Administrator" />
+    <EntitySet Name="BusinessConnections" EntityType="BizzBrandingModel.BusinessConnection" />
+    <EntitySet Name="BusinessEnquiries" EntityType="BizzBrandingModel.BusinessEnquiry" />
+    <EntitySet Name="BusinessJobs" EntityType="BizzBrandingModel.BusinessJob" />
+    <EntitySet Name="BusinessNews" EntityType="BizzBrandingModel.BusinessNew" />
+    <EntitySet Name="BussinessUsers" EntityType="BizzBrandingModel.BussinessUser" />
+    <EntitySet Name="Categories" EntityType="BizzBrandingModel.Category" />
+    <EntitySet Name="Cities" EntityType="BizzBrandingModel.City" />
+    <EntitySet Name="CMS" EntityType="BizzBrandingModel.CM" />
+    <EntitySet Name="CoBrandings" EntityType="BizzBrandingModel.CoBranding" />
+    <EntitySet Name="CoBrandingImages" EntityType="BizzBrandingModel.CoBrandingImage" />
+    <EntitySet Name="CorporateBrandings" EntityType="BizzBrandingModel.CorporateBranding" />
+    <EntitySet Name="Countries" EntityType="BizzBrandingModel.Country" />
+    <EntitySet Name="Currencies" EntityType="BizzBrandingModel.Currency" />
+    <EntitySet Name="CustomerEnquiries" EntityType="BizzBrandingModel.CustomerEnquiry" />
+    <EntitySet Name="EmailTemplates" EntityType="BizzBrandingModel.EmailTemplate" />
+    <EntitySet Name="EmployeeBrandings" EntityType="BizzBrandingModel.EmployeeBranding" />
+    <EntitySet Name="Franchises" EntityType="BizzBrandingModel.Franchise" />
+    <EntitySet Name="GlobalBrandings" EntityType="BizzBrandingModel.GlobalBranding" />
+    <EntitySet Name="HomeBanners" EntityType="BizzBrandingModel.HomeBanner" />
+    <EntitySet Name="HomeBannerMappings" EntityType="BizzBrandingModel.HomeBannerMapping" />
+    <EntitySet Name="Industries" EntityType="BizzBrandingModel.Industry" />
+    <EntitySet Name="InvestorPartnerings" EntityType="BizzBrandingModel.InvestorPartnering" />
+    <EntitySet Name="Memberships" EntityType="BizzBrandingModel.Membership" />
+    <EntitySet Name="Messages" EntityType="BizzBrandingModel.Message" />
+    <EntitySet Name="MessagesBlocks" EntityType="BizzBrandingModel.MessagesBlock" />
+    <EntitySet Name="MessagesFiles" EntityType="BizzBrandingModel.MessagesFile" />
+    <EntitySet Name="NewsLetters" EntityType="BizzBrandingModel.NewsLetter" />
+    <EntitySet Name="NewsMappings" EntityType="BizzBrandingModel.NewsMapping" />
+    <EntitySet Name="PaymentTransationDetails" EntityType="BizzBrandingModel.PaymentTransationDetail" />
+    <EntitySet Name="Products" EntityType="BizzBrandingModel.Product" />
+    <EntitySet Name="ProductImages" EntityType="BizzBrandingModel.ProductImage" />
+    <EntitySet Name="Roles" EntityType="BizzBrandingModel.Role" />
+    <EntitySet Name="RoleAssignments" EntityType="BizzBrandingModel.RoleAssignment" />
+    <EntitySet Name="SubCategories" EntityType="BizzBrandingModel.SubCategory" />
+    <EntitySet Name="Subscribes" EntityType="BizzBrandingModel.Subscribe" />
+    <EntitySet Name="TargetBrandings" EntityType="BizzBrandingModel.TargetBranding" />
+    <EntitySet Name="TargetedImages" EntityType="BizzBrandingModel.TargetedImage" />
+    <EntitySet Name="UserFriendMappings" EntityType="BizzBrandingModel.UserFriendMapping" />
+    <EntitySet Name="UserIndustryMappings" EntityType="BizzBrandingModel.UserIndustryMapping" />
+    <EntitySet Name="VisitorCounts" EntityType="BizzBrandingModel.VisitorCount" />
+    <AssociationSet Name="FK_AccessPlan_Currency" Association="BizzBrandingModel.FK_AccessPlan_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="AccessPlan" EntitySet="AccessPlans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HomeBannerMapping_AccessPlan" Association="BizzBrandingModel.FK_HomeBannerMapping_AccessPlan">
+      <End Role="AccessPlan" EntitySet="AccessPlans" />
+      <End Role="HomeBannerMapping" EntitySet="HomeBannerMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Membership_AccessPlan" Association="BizzBrandingModel.FK_Membership_AccessPlan">
+      <End Role="AccessPlan" EntitySet="AccessPlans" />
+      <End Role="Membership" EntitySet="Memberships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsMapping_AccessPlan" Association="BizzBrandingModel.FK_NewsMapping_AccessPlan">
+      <End Role="AccessPlan" EntitySet="AccessPlans" />
+      <End Role="NewsMapping" EntitySet="NewsMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Administrator_Role" Association="BizzBrandingModel.FK_Administrator_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Administrator" EntitySet="Administrators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoBranding_UpdatedBy" Association="BizzBrandingModel.FK_CoBranding_UpdatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="CoBranding" EntitySet="CoBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CorporateBranding_Administrator" Association="BizzBrandingModel.FK_CorporateBranding_Administrator">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="CorporateBranding" EntitySet="CorporateBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Franchise_ApprovedBy" Association="BizzBrandingModel.FK_Franchise_ApprovedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="Franchise" EntitySet="Franchises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GlobalBranding_Administrator" Association="BizzBrandingModel.FK_GlobalBranding_Administrator">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="GlobalBranding" EntitySet="GlobalBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="fk_InvestorPartner_ApprovedBy" Association="BizzBrandingModel.fk_InvestorPartner_ApprovedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="InvestorPartnering" EntitySet="InvestorPartnerings" />
+    </AssociationSet>
+    <AssociationSet Name="fk_NewsLetter_CreatedBy" Association="BizzBrandingModel.fk_NewsLetter_CreatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="NewsLetter" EntitySet="NewsLetters" />
+    </AssociationSet>
+    <AssociationSet Name="fk_NewsLetter_UpdatedBy" Association="BizzBrandingModel.fk_NewsLetter_UpdatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="NewsLetter" EntitySet="NewsLetters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessEnquiry_BussinessUser" Association="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="BusinessEnquiry" EntitySet="BusinessEnquiries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessEnquiry_BussinessUser1" Association="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser1">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="BusinessEnquiry" EntitySet="BusinessEnquiries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessJob_BusinessUserId" Association="BizzBrandingModel.FK_BusinessJob_BusinessUserId">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="BusinessJob" EntitySet="BusinessJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessNews_CreatedBy" Association="BizzBrandingModel.FK_BusinessNews_CreatedBy">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="BusinessNews" EntitySet="BusinessNews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BusinessNews_UpdatedBy" Association="BizzBrandingModel.FK_BusinessNews_UpdatedBy">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="BusinessNews" EntitySet="BusinessNews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BlockedMessages_BusinessUser" Association="BizzBrandingModel.FK_BlockedMessages_BusinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="MessagesBlock" EntitySet="MessagesBlocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BlockedMessages_BusinessUser1" Association="BizzBrandingModel.FK_BlockedMessages_BusinessUser1">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="MessagesBlock" EntitySet="MessagesBlocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BussinessUser_City" Association="BizzBrandingModel.FK_BussinessUser_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BussinessUser_Country" Association="BizzBrandingModel.FK_BussinessUser_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BussinessUser_Industry" Association="BizzBrandingModel.FK_BussinessUser_Industry">
+      <End Role="Industry" EntitySet="Industries" />
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoBranding_PartnerA" Association="BizzBrandingModel.FK_CoBranding_PartnerA">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="CoBranding" EntitySet="CoBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoBranding_PartnerB" Association="BizzBrandingModel.FK_CoBranding_PartnerB">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="CoBranding" EntitySet="CoBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CorporateBranding_BussinessUser" Association="BizzBrandingModel.FK_CorporateBranding_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="CorporateBranding" EntitySet="CorporateBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerEnquiries_BussinessUser" Association="BizzBrandingModel.FK_CustomerEnquiries_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="CustomerEnquiries" EntitySet="CustomerEnquiries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeBranding_BussinessUser" Association="BizzBrandingModel.FK_EmployeeBranding_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="EmployeeBranding" EntitySet="EmployeeBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Franchise_BusinessId" Association="BizzBrandingModel.FK_Franchise_BusinessId">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="Franchise" EntitySet="Franchises" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GlobalBranding_BussinessUser" Association="BizzBrandingModel.FK_GlobalBranding_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="GlobalBranding" EntitySet="GlobalBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HomeBanner_BussinessUser" Association="BizzBrandingModel.FK_HomeBanner_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="HomeBanner" EntitySet="HomeBanners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HomeBannerMapping_BussinessUser" Association="BizzBrandingModel.FK_HomeBannerMapping_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="HomeBannerMapping" EntitySet="HomeBannerMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvestorPartnering_BusinessId" Association="BizzBrandingModel.FK_InvestorPartnering_BusinessId">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="InvestorPartnering" EntitySet="InvestorPartnerings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Membership_BussinessUser" Association="BizzBrandingModel.FK_Membership_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="Membership" EntitySet="Memberships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_BusinessUser_MsgFrom" Association="BizzBrandingModel.FK_Message_BusinessUser_MsgFrom">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_BusinessUser_MsgTo" Association="BizzBrandingModel.FK_Message_BusinessUser_MsgTo">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessagesFile_BusinessUser" Association="BizzBrandingModel.FK_MessagesFile_BusinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="MessagesFile" EntitySet="MessagesFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessagesFile_BusinessUser1" Association="BizzBrandingModel.FK_MessagesFile_BusinessUser1">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="MessagesFile" EntitySet="MessagesFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsMapping_BussinessUser" Association="BizzBrandingModel.FK_NewsMapping_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="NewsMapping" EntitySet="NewsMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentTransationDetail_BussinessUser" Association="BizzBrandingModel.FK_PaymentTransationDetail_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="PaymentTransationDetail" EntitySet="PaymentTransationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_BusinessUser" Association="BizzBrandingModel.FK_Product_BusinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TargetBranding_BussinessUser" Association="BizzBrandingModel.FK_TargetBranding_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="TargetBranding" EntitySet="TargetBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserIndustryMapping_BussinessUser" Association="BizzBrandingModel.FK_UserIndustryMapping_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="UserIndustryMapping" EntitySet="UserIndustryMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VisitorCount_BussinessUser" Association="BizzBrandingModel.FK_VisitorCount_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="VisitorCount" EntitySet="VisitorCounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="BizzBrandingModel.FK_Product_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubCategory_Category" Association="BizzBrandingModel.FK_SubCategory_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="BizzBrandingModel.FK_City_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeBranding_City" Association="BizzBrandingModel.FK_EmployeeBranding_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="EmployeeBranding" EntitySet="EmployeeBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TargetBranding_City" Association="BizzBrandingModel.FK_TargetBranding_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="TargetBranding" EntitySet="TargetBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoBrandingImage_CoBrandingId" Association="BizzBrandingModel.FK_CoBrandingImage_CoBrandingId">
+      <End Role="CoBranding" EntitySet="CoBrandings" />
+      <End Role="CoBrandingImage" EntitySet="CoBrandingImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeBranding_Industry" Association="BizzBrandingModel.FK_EmployeeBranding_Industry">
+      <End Role="Industry" EntitySet="Industries" />
+      <End Role="EmployeeBranding" EntitySet="EmployeeBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TargetBranding_Industry" Association="BizzBrandingModel.FK_TargetBranding_Industry">
+      <End Role="Industry" EntitySet="Industries" />
+      <End Role="TargetBranding" EntitySet="TargetBrandings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserIndustryMapping_Industry" Association="BizzBrandingModel.FK_UserIndustryMapping_Industry">
+      <End Role="Industry" EntitySet="Industries" />
+      <End Role="UserIndustryMapping" EntitySet="UserIndustryMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessagesFile_Message" Association="BizzBrandingModel.FK_MessagesFile_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessagesFile" EntitySet="MessagesFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_SubCategory" Association="BizzBrandingModel.FK_Product_SubCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductImage_Product" Association="BizzBrandingModel.FK_ProductImage_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleAssignment_Role" Association="BizzBrandingModel.FK_RoleAssignment_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RoleAssignment" EntitySet="RoleAssignments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TargetedImage_TargetBranding" Association="BizzBrandingModel.FK_TargetedImage_TargetBranding">
+      <End Role="TargetBranding" EntitySet="TargetBrandings" />
+      <End Role="TargetedImage" EntitySet="TargetedImages" />
+    </AssociationSet>
+    <EntitySet Name="News" EntityType="BizzBrandingModel.News" />
+    <AssociationSet Name="fk_News_CreatedBy" Association="BizzBrandingModel.fk_News_CreatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="fk_News_UpdatedBy" Association="BizzBrandingModel.fk_News_UpdatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_BussinessUser" Association="BizzBrandingModel.FK_News_BussinessUser">
+      <End Role="BussinessUser" EntitySet="BussinessUsers" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <EntitySet Name="Modules" EntityType="BizzBrandingModel.Module" />
+    <AssociationSet Name="FK_Table_1_CreatedBy" Association="BizzBrandingModel.FK_Table_1_CreatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="Module" EntitySet="Modules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_1_UpdatedBy" Association="BizzBrandingModel.FK_Table_1_UpdatedBy">
+      <End Role="Administrator" EntitySet="Administrators" />
+      <End Role="Module" EntitySet="Modules" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AccessPlan">
+    <Key>
+      <PropertyRef Name="AccessPlanId" />
+    </Key>
+    <Property Name="AccessPlanId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccessPlanName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="MaxNoDeals" Type="Int32" />
+    <Property Name="ProdPerMonth" Type="Int32" />
+    <Property Name="UpdatesPerMonth" Type="Int32" />
+    <Property Name="AddPostCharge" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="AddUpdCharge" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="NewsCharge" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="Validity" Type="Int32" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <Property Name="MembershipFee" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AccessPlanImage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Currency" Relationship="BizzBrandingModel.FK_AccessPlan_Currency" FromRole="AccessPlan" ToRole="Currency" />
+    <NavigationProperty Name="HomeBannerMappings" Relationship="BizzBrandingModel.FK_HomeBannerMapping_AccessPlan" FromRole="AccessPlan" ToRole="HomeBannerMapping" />
+    <NavigationProperty Name="Memberships" Relationship="BizzBrandingModel.FK_Membership_AccessPlan" FromRole="AccessPlan" ToRole="Membership" />
+    <NavigationProperty Name="NewsMappings" Relationship="BizzBrandingModel.FK_NewsMapping_AccessPlan" FromRole="AccessPlan" ToRole="NewsMapping" />
+  </EntityType>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="BizzBrandingModel.FK_Administrator_Role" FromRole="Administrator" ToRole="Role" />
+    <NavigationProperty Name="CoBrandings" Relationship="BizzBrandingModel.FK_CoBranding_UpdatedBy" FromRole="Administrator" ToRole="CoBranding" />
+    <NavigationProperty Name="CorporateBrandings" Relationship="BizzBrandingModel.FK_CorporateBranding_Administrator" FromRole="Administrator" ToRole="CorporateBranding" />
+    <NavigationProperty Name="Franchises" Relationship="BizzBrandingModel.FK_Franchise_ApprovedBy" FromRole="Administrator" ToRole="Franchise" />
+    <NavigationProperty Name="GlobalBrandings" Relationship="BizzBrandingModel.FK_GlobalBranding_Administrator" FromRole="Administrator" ToRole="GlobalBranding" />
+    <NavigationProperty Name="InvestorPartnerings" Relationship="BizzBrandingModel.fk_InvestorPartner_ApprovedBy" FromRole="Administrator" ToRole="InvestorPartnering" />
+    <NavigationProperty Name="NewsLetters" Relationship="BizzBrandingModel.fk_NewsLetter_CreatedBy" FromRole="Administrator" ToRole="NewsLetter" />
+    <NavigationProperty Name="NewsLetters1" Relationship="BizzBrandingModel.fk_NewsLetter_UpdatedBy" FromRole="Administrator" ToRole="NewsLetter" />
+    <NavigationProperty Name="News" Relationship="BizzBrandingModel.fk_News_CreatedBy" FromRole="Administrator" ToRole="News" />
+    <NavigationProperty Name="News1" Relationship="BizzBrandingModel.fk_News_UpdatedBy" FromRole="Administrator" ToRole="News" />
+    <NavigationProperty Name="Modules" Relationship="BizzBrandingModel.FK_Table_1_CreatedBy" FromRole="Administrator" ToRole="Module" />
+    <NavigationProperty Name="Modules1" Relationship="BizzBrandingModel.FK_Table_1_UpdatedBy" FromRole="Administrator" ToRole="Module" />
+  </EntityType>
+  <EntityType Name="BusinessConnection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="BusinessPartnerId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsCoBrand" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BusinessEnquiry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="FromUserId" Type="Int32" />
+    <Property Name="ToUserId" Type="Int32" />
+    <Property Name="Subject" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="EnquiryDetails" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SentOn" Type="DateTime" Precision="3" />
+    <Property Name="ReadOn" Type="DateTime" Precision="3" />
+    <Property Name="IsSent" Type="Boolean" Nullable="false" />
+    <Property Name="IsRead" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser" FromRole="BusinessEnquiry" ToRole="BussinessUser" />
+    <NavigationProperty Name="BussinessUser1" Relationship="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser1" FromRole="BusinessEnquiry" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="BusinessJob">
+    <Key>
+      <PropertyRef Name="BusinessJobId" />
+    </Key>
+    <Property Name="BusinessJobId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessUserId" Type="Int32" />
+    <Property Name="JobTitle" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_BusinessJob_BusinessUserId" FromRole="BusinessJob" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="BusinessNew">
+    <Key>
+      <PropertyRef Name="BusinessNewsId" />
+    </Key>
+    <Property Name="BusinessNewsId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_BusinessNews_CreatedBy" FromRole="BusinessNews" ToRole="BussinessUser" />
+    <NavigationProperty Name="BussinessUser1" Relationship="BizzBrandingModel.FK_BusinessNews_UpdatedBy" FromRole="BusinessNews" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="BussinessUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="EmailId" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CompanyLogo" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CoRegNo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IndustryId" Type="Int32" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="CoAddress" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="Fax" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="ContactPerson" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Designation" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="TradeEmaiIId" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="BusinessDetails" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="GUId" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="IsGlobal" Type="Boolean" Nullable="false" />
+    <Property Name="BannerImage" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="IsRequested" Type="Boolean" />
+    <Property Name="HitCounter" Type="Int32" />
+    <Property Name="URL" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="BusinessEnquiries" Relationship="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser" FromRole="BussinessUser" ToRole="BusinessEnquiry" />
+    <NavigationProperty Name="BusinessEnquiries1" Relationship="BizzBrandingModel.FK_BusinessEnquiry_BussinessUser1" FromRole="BussinessUser" ToRole="BusinessEnquiry" />
+    <NavigationProperty Name="BusinessJobs" Relationship="BizzBrandingModel.FK_BusinessJob_BusinessUserId" FromRole="BussinessUser" ToRole="BusinessJob" />
+    <NavigationProperty Name="BusinessNews" Relationship="BizzBrandingModel.FK_BusinessNews_CreatedBy" FromRole="BussinessUser" ToRole="BusinessNews" />
+    <NavigationProperty Name="BusinessNews1" Relationship="BizzBrandingModel.FK_BusinessNews_UpdatedBy" FromRole="BussinessUser" ToRole="BusinessNews" />
+    <NavigationProperty Name="MessagesBlocks" Relationship="BizzBrandingModel.FK_BlockedMessages_BusinessUser" FromRole="BussinessUser" ToRole="MessagesBlock" />
+    <NavigationProperty Name="MessagesBlocks1" Relationship="BizzBrandingModel.FK_BlockedMessages_BusinessUser1" FromRole="BussinessUser" ToRole="MessagesBlock" />
+    <NavigationProperty Name="City" Relationship="BizzBrandingModel.FK_BussinessUser_City" FromRole="BussinessUser" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="BizzBrandingModel.FK_BussinessUser_Country" FromRole="BussinessUser" ToRole="Country" />
+    <NavigationProperty Name="Industry" Relationship="BizzBrandingModel.FK_BussinessUser_Industry" FromRole="BussinessUser" ToRole="Industry" />
+    <NavigationProperty Name="CoBrandings" Relationship="BizzBrandingModel.FK_CoBranding_PartnerA" FromRole="BussinessUser" ToRole="CoBranding" />
+    <NavigationProperty Name="CoBrandings1" Relationship="BizzBrandingModel.FK_CoBranding_PartnerB" FromRole="BussinessUser" ToRole="CoBranding" />
+    <NavigationProperty Name="CorporateBrandings" Relationship="BizzBrandingModel.FK_CorporateBranding_BussinessUser" FromRole="BussinessUser" ToRole="CorporateBranding" />
+    <NavigationProperty Name="CustomerEnquiries" Relationship="BizzBrandingModel.FK_CustomerEnquiries_BussinessUser" FromRole="BussinessUser" ToRole="CustomerEnquiries" />
+    <NavigationProperty Name="EmployeeBrandings" Relationship="BizzBrandingModel.FK_EmployeeBranding_BussinessUser" FromRole="BussinessUser" ToRole="EmployeeBranding" />
+    <NavigationProperty Name="Franchises" Relationship="BizzBrandingModel.FK_Franchise_BusinessId" FromRole="BussinessUser" ToRole="Franchise" />
+    <NavigationProperty Name="GlobalBrandings" Relationship="BizzBrandingModel.FK_GlobalBranding_BussinessUser" FromRole="BussinessUser" ToRole="GlobalBranding" />
+    <NavigationProperty Name="HomeBanners" Relationship="BizzBrandingModel.FK_HomeBanner_BussinessUser" FromRole="BussinessUser" ToRole="HomeBanner" />
+    <NavigationProperty Name="HomeBannerMappings" Relationship="BizzBrandingModel.FK_HomeBannerMapping_BussinessUser" FromRole="BussinessUser" ToRole="HomeBannerMapping" />
+    <NavigationProperty Name="InvestorPartnerings" Relationship="BizzBrandingModel.FK_InvestorPartnering_BusinessId" FromRole="BussinessUser" ToRole="InvestorPartnering" />
+    <NavigationProperty Name="Memberships" Relationship="BizzBrandingModel.FK_Membership_BussinessUser" FromRole="BussinessUser" ToRole="Membership" />
+    <NavigationProperty Name="Messages" Relationship="BizzBrandingModel.FK_Message_BusinessUser_MsgFrom" FromRole="BussinessUser" ToRole="Message" />
+    <NavigationProperty Name="Messages1" Relationship="BizzBrandingModel.FK_Message_BusinessUser_MsgTo" FromRole="BussinessUser" ToRole="Message" />
+    <NavigationProperty Name="MessagesFiles" Relationship="BizzBrandingModel.FK_MessagesFile_BusinessUser" FromRole="BussinessUser" ToRole="MessagesFile" />
+    <NavigationProperty Name="MessagesFiles1" Relationship="BizzBrandingModel.FK_MessagesFile_BusinessUser1" FromRole="BussinessUser" ToRole="MessagesFile" />
+    <NavigationProperty Name="NewsMappings" Relationship="BizzBrandingModel.FK_NewsMapping_BussinessUser" FromRole="BussinessUser" ToRole="NewsMapping" />
+    <NavigationProperty Name="PaymentTransationDetails" Relationship="BizzBrandingModel.FK_PaymentTransationDetail_BussinessUser" FromRole="BussinessUser" ToRole="PaymentTransationDetail" />
+    <NavigationProperty Name="Products" Relationship="BizzBrandingModel.FK_Product_BusinessUser" FromRole="BussinessUser" ToRole="Product" />
+    <NavigationProperty Name="TargetBrandings" Relationship="BizzBrandingModel.FK_TargetBranding_BussinessUser" FromRole="BussinessUser" ToRole="TargetBranding" />
+    <NavigationProperty Name="UserIndustryMappings" Relationship="BizzBrandingModel.FK_UserIndustryMapping_BussinessUser" FromRole="BussinessUser" ToRole="UserIndustryMapping" />
+    <NavigationProperty Name="VisitorCounts" Relationship="BizzBrandingModel.FK_VisitorCount_BussinessUser" FromRole="BussinessUser" ToRole="VisitorCount" />
+    <NavigationProperty Name="News" Relationship="BizzBrandingModel.FK_News_BussinessUser" FromRole="BussinessUser" ToRole="News" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="BizzBrandingModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+    <NavigationProperty Name="SubCategories" Relationship="BizzBrandingModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BussinessUsers" Relationship="BizzBrandingModel.FK_BussinessUser_City" FromRole="City" ToRole="BussinessUser" />
+    <NavigationProperty Name="Country" Relationship="BizzBrandingModel.FK_City_Country" FromRole="City" ToRole="Country" />
+    <NavigationProperty Name="EmployeeBrandings" Relationship="BizzBrandingModel.FK_EmployeeBranding_City" FromRole="City" ToRole="EmployeeBranding" />
+    <NavigationProperty Name="TargetBrandings" Relationship="BizzBrandingModel.FK_TargetBranding_City" FromRole="City" ToRole="TargetBranding" />
+  </EntityType>
+  <EntityType Name="CM">
+    <Key>
+      <PropertyRef Name="CMSId" />
+    </Key>
+    <Property Name="CMSId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CMSTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CoBranding">
+    <Key>
+      <PropertyRef Name="CoBrandingId" />
+    </Key>
+    <Property Name="CoBrandingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="PartnerA" Type="Int32" />
+    <Property Name="PartnerB" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsAprroved" Type="Boolean" Nullable="false" />
+    <Property Name="ProductsLogo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ProductsDetails" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CoBrandedName" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="ActivatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="3" />
+    <Property Name="No_Months" Type="Int32" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.FK_CoBranding_UpdatedBy" FromRole="CoBranding" ToRole="Administrator" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_CoBranding_PartnerA" FromRole="CoBranding" ToRole="BussinessUser" />
+    <NavigationProperty Name="BussinessUser1" Relationship="BizzBrandingModel.FK_CoBranding_PartnerB" FromRole="CoBranding" ToRole="BussinessUser" />
+    <NavigationProperty Name="CoBrandingImages" Relationship="BizzBrandingModel.FK_CoBrandingImage_CoBrandingId" FromRole="CoBranding" ToRole="CoBrandingImage" />
+  </EntityType>
+  <EntityType Name="CoBrandingImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CoBrandingId" Type="Int32" />
+    <Property Name="CoBrandingImage1" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CoBranding" Relationship="BizzBrandingModel.FK_CoBrandingImage_CoBrandingId" FromRole="CoBrandingImage" ToRole="CoBranding" />
+  </EntityType>
+  <EntityType Name="CorporateBranding">
+    <Key>
+      <PropertyRef Name="CorporateId" />
+    </Key>
+    <Property Name="CorporateId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessUserId" Type="Int32" />
+    <Property Name="CorporatingDetails" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="No_Months" Type="Int32" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.FK_CorporateBranding_Administrator" FromRole="CorporateBranding" ToRole="Administrator" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_CorporateBranding_BussinessUser" FromRole="CorporateBranding" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BussinessUsers" Relationship="BizzBrandingModel.FK_BussinessUser_Country" FromRole="Country" ToRole="BussinessUser" />
+    <NavigationProperty Name="Cities" Relationship="BizzBrandingModel.FK_City_Country" FromRole="Country" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyId" />
+    </Key>
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CurrencyName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AccessPlans" Relationship="BizzBrandingModel.FK_AccessPlan_Currency" FromRole="Currency" ToRole="AccessPlan" />
+  </EntityType>
+  <EntityType Name="CustomerEnquiry">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="EmailId" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Subject" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Enquiry" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LoginUserId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_CustomerEnquiries_BussinessUser" FromRole="CustomerEnquiries" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="EmailTemplate">
+    <Key>
+      <PropertyRef Name="EmailTempId" />
+    </Key>
+    <Property Name="EmailTempId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="EmailTempTitle" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeBranding">
+    <Key>
+      <PropertyRef Name="EmpBrandingId" />
+    </Key>
+    <Property Name="EmpBrandingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployerId" Type="Int32" />
+    <Property Name="EmpName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="EmpImage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Message" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="No_Months" Type="Int32" />
+    <Property Name="IndustryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_EmployeeBranding_BussinessUser" FromRole="EmployeeBranding" ToRole="BussinessUser" />
+    <NavigationProperty Name="City" Relationship="BizzBrandingModel.FK_EmployeeBranding_City" FromRole="EmployeeBranding" ToRole="City" />
+    <NavigationProperty Name="Industry" Relationship="BizzBrandingModel.FK_EmployeeBranding_Industry" FromRole="EmployeeBranding" ToRole="Industry" />
+  </EntityType>
+  <EntityType Name="Franchise">
+    <Key>
+      <PropertyRef Name="FranchiseId" />
+    </Key>
+    <Property Name="FranchiseId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessId" Type="Int32" />
+    <Property Name="Details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="No_Months" Type="Int32" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.FK_Franchise_ApprovedBy" FromRole="Franchise" ToRole="Administrator" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_Franchise_BusinessId" FromRole="Franchise" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="GlobalBranding">
+    <Key>
+      <PropertyRef Name="GlobalBrandingId" />
+    </Key>
+    <Property Name="GlobalBrandingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessUserId" Type="Int32" />
+    <Property Name="GlobalBrandingDetails" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="No_Months" Type="Int32" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.FK_GlobalBranding_Administrator" FromRole="GlobalBranding" ToRole="Administrator" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_GlobalBranding_BussinessUser" FromRole="GlobalBranding" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="HomeBanner">
+    <Key>
+      <PropertyRef Name="HomeBannerId" />
+    </Key>
+    <Property Name="HomeBannerId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="BannerImage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="URL" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_HomeBanner_BussinessUser" FromRole="HomeBanner" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="HomeBannerMapping">
+    <Key>
+      <PropertyRef Name="BannerMembershipId" />
+    </Key>
+    <Property Name="BannerMembershipId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccessPlanId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ValidityStart" Type="DateTime" Precision="3" />
+    <Property Name="ValidityEnd" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AccessPlan" Relationship="BizzBrandingModel.FK_HomeBannerMapping_AccessPlan" FromRole="HomeBannerMapping" ToRole="AccessPlan" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_HomeBannerMapping_BussinessUser" FromRole="HomeBannerMapping" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="Industry">
+    <Key>
+      <PropertyRef Name="IndustryId" />
+    </Key>
+    <Property Name="IndustryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IndustryName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BussinessUsers" Relationship="BizzBrandingModel.FK_BussinessUser_Industry" FromRole="Industry" ToRole="BussinessUser" />
+    <NavigationProperty Name="EmployeeBrandings" Relationship="BizzBrandingModel.FK_EmployeeBranding_Industry" FromRole="Industry" ToRole="EmployeeBranding" />
+    <NavigationProperty Name="TargetBrandings" Relationship="BizzBrandingModel.FK_TargetBranding_Industry" FromRole="Industry" ToRole="TargetBranding" />
+    <NavigationProperty Name="UserIndustryMappings" Relationship="BizzBrandingModel.FK_UserIndustryMapping_Industry" FromRole="Industry" ToRole="UserIndustryMapping" />
+  </EntityType>
+  <EntityType Name="InvestorPartnering">
+    <Key>
+      <PropertyRef Name="InvestorPartneringId" />
+    </Key>
+    <Property Name="InvestorPartneringId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BusinessUserId" Type="Int32" />
+    <Property Name="Details" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="No_Months" Type="Int32" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.fk_InvestorPartner_ApprovedBy" FromRole="InvestorPartnering" ToRole="Administrator" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_InvestorPartnering_BusinessId" FromRole="InvestorPartnering" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="Membership">
+    <Key>
+      <PropertyRef Name="MembershipID" />
+    </Key>
+    <Property Name="MembershipID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccessPlanId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ActivatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AccessPlan" Relationship="BizzBrandingModel.FK_Membership_AccessPlan" FromRole="Membership" ToRole="AccessPlan" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_Membership_BussinessUser" FromRole="Membership" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="MsgFrom" Type="Int32" />
+    <Property Name="MsgTo" Type="Int32" Nullable="false" />
+    <Property Name="MsgTitle" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="Message1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FromStatus" Type="Boolean" />
+    <Property Name="ToStatus" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="Updateddate" Type="DateTime" Precision="3" />
+    <Property Name="IsReadFrom" Type="Boolean" />
+    <Property Name="IsReadTo" Type="Boolean" />
+    <Property Name="IsEnquiry" Type="Boolean" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_Message_BusinessUser_MsgFrom" FromRole="Message" ToRole="BussinessUser" />
+    <NavigationProperty Name="BussinessUser1" Relationship="BizzBrandingModel.FK_Message_BusinessUser_MsgTo" FromRole="Message" ToRole="BussinessUser" />
+    <NavigationProperty Name="MessagesFiles" Relationship="BizzBrandingModel.FK_MessagesFile_Message" FromRole="Message" ToRole="MessagesFile" />
+  </EntityType>
+  <EntityType Name="MessagesBlock">
+    <Key>
+      <PropertyRef Name="BlockId" />
+    </Key>
+    <Property Name="BlockId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ToUser" Type="Int32" />
+    <Property Name="FromUser" Type="Int32" />
+    <Property Name="IsBlocked" Type="Boolean" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_BlockedMessages_BusinessUser" FromRole="MessagesBlock" ToRole="BussinessUser" />
+    <NavigationProperty Name="BussinessUser1" Relationship="BizzBrandingModel.FK_BlockedMessages_BusinessUser1" FromRole="MessagesBlock" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="MessagesFile">
+    <Key>
+      <PropertyRef Name="FileId" />
+    </Key>
+    <Property Name="FileId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ToUser" Type="Int32" />
+    <Property Name="FromUser" Type="Int32" />
+    <Property Name="MessageFile" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="MessageId" Type="Int32" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_MessagesFile_BusinessUser" FromRole="MessagesFile" ToRole="BussinessUser" />
+    <NavigationProperty Name="BussinessUser1" Relationship="BizzBrandingModel.FK_MessagesFile_BusinessUser1" FromRole="MessagesFile" ToRole="BussinessUser" />
+    <NavigationProperty Name="Message" Relationship="BizzBrandingModel.FK_MessagesFile_Message" FromRole="MessagesFile" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="NewsLetter">
+    <Key>
+      <PropertyRef Name="NewsLetterID" />
+    </Key>
+    <Property Name="NewsLetterID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.fk_NewsLetter_CreatedBy" FromRole="NewsLetter" ToRole="Administrator" />
+    <NavigationProperty Name="Administrator1" Relationship="BizzBrandingModel.fk_NewsLetter_UpdatedBy" FromRole="NewsLetter" ToRole="Administrator" />
+  </EntityType>
+  <EntityType Name="NewsMapping">
+    <Key>
+      <PropertyRef Name="NewsMappingId" />
+    </Key>
+    <Property Name="NewsMappingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccessPlanId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="ValidityStart" Type="DateTime" Precision="3" />
+    <Property Name="ValidityEnd" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AccessPlan" Relationship="BizzBrandingModel.FK_NewsMapping_AccessPlan" FromRole="NewsMapping" ToRole="AccessPlan" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_NewsMapping_BussinessUser" FromRole="NewsMapping" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="PaymentTransationDetail">
+    <Key>
+      <PropertyRef Name="PaymentTransationId" />
+    </Key>
+    <Property Name="PaymentTransationId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TransationId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentReturnId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TransationStatus" Type="Boolean" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="MessageFromGateway" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_PaymentTransationDetail_BussinessUser" FromRole="PaymentTransationDetail" ToRole="BussinessUser" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="SubCategoryId" Type="Int32" />
+    <Property Name="ProdDetails" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_Product_BusinessUser" FromRole="Product" ToRole="BussinessUser" />
+    <NavigationProperty Name="Category" Relationship="BizzBrandingModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="SubCategory" Relationship="BizzBrandingModel.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
+    <NavigationProperty Name="ProductImages" Relationship="BizzBrandingModel.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="ProdImage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="BizzBrandingModel.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Administrators" Relationship="BizzBrandingModel.FK_Administrator_Role" FromRole="Role" ToRole="Administrator" />
+    <NavigationProperty Name="RoleAssignments" Relationship="BizzBrandingModel.FK_RoleAssignment_Role" FromRole="Role" ToRole="RoleAssignment" />
+  </EntityType>
+  <EntityType Name="RoleAssignment">
+    <Key>
+      <PropertyRef Name="RoleAssignmentId" />
+    </Key>
+    <Property Name="RoleAssignmentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="PageId" Type="Int32" Nullable="false" />
+    <Property Name="AddRec" Type="Boolean" Nullable="false" />
+    <Property Name="EditRec" Type="Boolean" Nullable="false" />
+    <Property Name="DeleteRec" Type="Boolean" Nullable="false" />
+    <Property Name="ViewRec" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="BizzBrandingModel.FK_RoleAssignment_Role" FromRole="RoleAssignment" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="SubCatgoryName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ParentCategoryId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="BizzBrandingModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+    <NavigationProperty Name="Products" Relationship="BizzBrandingModel.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Subscribe">
+    <Key>
+      <PropertyRef Name="SubscribeId" />
+    </Key>
+    <Property Name="SubscribeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="EmailId" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TargetBranding">
+    <Key>
+      <PropertyRef Name="TargetBrandingId" />
+    </Key>
+    <Property Name="TargetBrandingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IndustryId" Type="Int32" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="No_Months" Type="Int32" />
+    <Property Name="CreatedUserId" Type="Int32" />
+    <Property Name="BusinessName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="URL" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="ExpiresOn" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_TargetBranding_BussinessUser" FromRole="TargetBranding" ToRole="BussinessUser" />
+    <NavigationProperty Name="City" Relationship="BizzBrandingModel.FK_TargetBranding_City" FromRole="TargetBranding" ToRole="City" />
+    <NavigationProperty Name="Industry" Relationship="BizzBrandingModel.FK_TargetBranding_Industry" FromRole="TargetBranding" ToRole="Industry" />
+    <NavigationProperty Name="TargetedImages" Relationship="BizzBrandingModel.FK_TargetedImage_TargetBranding" FromRole="TargetBranding" ToRole="TargetedImage" />
+  </EntityType>
+  <EntityType Name="TargetedImage">
+    <Key>
+      <PropertyRef Name="TargetImageId" />
+    </Key>
+    <Property Name="TargetImageId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Image" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="TargetBrandingId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TargetBranding" Relationship="BizzBrandingModel.FK_TargetedImage_TargetBranding" FromRole="TargetedImage" ToRole="TargetBranding" />
+  </EntityType>
+  <EntityType Name="UserFriendMapping">
+    <Key>
+      <PropertyRef Name="UserFriendId" />
+    </Key>
+    <Property Name="UserFriendId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="FriendId" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="NotificationReaded" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="UserIndustryMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="IndustryId" Type="Int32" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_UserIndustryMapping_BussinessUser" FromRole="UserIndustryMapping" ToRole="BussinessUser" />
+    <NavigationProperty Name="Industry" Relationship="BizzBrandingModel.FK_UserIndustryMapping_Industry" FromRole="UserIndustryMapping" ToRole="Industry" />
+  </EntityType>
+  <EntityType Name="VisitorCount">
+    <Key>
+      <PropertyRef Name="VisitorId" />
+    </Key>
+    <Property Name="VisitorId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_VisitorCount_BussinessUser" FromRole="VisitorCount" ToRole="BussinessUser" />
+  </EntityType>
+  <Association Name="FK_AccessPlan_Currency">
+    <End Role="Currency" Type="BizzBrandingModel.Currency" Multiplicity="0..1" />
+    <End Role="AccessPlan" Type="BizzBrandingModel.AccessPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyId" />
+      </Principal>
+      <Dependent Role="AccessPlan">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HomeBannerMapping_AccessPlan">
+    <End Role="AccessPlan" Type="BizzBrandingModel.AccessPlan" Multiplicity="0..1" />
+    <End Role="HomeBannerMapping" Type="BizzBrandingModel.HomeBannerMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessPlan">
+        <PropertyRef Name="AccessPlanId" />
+      </Principal>
+      <Dependent Role="HomeBannerMapping">
+        <PropertyRef Name="AccessPlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Membership_AccessPlan">
+    <End Role="AccessPlan" Type="BizzBrandingModel.AccessPlan" Multiplicity="0..1" />
+    <End Role="Membership" Type="BizzBrandingModel.Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessPlan">
+        <PropertyRef Name="AccessPlanId" />
+      </Principal>
+      <Dependent Role="Membership">
+        <PropertyRef Name="AccessPlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsMapping_AccessPlan">
+    <End Role="AccessPlan" Type="BizzBrandingModel.AccessPlan" Multiplicity="0..1" />
+    <End Role="NewsMapping" Type="BizzBrandingModel.NewsMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccessPlan">
+        <PropertyRef Name="AccessPlanId" />
+      </Principal>
+      <Dependent Role="NewsMapping">
+        <PropertyRef Name="AccessPlanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Administrator_Role">
+    <End Role="Role" Type="BizzBrandingModel.Role" Multiplicity="1" />
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Administrator">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoBranding_UpdatedBy">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="CoBranding" Type="BizzBrandingModel.CoBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="CoBranding">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CorporateBranding_Administrator">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="CorporateBranding" Type="BizzBrandingModel.CorporateBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="CorporateBranding">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Franchise_ApprovedBy">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="Franchise" Type="BizzBrandingModel.Franchise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Franchise">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GlobalBranding_Administrator">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="GlobalBranding" Type="BizzBrandingModel.GlobalBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="GlobalBranding">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_InvestorPartner_ApprovedBy">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="InvestorPartnering" Type="BizzBrandingModel.InvestorPartnering" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="InvestorPartnering">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_NewsLetter_CreatedBy">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="NewsLetter" Type="BizzBrandingModel.NewsLetter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="NewsLetter">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_NewsLetter_UpdatedBy">
+    <End Role="Administrator" Type="BizzBrandingModel.Administrator" Multiplicity="0..1" />
+    <End Role="NewsLetter" Type="BizzBrandingModel.NewsLetter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="NewsLetter">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessEnquiry_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="BusinessEnquiry" Type="BizzBrandingModel.BusinessEnquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BusinessEnquiry">
+        <PropertyRef Name="FromUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessEnquiry_BussinessUser1">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="BusinessEnquiry" Type="BizzBrandingModel.BusinessEnquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BusinessEnquiry">
+        <PropertyRef Name="ToUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessJob_BusinessUserId">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="BusinessJob" Type="BizzBrandingModel.BusinessJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BusinessJob">
+        <PropertyRef Name="BusinessUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessNews_CreatedBy">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="BusinessNews" Type="BizzBrandingModel.BusinessNew" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BusinessNews">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BusinessNews_UpdatedBy">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="BusinessNews" Type="BizzBrandingModel.BusinessNew" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BusinessNews">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BlockedMessages_BusinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="MessagesBlock" Type="BizzBrandingModel.MessagesBlock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MessagesBlock">
+        <PropertyRef Name="ToUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BlockedMessages_BusinessUser1">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="MessagesBlock" Type="BizzBrandingModel.MessagesBlock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MessagesBlock">
+        <PropertyRef Name="FromUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BussinessUser_City">
+    <End Role="City" Type="BizzBrandingModel.City" Multiplicity="0..1" />
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="BussinessUser">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BussinessUser_Country">
+    <End Role="Country" Type="BizzBrandingModel.Country" Multiplicity="0..1" />
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="BussinessUser">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BussinessUser_Industry">
+    <End Role="Industry" Type="BizzBrandingModel.Industry" Multiplicity="0..1" />
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryId" />
+      </Principal>
+      <Dependent Role="BussinessUser">
+        <PropertyRef Name="IndustryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoBranding_PartnerA">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="CoBranding" Type="BizzBrandingModel.CoBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CoBranding">
+        <PropertyRef Name="PartnerA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoBranding_PartnerB">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="CoBranding" Type="BizzBrandingModel.CoBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CoBranding">
+        <PropertyRef Name="PartnerB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CorporateBranding_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="CorporateBranding" Type="BizzBrandingModel.CorporateBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CorporateBranding">
+        <PropertyRef Name="BusinessUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerEnquiries_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="CustomerEnquiries" Type="BizzBrandingModel.CustomerEnquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CustomerEnquiries">
+        <PropertyRef Name="LoginUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeBranding_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="EmployeeBranding" Type="BizzBrandingModel.EmployeeBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="EmployeeBranding">
+        <PropertyRef Name="EmployerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Franchise_BusinessId">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="Franchise" Type="BizzBrandingModel.Franchise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Franchise">
+        <PropertyRef Name="BusinessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GlobalBranding_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="GlobalBranding" Type="BizzBrandingModel.GlobalBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="GlobalBranding">
+        <PropertyRef Name="BusinessUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HomeBanner_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="HomeBanner" Type="BizzBrandingModel.HomeBanner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="HomeBanner">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HomeBannerMapping_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="HomeBannerMapping" Type="BizzBrandingModel.HomeBannerMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="HomeBannerMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvestorPartnering_BusinessId">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="InvestorPartnering" Type="BizzBrandingModel.InvestorPartnering" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="InvestorPartnering">
+        <PropertyRef Name="BusinessUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Membership_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="Membership" Type="BizzBrandingModel.Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_BusinessUser_MsgFrom">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="Message" Type="BizzBrandingModel.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MsgFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_BusinessUser_MsgTo">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="1" />
+    <End Role="Message" Type="BizzBrandingModel.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MsgTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessagesFile_BusinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="MessagesFile" Type="BizzBrandingModel.MessagesFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MessagesFile">
+        <PropertyRef Name="ToUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessagesFile_BusinessUser1">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="MessagesFile" Type="BizzBrandingModel.MessagesFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MessagesFile">
+        <PropertyRef Name="FromUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsMapping_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="NewsMapping" Type="BizzBrandingModel.NewsMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="NewsMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentTransationDetail_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="PaymentTransationDetail" Type="BizzBrandingModel.PaymentTransationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PaymentTransationDetail">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_BusinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="Product" Type="BizzBrandingModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TargetBranding_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="TargetBranding" Type="BizzBrandingModel.TargetBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TargetBranding">
+        <PropertyRef Name="CreatedUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserIndustryMapping_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="UserIndustryMapping" Type="BizzBrandingModel.UserIndustryMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserIndustryMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VisitorCount_BussinessUser">
+    <End Role="BussinessUser" Type="BizzBrandingModel.BussinessUser" Multiplicity="0..1" />
+    <End Role="VisitorCount" Type="BizzBrandingModel.VisitorCount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="VisitorCount">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="BizzBrandingModel.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="BizzBrandingModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubCategory_Category">
+    <End Role="Category" Type="BizzBrandingModel.Category" Multiplicity="0..1" />
+    <End Role="SubCategory" Type="BizzBrandingModel.SubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="ParentCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="BizzBrandingModel.Country" Multiplicity="0..1" />
+    <End Role="City" Type="BizzBrandingModel.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeBranding_City">
+    <End Role="City" Type="BizzBrandingModel.City" Multiplicity="0..1" />
+    <End Role="EmployeeBranding" Type="BizzBrandingModel.EmployeeBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="EmployeeBranding">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TargetBranding_City">
+    <End Role="City" Type="BizzBrandingModel.City" Multiplicity="0..1" />
+    <End Role="TargetBranding" Type="BizzBrandingModel.TargetBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="TargetBranding">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoBrandingImage_CoBrandingId">
+    <End Role="CoBranding" Type="BizzBrandingModel.CoBranding" Multiplicity="0..1" />
+    <End Role="CoBrandingImage" Type="BizzBrandingModel.CoBrandingImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CoBranding">
+        <PropertyRef Name="CoBrandingId" />
+      </Principal>
+      <Dependent Role="CoBrandingImage">
+        <PropertyRef Name="CoBrandingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeBranding_Industry">
+    <End Role="Industry" Type="BizzBrandingModel.Industry" Multiplicity="0..1" />
+    <End Role="EmployeeBranding" Type="BizzBrandingModel.EmployeeBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryId" />
+      </Principal>
+      <Dependent Role="EmployeeBranding">
+        <PropertyRef Name="IndustryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TargetBranding_Industry">
+    <End Role="Industry" Type="BizzBrandingModel.Industry" Multiplicity="0..1" />
+    <End Role="TargetBranding" Type="BizzBrandingModel.TargetBranding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryId" />
+      </Principal>
+      <Dependent Role="TargetBranding">
+        <PropertyRef Name="IndustryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserIndustryMapping_Industry">
+    <End Role="Industry" Type="BizzBrandingModel.Industry" Multiplicity="0..1" />
+    <End Role="UserIndustryMapping" Type="BizzBrandingModel.UserIndustryMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Industry">
+        <PropertyRef Name="IndustryId" />
+      </Principal>
+      <Dependent Role="UserIndustryMapping">
+        <PropertyRef Name="IndustryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessagesFile_Message">
+    <End Role="Message" Type="BizzBrandingModel.Message" Multiplicity="0..1" />
+    <End Role="MessagesFile" Type="BizzBrandingModel.MessagesFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessagesFile">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_SubCategory">
+    <End Role="SubCategory" Type="BizzBrandingModel.SubCategory" Multiplicity="0..1" />
+    <End Role="Product" Type="BizzBrandingModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductImage_Product">
+    <End Role="Product" Type="BizzBrandingModel.Product" Multiplicity="0..1" />
+    <End Role="ProductImage" Type="BizzBrandingModel.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleAssignment_Role">
+    <End Role="Role" Type="BizzBrandingModel.Role" Multiplicity="1" />
+    <End Role="RoleAssignment" Type="BizzBrandingModel.RoleAssignment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="RoleAssignment">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TargetedImage_TargetBranding">
+    <End Role="TargetBranding" Type="BizzBrandingModel.TargetBranding" Multiplicity="0..1" />
+    <End Role="TargetedImage" Type="BizzBrandingModel.TargetedImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TargetBranding">
+        <PropertyRef Name="TargetBrandingId" />
+      </Principal>
+      <Dependent Role="TargetedImage">
+        <PropertyRef Name="TargetBrandingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsId" />
+    </Key>
+    <Property Type="Int32" Name="NewsId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="NewsTitle" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedOn" Precision="3" />
+    <Property Type="Int32" Name="CreatedByAdminId" />
+    <Property Type="DateTime" Name="UpdatedOn" Precision="3" />
+    <Property Type="Int32" Name="UpdatedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="NewsImage" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="CreatedByUserId" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.fk_News_CreatedBy" FromRole="News" ToRole="Administrator" />
+    <NavigationProperty Name="Administrator1" Relationship="BizzBrandingModel.fk_News_UpdatedBy" FromRole="News" ToRole="Administrator" />
+    <NavigationProperty Name="BussinessUser" Relationship="BizzBrandingModel.FK_News_BussinessUser" FromRole="News" ToRole="BussinessUser" />
+  </EntityType>
+  <Association Name="fk_News_CreatedBy">
+    <End Type="BizzBrandingModel.Administrator" Role="Administrator" Multiplicity="0..1" />
+    <End Type="BizzBrandingModel.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="CreatedByAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_News_UpdatedBy">
+    <End Type="BizzBrandingModel.Administrator" Role="Administrator" Multiplicity="0..1" />
+    <End Type="BizzBrandingModel.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_News_BussinessUser">
+    <End Type="BizzBrandingModel.BussinessUser" Role="BussinessUser" Multiplicity="0..1" />
+    <End Type="BizzBrandingModel.News" Role="News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BussinessUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Type="Int32" Name="ModuleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ModuleName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedOn" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="UpdatedOn" Precision="3" />
+    <Property Type="Int32" Name="UpdatedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <NavigationProperty Name="Administrator" Relationship="BizzBrandingModel.FK_Table_1_CreatedBy" FromRole="Module" ToRole="Administrator" />
+    <NavigationProperty Name="Administrator1" Relationship="BizzBrandingModel.FK_Table_1_UpdatedBy" FromRole="Module" ToRole="Administrator" />
+  </EntityType>
+  <Association Name="FK_Table_1_CreatedBy">
+    <End Type="BizzBrandingModel.Administrator" Role="Administrator" Multiplicity="0..1" />
+    <End Type="BizzBrandingModel.Module" Role="Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_1_UpdatedBy">
+    <End Type="BizzBrandingModel.Administrator" Role="Administrator" Multiplicity="0..1" />
+    <End Type="BizzBrandingModel.Module" Role="Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

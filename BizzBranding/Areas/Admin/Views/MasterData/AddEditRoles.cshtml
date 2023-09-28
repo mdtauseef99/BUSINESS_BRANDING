@@ -1,0 +1,108 @@
+﻿@model BizzBranding.Areas.Admin.Models.RoleWebModel
+@{
+    ViewBag.Title = "AddEditRoles";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "AddEditRoles";
+}
+
+<div id="page-heading">
+    <h1>Add / Edit Roles</h1>
+    @if (Session["Error"] != null)
+    {
+        <div class="errormsg">
+            @Session["Error"].ToString()
+        </div>
+        Session["Error"] = null;
+    }
+</div>
+
+@{Html.EnableClientValidation(true);}
+@using (Html.BeginForm())
+{
+    
+    @Html.HiddenFor(x => x.RoleID)
+    @Html.HiddenFor(x => x.Pagecount, new { @name = "pagecount" })
+    <div style="box-shadow: 0 0 5px; border-radius: 10px;">
+        <div class="emptyspace"></div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.RoleName)</div>
+            <div class="rowright">
+                @Html.TextBoxFor(x => x.RoleName, new { @class = "inp-form", @placeholder = "Role Name" })
+                @Html.ValidationMessageFor(x => x.RoleName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+            <div class="rowright">
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+        </div>
+        <div class="row">
+            @{int i = 1;}
+            @foreach (var item in Model.Rolemanages)
+            {
+                <input type="hidden" name="hd_page@(i)" value="@item.PageID" />
+                <div class="rowleft">
+                    @item.PageName
+                </div>
+                <div class="rowright">
+                    @{
+                if (item.Add)
+                {
+                        <input type="checkbox" name="page_Add@(i)" value="true" checked="checked"/> <label>Add</label>
+                }
+                else
+                {
+                        <input type="checkbox" name="page_Add@(i)" value="true"/><label>Add</label>
+                }
+
+                if (item.Edit)
+                {
+                        <input type="checkbox" name="page_edit@(i)" value="true" checked="checked"/><label>Edit</label>
+                }
+                else
+                {
+                        <input type="checkbox" name="page_edit@(i)" value="true"/><label>Edit</label>
+                }
+
+                if (item.Delete)
+                {
+                        <input type="checkbox" name="page_delete@(i)" value="true" checked="checked"/><label>Delete</label>
+                }
+                else
+                {
+                        <input type="checkbox" name="page_delete@(i)" value="true"/><label>Delete</label>
+                }
+
+                if (item.View)
+                {
+                        <input type="checkbox" name="page_read@(i)" value="true" checked="checked"/><label>Read</label>
+                }
+                else
+                {
+                        <input type="checkbox" name="page_read@(i)" value="true"/><label>Read</label>
+                }
+
+                i++;
+                    }
+                </div>
+                <div style="clear: both"></div>
+            }
+
+        </div>
+        <div class="row">
+            <div class="rowleft">
+               
+            </div>
+            <div class="rowright">
+                 <input type="submit" value="Submit" class="form-submit left">
+                <a href="@Url.Action("Roles", "MasterData")" class="form-reset">Cancel</a>
+                @*<input type="reset" value="" class="form-reset">*@
+            </div>
+
+        </div>
+    </div>
+    
+    
+}
+

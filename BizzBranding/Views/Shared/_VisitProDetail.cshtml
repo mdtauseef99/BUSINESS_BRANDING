@@ -1,0 +1,21 @@
+﻿@model BizzBranding.CommonUtility.ProductModel
+
+
+<div>
+    @foreach (var item in (List<BizzBranding.CommonUtility.ProductImageModel>)ViewBag.objImg)
+    {
+        <img src="~/Areas/Admin/ProjectImages/ProductImage/@item.ProdImage" alt="" width="250" height="200"/>
+        break;
+    }
+    
+</div>
+<table>
+    <tr>
+        <td>Product Name : </td>
+        <td>@Html.DisplayFor(x => x.ProductName)</td>
+    </tr>
+    <tr>
+        <td>Product Detail : </td>
+        <td>@Html.DisplayFor(x => x.ProdDetails)</td>
+    </tr>
+</table>

@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizzBranding.Web", "BizzBranding\BizzBranding.Web.csproj", "{B260C0A1-B8BA-4AF0-BBD9-E4234F72573D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizzBranding.DAL", "BizzBranding.DAL\BizzBranding.DAL.csproj", "{91325BC2-7F28-43B8-882B-A601760EF9D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizzBranding.BLL", "BizzBranding.BLL\BizzBranding.BLL.csproj", "{B4C4B407-E2CF-49EC-87DC-03E1F8B17006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizzBranding.CommonUtility", "BizzBranding.CommonUtility\BizzBranding.CommonUtility.csproj", "{71D2230B-E76D-498E-B48D-0947E0716E45}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://server:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BizzBranding.BLL\\BizzBranding.BLL.csproj
+		SccProjectName1 = BizzBranding.BLL
+		SccLocalPath1 = BizzBranding.BLL
+		SccProjectUniqueName2 = BizzBranding.CommonUtility\\BizzBranding.CommonUtility.csproj
+		SccProjectName2 = BizzBranding.CommonUtility
+		SccLocalPath2 = BizzBranding.CommonUtility
+		SccProjectUniqueName3 = BizzBranding.DAL\\BizzBranding.DAL.csproj
+		SccProjectName3 = BizzBranding.DAL
+		SccLocalPath3 = BizzBranding.DAL
+		SccProjectUniqueName4 = BizzBranding\\BizzBranding.Web.csproj
+		SccProjectName4 = BizzBranding
+		SccLocalPath4 = BizzBranding
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B260C0A1-B8BA-4AF0-BBD9-E4234F72573D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B260C0A1-B8BA-4AF0-BBD9-E4234F72573D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B260C0A1-B8BA-4AF0-BBD9-E4234F72573D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B260C0A1-B8BA-4AF0-BBD9-E4234F72573D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91325BC2-7F28-43B8-882B-A601760EF9D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91325BC2-7F28-43B8-882B-A601760EF9D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91325BC2-7F28-43B8-882B-A601760EF9D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91325BC2-7F28-43B8-882B-A601760EF9D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C4B407-E2CF-49EC-87DC-03E1F8B17006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C4B407-E2CF-49EC-87DC-03E1F8B17006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C4B407-E2CF-49EC-87DC-03E1F8B17006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C4B407-E2CF-49EC-87DC-03E1F8B17006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71D2230B-E76D-498E-B48D-0947E0716E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71D2230B-E76D-498E-B48D-0947E0716E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71D2230B-E76D-498E-B48D-0947E0716E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71D2230B-E76D-498E-B48D-0947E0716E45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

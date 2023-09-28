@@ -1,0 +1,38 @@
+﻿@model BizzBranding.Areas.Admin.Models.CurrencyWebModel
+@{
+    ViewBag.Title = "ViewCurrency";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.mainmenu = "ViewCategory";
+}
+
+<h2>@Html.DisplayFor(x => x.CurrencyName)</h2>
+@Html.HiddenFor(x => x.CurrencyId)
+<div style="box-shadow: 0 0 5px; border-radius: 10px;">
+    <div class="emptyspace"></div>
+
+  
+    <div class="row">
+        <div ><span class="rowleft">Currency Name</span></div>
+        <div class="rowright">
+            @Html.DisplayFor(x => x.CurrencyName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="rowleft">@Html.LabelFor(x => x.IsActive)</div>
+        <div class="rowright">
+            @Html.DisplayTextFor(x => x.IsActive)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="rowleft">
+        </div>
+        <div class="rowright">
+            <a href="@Url.Action("Currency","MasterData")" class="form-reset">Back</a>
+
+        </div>
+
+    </div>
+</div>
